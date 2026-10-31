@@ -152,7 +152,8 @@ export function ReportView() {
               onClick={() => setMonth(m)}
               className={cn("rounded-full px-3.5 py-1.5 text-[13px]", m === month ? "bg-ink text-bg" : "text-muted hover:text-ink")}
             >
-              {monthLabel(m)}
+              <span className="sm:hidden">{monthLabel(m).slice(0, 3)}</span>
+              <span className="hidden sm:inline">{monthLabel(m)}</span>
             </button>
           ))}
         </div>

@@ -97,6 +97,10 @@ function ResetDemo() {
 export function AppShell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
   const active = indexOf(path);
+  // keep the active chip visible in the scrolling mobile nav
+  useEffect(() => {
+    document.querySelector("[data-mobile-active]")?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+  }, [path]);
 
   return (
     <>
@@ -152,6 +156,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   key={href}
                   href={href}
                   transitionTypes={navType(path, href)}
+                  data-mobile-active={i === active ? "" : undefined}
                   className={cn(
                     "shrink-0 rounded-full px-3.5 py-1.5 text-[13.5px]",
                     i === active ? "bg-ink text-bg" : "text-muted hover:bg-surface-2",

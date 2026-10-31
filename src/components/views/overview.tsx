@@ -126,7 +126,7 @@ export function OverviewView() {
                     <div className="mb-1.5 flex items-center justify-between gap-3 text-[13.5px]">
                       <Link href={`/transactions?category=${p.category}`} className="flex items-center gap-2 text-ink hover:underline underline-offset-4">
                         {getCategory(p.category).label}
-                        {over && <Badge tone={p.paceRatio > 1.4 ? "danger" : "warn"}>{Math.round((p.paceRatio - 1) * 100)}% ahead</Badge>}
+                        {over && <Badge tone={p.paceRatio > 1.4 ? "danger" : "warn"}>{Math.round((p.paceRatio - 1) * 100)}% over pace</Badge>}
                       </Link>
                       <span className="num text-muted">
                         <span className="text-ink">{formatINR(p.spent)}</span> / {formatINRCompact(p.budget)}

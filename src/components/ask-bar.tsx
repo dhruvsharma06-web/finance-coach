@@ -33,7 +33,7 @@ export function AskBar({ className, placeholder }: { className?: string; placeho
       <input
         value={q}
         onChange={(e) => setQ(e.target.value)}
-        placeholder={placeholder ?? "Ask anything, or say “what if I cut dining out by 30%?”"}
+        placeholder={placeholder ?? "Ask anything, or try a what-if"}
         className="min-w-0 flex-1 bg-transparent text-[16px] outline-none placeholder:text-subtle"
       />
       <button

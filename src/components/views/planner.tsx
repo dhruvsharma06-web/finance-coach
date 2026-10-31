@@ -170,7 +170,7 @@ export function PlannerView() {
               }
             }}
             rows={2}
-            placeholder="What if I cut dining out by 30% and my rent goes up by 3,000 from January?"
+            placeholder="What if rent goes up 3k?"
             className="min-w-0 flex-1 resize-none bg-transparent font-display text-[26px] leading-tight tracking-[-0.01em] outline-none placeholder:text-subtle"
           />
         </div>
