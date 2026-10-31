@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kosh: your living money model
 
-## Getting Started
+An AI personal-finance coach for India that **reads your messy statements, learns how you categorize, notices what changed, and models your what-ifs**, without ever recommending specific securities.
 
-First, run the development server:
+Built for the Product Space × Wispr Flow hackathon (problem 04), **entirely by voice** with Wispr Flow driving Claude Code and Codex.
 
+## What it does
+- **Ingest anything:** bank CSVs (any bank's layout), PDF statements, and pasted transaction SMS (OTP/promo spam ignored).
+- **Categorize, then learn:** rules → merchant knowledge → AI. Fix one transaction and Kosh learns the rule, re-applies it to the past, and uses it on every future import.
+- **Recurring & subscriptions:** detects cadence, flags price hikes, and asks "still using it?" instead of guessing.
+- **Living financial profile:** income, fixed costs, emergency fund, and goals with dates. Tell it "rent went up to 28k" and the model updates.
+- **What-if planner:** "What if I cut dining out by 30% and rent goes up 3k from January?" → projected savings and goal dates.
+- **Nudges** when spending drifts off plan, and a **monthly review** written like a coach.
+- **Guardrails:** educates and models scenarios; never names stocks, funds, or crypto to buy.
+
+**Design principle: the AI parses and explains; deterministic code does every rupee of math.**
+
+## Run it
 ```bash
+npm install
+cp .env.example .env.local   # add a Gemini or OpenAI key (optional: everything has fallbacks)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Open http://localhost:3000. Demo data for "Aarav" (Bengaluru, Aug–Oct 2026) loads automatically. `POST /api/reset` restores it. Sample inputs are in `samples/`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Architecture
+```
+src/lib/ingest      CSV · PDF · SMS parsers → normalized transactions
+src/lib/categorize  rule engine + AI + correction learning
+src/lib/recurring   cadence / price change / unused detection
+src/lib/simulate    deterministic projection engine + NL → scenario
+src/lib/insights    nudges + monthly review
+src/lib/coach       chat + guardrails
+src/app/api/*       thin route handlers
+src/app/*           UI
+```
+Stack: Next.js 16, React 19, TypeScript, Tailwind v4, Vercel AI SDK (Gemini/OpenAI), Recharts.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Team
+Dhruv Sharma + teammate. See [docs/WISPR_LOG.md](docs/WISPR_LOG.md) for how we built it by voice.

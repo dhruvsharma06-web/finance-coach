@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens — owned by Lane A (Claude). Use these via Tailwind classes
+ * (bg-surface, text-muted, border-line, text-accent …) — never hard-code hex in components.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --bg: #f7f7f4;
+  --surface: #ffffff;
+  --surface-2: #f1f1ec;
+  --line: #e4e4dd;
+  --ink: #15171a;
+  --muted: #6b6f76;
+  --subtle: #9a9ea5;
+  --accent: #0f7a5c; /* deep emerald */
+  --accent-soft: #e3f2ec;
+  --accent-ink: #ffffff;
+  --warn: #b45309;
+  --warn-soft: #fdf1e2;
+  --danger: #c2410c;
+  --danger-soft: #fdeae2;
+  --info: #2563eb;
+  --info-soft: #e8effd;
+  --positive: #15803d;
+  --positive-soft: #e6f4ea;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --cat-income: #15803d;
+  --cat-rent: #7c3aed;
+  --cat-groceries: #65a30d;
+  --cat-dining: #ea580c;
+  --cat-transport: #0284c7;
+  --cat-fuel: #0369a1;
+  --cat-shopping: #db2777;
+  --cat-utilities: #ca8a04;
+  --cat-subscriptions: #9333ea;
+  --cat-entertainment: #e11d48;
+  --cat-health: #0d9488;
+  --cat-education: #4f46e5;
+  --cat-travel: #0891b2;
+  --cat-emi: #57534e;
+  --cat-insurance: #475569;
+  --cat-investments: #0f7a5c;
+  --cat-transfers: #64748b;
+  --cat-cash: #78716c;
+  --cat-fees: #a16207;
+  --cat-other: #94a3b8;
+
+  --radius: 14px;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --bg: #0c0d0f;
+    --surface: #141518;
+    --surface-2: #1b1d21;
+    --line: #26292e;
+    --ink: #ecedee;
+    --muted: #9ba1a8;
+    --subtle: #6b7077;
+    --accent: #34d399;
+    --accent-soft: #10291f;
+    --accent-ink: #052e1f;
+    --warn: #f59e0b;
+    --warn-soft: #2a1f0b;
+    --danger: #fb923c;
+    --danger-soft: #2b160c;
+    --info: #60a5fa;
+    --info-soft: #0f1d33;
+    --positive: #4ade80;
+    --positive-soft: #0e2416;
   }
 }
 
+:root[data-theme="dark"] {
+  --bg: #0c0d0f;
+  --surface: #141518;
+  --surface-2: #1b1d21;
+  --line: #26292e;
+  --ink: #ecedee;
+  --muted: #9ba1a8;
+  --subtle: #6b7077;
+  --accent: #34d399;
+  --accent-soft: #10291f;
+  --accent-ink: #052e1f;
+  --warn: #f59e0b;
+  --warn-soft: #2a1f0b;
+  --danger: #fb923c;
+  --danger-soft: #2b160c;
+  --info: #60a5fa;
+  --info-soft: #0f1d33;
+  --positive: #4ade80;
+  --positive-soft: #0e2416;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-positive: var(--positive);
+  --color-positive-soft: var(--positive-soft);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --radius-card: var(--radius);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
 }
