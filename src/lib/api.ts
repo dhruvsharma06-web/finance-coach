@@ -21,8 +21,13 @@ export function handle<A extends unknown[]>(
         const request = args[0];
         if (!["GET", "HEAD", "OPTIONS"].includes(request.method)) {
           const origin = request.headers.get("origin");
+          const expectedOrigin = new URL(request.url);
+          const requestHost = request.headers.get("host");
+          if(requestHost)expectedOrigin.host=requestHost;
+          const forwardedProto=request.headers.get("x-forwarded-proto");
+          if(forwardedProto==="http"||forwardedProto==="https")expectedOrigin.protocol=forwardedProto+":";
           if (
-            (origin && origin !== new URL(request.url).origin) ||
+            (origin && origin !== expectedOrigin.origin) ||
             (!origin && request.headers.get("sec-fetch-site") === "cross-site")
           )
             return fail("Request origin not allowed.", 403);
