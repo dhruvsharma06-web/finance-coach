@@ -45,7 +45,7 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": "22.x"
   },
   "license": "AGPL-3.0-only"
 }
