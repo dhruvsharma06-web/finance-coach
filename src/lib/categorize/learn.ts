@@ -33,10 +33,20 @@ export async function similarPreview(
     txn = db.transactions.find((t) => t.id === transactionId);
   if (!txn) throw new Error("Transaction not found");
   const rule = proposedRule(txn, txn.category);
+  const competing = db.rules.filter(
+    (r) =>
+      !(
+        r.pattern === rule.pattern &&
+        r.matchType === rule.matchType &&
+        r.direction === rule.direction
+      ),
+  );
   const similarIds = db.transactions
     .filter(
       (t) =>
-        t.id !== txn.id && t.categorySource !== "user" && matchRule(t, [rule]),
+        t.id !== txn.id &&
+        t.categorySource !== "user" &&
+        matchRule(t, [...competing, rule])?.id === rule.id,
     )
     .map((t) => t.id);
   return { similarIds, count: similarIds.length };
@@ -76,7 +86,9 @@ export async function applyCorrection(
     txn.ruleId = rule.id;
     const similar = db.transactions.filter(
       (t) =>
-        t.id !== txn.id && t.categorySource !== "user" && matchRule(t, [rule!]),
+        t.id !== txn.id &&
+        t.categorySource !== "user" &&
+        matchRule(t, db.rules)?.id === rule!.id,
     );
     let appliedCount = 0;
     if (applyToSimilar)

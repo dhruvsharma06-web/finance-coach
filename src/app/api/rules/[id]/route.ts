@@ -16,7 +16,7 @@ import { fail } from "@/lib/api";
 export const PATCH = handle(
   async (req: Request, ctx: { params: Promise<{ id: string }> }) => {
     const { id } = await ctx.params,
-      body = await req.json();
+      body = await req.json().catch(() => null);
     if (!CATEGORY_IDS.includes(body?.category)) return fail("Unknown category");
     const rule = await updateDb((db) => {
       const r = db.rules.find((r) => r.id === id);

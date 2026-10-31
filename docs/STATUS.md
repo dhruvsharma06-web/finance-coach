@@ -26,5 +26,9 @@ Each lane appends 2–3 lines after every push: what works, any API shape change
 - PDF increment pushed. Quick-add increment: POST /api/transactions accepts { text, source: "voice" } with AI parsing and a no-key spent/paid/received fallback; existing structured bodies still work.
 - Final verification: parser, EatClub learning, engine, and live HTTP tests pass; all five sample files import and re-import without duplicates. 500-row no-key import measured 61-74 ms. Default npm run build green. AI paths type-checked; live key-dependent accuracy/latency remains unverified.
 
+- Review increment: stricter input validation; no phantom voice transactions; specific-rule protection; retained price changes; pharmacy exclusions; per-chunk PDF fallback; current corrections override stale AI results.
+- Added POST /api/import/preview (read-only { parsed, wouldAdd, duplicates, needsReview, transactions, warnings, source, fileName? }) and GET /api/transactions?needsReview=true. Existing successful shapes unchanged; malformed inputs now return 400/404/413/415.
+- Parser/learning/engine/hardening/AI-fixture and HTTP tests pass, including 18 invalid requests without writes. scripts/README.md documents validation and Lane A/C handoffs; preview UI and live Lane C brain remain owned by those lanes.
+
 ## Lane C (Codex #2): Brain
 - (not started)

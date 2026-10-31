@@ -22,7 +22,8 @@ export async function detectRecurring(): Promise<RecurringPayment[]> {
     for (const t of db.transactions)
       if (t.direction === "debit") {
         const key = normalizeMerchant(t.merchant);
-        groups.set(key, [...(groups.get(key) ?? []), t]);
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key)!.push(t);
       }
     const result: RecurringPayment[] = [];
     for (const [merchant, items] of groups) {
@@ -65,7 +66,11 @@ export async function detectRecurring(): Promise<RecurringPayment[]> {
         old = previous.get(merchant);
       const isSubscription =
         !["rent", "emi", "investments", "utilities"].includes(last.category) &&
-        (["subscriptions", "entertainment", "health"].includes(last.category) ||
+        (["subscriptions", "entertainment"].includes(last.category) ||
+          (last.category === "health" &&
+            /cult|gym|fitness|membership/i.test(
+              last.merchant + " " + last.description,
+            )) ||
           /netflix|spotify|hotstar|icloud|youtube|prime|adobe|notion|openai/i.test(
             merchant,
           ));
@@ -73,7 +78,9 @@ export async function detectRecurring(): Promise<RecurringPayment[]> {
       const priceChange =
         Math.abs(pct) > 5
           ? { from: prev.amount, to: last.amount, pct, date: last.date }
-          : undefined;
+          : old?.priceChange?.to === last.amount
+            ? old.priceChange
+            : undefined;
       const next = new Date(last.date + "T00:00:00Z");
       if (name === "monthly" || name === "quarterly" || name === "yearly") {
         const day = next.getUTCDate();
@@ -112,7 +119,7 @@ export async function detectRecurring(): Promise<RecurringPayment[]> {
             : priceChange
               ? "price_changed"
               : isSubscription &&
-                  old?.userConfirmedInUse == null &&
+                  old?.userConfirmedInUse !== true &&
                   /hotstar|netflix|prime|youtube|disney/i.test(merchant)
                 ? "possibly_unused"
                 : "active",
@@ -132,10 +139,11 @@ export async function detectRecurring(): Promise<RecurringPayment[]> {
     for (const old of db.recurring)
       if (old.status === "cancelled" && !result.some((r) => r.id === old.id))
         result.push(old);
+    const byId = new Map(db.transactions.map((t) => [t.id, t]));
     for (const t of db.transactions) delete t.recurringId;
     for (const r of result)
       for (const id of r.transactionIds) {
-        const t = db.transactions.find((t) => t.id === id);
+        const t = byId.get(id);
         if (t) t.recurringId = r.id;
       }
     db.recurring = result;

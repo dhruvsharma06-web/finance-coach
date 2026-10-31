@@ -136,15 +136,26 @@ export async function parseCsv(text: string): Promise<RawTxn[]> {
     const debit = parseAmount(get(map.debitCol)),
       credit = parseAmount(get(map.creditCol)),
       signed = parseAmount(get(map.amountCol));
+    const indicatorValue = get(map.drCrCol).trim();
+    if (
+      (debit > 0 && credit > 0) ||
+      (indicatorValue && !/^(?:dr|cr|debit|credit|d|c)$/i.test(indicatorValue))
+    ) {
+      dropped++;
+      continue;
+    }
     const direction =
       debit > 0
         ? "debit"
         : credit > 0
           ? "credit"
-          : /dr|debit/i.test(get(map.drCrCol) || get(map.amountCol)) ||
-              signed < 0
-            ? "debit"
-            : "credit";
+          : indicatorValue
+            ? /^(?:dr|debit|d)$/i.test(indicatorValue)
+              ? "debit"
+              : "credit"
+            : /dr\s*$/i.test(get(map.amountCol)) || signed < 0
+              ? "debit"
+              : "credit";
     const amount = debit > 0 ? debit : credit > 0 ? credit : Math.abs(signed);
     if (!Number.isFinite(amount) || amount <= 0) {
       dropped++;

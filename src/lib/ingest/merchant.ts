@@ -75,5 +75,11 @@ export function cleanMerchant(description: string): string {
     .trim()
     .toLowerCase()
     .replace(/\b\w/g, (c) => c.toUpperCase());
-  return (clean || known?.name || "Unknown") + (salary ? " (Salary)" : "");
+  const vpaName = description
+    .match(/([\w.]+)@[\w.]+/)?.[1]
+    ?.replace(/[._]/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+  return (
+    (clean || vpaName || known?.name || "Unknown") + (salary ? " (Salary)" : "")
+  );
 }
