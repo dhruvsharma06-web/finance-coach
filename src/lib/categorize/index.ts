@@ -30,38 +30,44 @@ export async function categorizeBatch(
     .map((it, index) => ({ ...it, index }))
     .filter((it) => outputs[it.index].categorySource === "default");
   if (aiAvailable())
-    for (let start = 0; start < unknown.length; start += 60) {
-      const chunk = unknown.slice(start, start + 60),
-        indices = new Set(chunk.map((it) => it.index));
-      try {
-        const response = await aiObject({
-          schema: z.object({
-            results: z.array(
-              z.object({
-                index: z.number().int(),
-                category: z.enum(CATEGORY_IDS),
-                confidence: z.number().min(0).max(1),
+    await Promise.all(
+      Array.from(
+        { length: Math.ceil(unknown.length / 60) },
+        async (_, batch) => {
+          const start = batch * 60;
+          const chunk = unknown.slice(start, start + 60),
+            indices = new Set(chunk.map((it) => it.index));
+          try {
+            const response = await aiObject({
+              schema: z.object({
+                results: z.array(
+                  z.object({
+                    index: z.number().int(),
+                    category: z.enum(CATEGORY_IDS),
+                    confidence: z.number().min(0).max(1),
+                  }),
+                ),
               }),
-            ),
-          }),
-          system:
-            "Classify Indian bank transactions. Respect debit/credit directions; refunds are not salary. Unknown people-to-people UPI are transfers. Categories: " +
-            CATEGORIES.map(
-              (c) => c.id + ": " + c.label + " (" + c.group + ")",
-            ).join("; "),
-          prompt: JSON.stringify(chunk),
-        });
-        for (const r of response.results)
-          if (indices.has(r.index))
-            outputs[r.index] = {
-              category: r.category,
-              confidence: r.confidence,
-              categorySource: "ai",
-            };
-      } catch {
-        /* Classification failure must not fail import. */
-      }
-    }
+              system:
+                "Classify Indian bank transactions. Respect debit/credit directions; refunds are not salary. Unknown people-to-people UPI are transfers. Categories: " +
+                CATEGORIES.map(
+                  (c) => c.id + ": " + c.label + " (" + c.group + ")",
+                ).join("; "),
+              prompt: JSON.stringify(chunk),
+            });
+            for (const r of response.results)
+              if (indices.has(r.index))
+                outputs[r.index] = {
+                  category: r.category,
+                  confidence: r.confidence,
+                  categorySource: "ai",
+                };
+          } catch {
+            /* Classification failure must not fail import. */
+          }
+        },
+      ),
+    );
   return outputs;
 }
 export function categorizeSync(
@@ -88,6 +94,18 @@ export function categorizeSync(
   else {
     const known = knownMerchant(it.merchant) ?? knownMerchant(it.description);
     if (known && known.category !== "other") category = known.category;
+  }
+  if (!category) {
+    const keywords: [RegExp, CategoryId][] = [
+      [/coffee|cafe|restaurant|brewpub|food delivery/, "dining"],
+      [/grocer|supermarket/, "groceries"],
+      [/petrol|diesel|fuel/, "fuel"],
+      [/electricity|broadband|postpaid|water bill/, "utilities"],
+      [/pharmacy|hospital|clinic|gym membership/, "health"],
+      [/tuition|school fee|college fee/, "education"],
+      [/insurance premium/, "insurance"],
+    ];
+    category = keywords.find(([pattern]) => pattern.test(hay))?.[1];
   }
   if (category)
     return { category, categorySource: "builtin", confidence: 0.95 };

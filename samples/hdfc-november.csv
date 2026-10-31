@@ -1,3 +1,9 @@
+HDFC Bank account statement
+Account holder: Sample Demo User
+Account: XXXX4821
+Branch: Koramangala
+Currency: INR
+Statement period: 01 Nov 2026 to 30 Nov 2026
 Date,Narration,Chq./Ref.No.,Value Dt,Withdrawal Amt.,Deposit Amt.,Closing Balance
 01/11/26,NEFT CR-ACME DESIGN LABS PVT LTD-SALARY,N305261234,01/11/26,,95000.00,212340.50
 02/11/26,UPI-SUNITA RAO-sunita.rao@okhdfc-RENT NOV,430612345678,02/11/26,25000.00,,187340.50

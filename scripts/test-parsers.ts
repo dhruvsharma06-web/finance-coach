@@ -24,18 +24,37 @@ async function main() {
       "icici-style.csv": 3,
       "sbi-style.csv": 3,
       "sms-dump.txt": 10,
+      "statement.pdf": 10,
     };
     if (expected[file]) assert.equal(rows.length, expected[file]);
     if (file === "sms-dump.txt") {
-      const {parserWarnings}=await import("../src/lib/ingest/warnings");
-      assert(parserWarnings(rows).some(w=>w.includes("Ignored 3")));
-      assert.equal(rows.find(t=>t.merchant==="Netflix")?.direction,"debit");
-      assert.equal(rows.find(t=>t.merchant==="Disney+ Hotstar")?.date,"2026-11-15");
+      const { parserWarnings } = await import("../src/lib/ingest/warnings");
+      assert(parserWarnings(rows).some((w) => w.includes("Ignored 3")));
+      assert.equal(
+        rows.find((t) => t.merchant === "Netflix")?.direction,
+        "debit",
+      );
+      assert.equal(
+        rows.find((t) => t.merchant === "Disney+ Hotstar")?.date,
+        "2026-11-15",
+      );
     }
     console.log(file + ": " + rows.length + " rows", rows.slice(0, 3));
   }
   assert.equal(toIsoDate("04-Nov-26"), "2026-11-04");
   assert.equal(toIsoDate("31/02/26"), "");
+  const indicatorRows = await parseCsv(
+    'Date,Remarks,Amount,Dr/Cr\n04 Nov 2026,UPI SWIGGY,"Rs.1,42,310.00 Dr ",Dr\n05-11-2026,Refund,500Cr,Cr\n31/02/26,Bad date,100,Dr\n,Closing Balance,0,',
+  );
+  assert.deepEqual(
+    indicatorRows.map((r) => [r.amount, r.direction]),
+    [
+      [142310, "debit"],
+      [500, "credit"],
+    ],
+  );
+  const { parserWarnings } = await import("../src/lib/ingest/warnings");
+  assert(parserWarnings(indicatorRows).some((w) => w.includes("Dropped 1")));
   for (const [input, want] of [
     ["UPI-SWIGGY-swiggy@icici-430698765432", "Swiggy"],
     ["UPI/DR/430612345678/ZOMATO LTD/YESB/zomato@kotak", "Zomato"],
@@ -49,4 +68,3 @@ async function main() {
   console.log("Parser checks passed");
 }
 serverTest("scripts/test-parsers.ts", main);
-

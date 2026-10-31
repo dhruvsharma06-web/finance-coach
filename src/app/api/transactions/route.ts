@@ -1,7 +1,7 @@
+import { parseQuickAdd } from "@/lib/ingest/quick-add";
 import { readDb } from "@/lib/db";
 import { ingest } from "@/lib/ingest";
 import { fail, handle, ok } from "@/lib/api";
-
 
 /**
  * GET /api/transactions?month=YYYY-MM&category=dining&q=swiggy → Transaction[] (newest first)
@@ -15,7 +15,9 @@ export const GET = handle(async (req: Request) => {
   const list = db.transactions
     .filter((t) => !month || t.date.startsWith(month))
     .filter((t) => !category || t.category === category)
-    .filter((t) => !q || `${t.merchant} ${t.description}`.toLowerCase().includes(q))
+    .filter(
+      (t) => !q || `${t.merchant} ${t.description}`.toLowerCase().includes(q),
+    )
     .reverse();
   return ok(list);
 });
@@ -27,7 +29,22 @@ export const GET = handle(async (req: Request) => {
  */
 export const POST = handle(async (req: Request) => {
   const body = await req.json();
-  if (!body?.amount || !body?.description) return fail("amount and description are required");
+  if (typeof body?.text === "string") {
+    const row = await parseQuickAdd(body.text);
+    if (!row)
+      return fail(
+        "Could not parse transaction. Try spent 450 on Swiggy yesterday.",
+      );
+    return ok(
+      await ingest([row], body.source === "voice" ? "voice" : "manual"),
+    );
+  }
+  if (
+    !Number.isFinite(Number(body?.amount)) ||
+    Number(body?.amount) <= 0 ||
+    !body?.description
+  )
+    return fail("amount and description are required");
   const result = await ingest(
     [
       {

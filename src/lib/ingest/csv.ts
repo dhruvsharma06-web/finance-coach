@@ -2,6 +2,7 @@ import Papa from "papaparse";
 import { z } from "zod";
 import { aiAvailable, aiObject } from "../ai";
 import type { RawTxn } from "./index";
+import { withWarnings } from "./warnings";
 export function toIsoDate(value: string): string {
   const s = value.trim();
   let year: number, month: number, day: number;
@@ -42,7 +43,7 @@ export function toIsoDate(value: string): string {
     : "";
 }
 export function parseAmount(s = ""): number {
-  const c = s.replace(/INR|Rs\.?|₹|,|\s|\b(?:Dr|Cr)\b/gi, "");
+  const c = s.replace(/INR|Rs\.?|₹|,|\s/gi, "").replace(/(?:Dr|Cr)$/i, "");
   return /^[-+]?\d+(?:\.\d+)?$/.test(c) ? Number(c) : NaN;
 }
 const mappingSchema = z.object({
@@ -88,7 +89,14 @@ export async function parseCsv(text: string): Promise<RawTxn[]> {
   };
   if (map.debitCol === indicator) map.debitCol = undefined;
   if (map.creditCol === indicator) map.creditCol = undefined;
-  if ((map.dateCol === undefined || map.descCol === undefined) && aiAvailable())
+  if (
+    (map.dateCol === undefined ||
+      map.descCol === undefined ||
+      (map.amountCol === undefined &&
+        map.debitCol === undefined &&
+        map.creditCol === undefined)) &&
+    aiAvailable()
+  )
     try {
       map = {
         ...map,
@@ -103,21 +111,28 @@ export async function parseCsv(text: string): Promise<RawTxn[]> {
     } catch {
       /* no-key behavior */
     }
-  if (map.dateCol === undefined || map.descCol === undefined) return [];
+  if (map.dateCol === undefined || map.descCol === undefined)
+    return withWarnings(
+      [],
+      ["Could not identify the date and description columns."],
+    );
   const out: RawTxn[] = [];
+  let dropped = 0;
   for (const row of rows.slice(header + 1)) {
     const get = (i: number | undefined) =>
       i === undefined ? "" : (row[i] ?? "");
     const date = toIsoDate(get(map.dateCol)),
       description = get(map.descCol).trim();
     if (
-      !date ||
-      !description ||
       /^(?:opening balance|closing balance|total|statement summary)/i.test(
         description,
       )
     )
       continue;
+    if (!date || !description) {
+      if (header >= 0) dropped++;
+      continue;
+    }
     const debit = parseAmount(get(map.debitCol)),
       credit = parseAmount(get(map.creditCol)),
       signed = parseAmount(get(map.amountCol));
@@ -131,7 +146,10 @@ export async function parseCsv(text: string): Promise<RawTxn[]> {
             ? "debit"
             : "credit";
     const amount = debit > 0 ? debit : credit > 0 ? credit : Math.abs(signed);
-    if (!Number.isFinite(amount) || amount <= 0) continue;
+    if (!Number.isFinite(amount) || amount <= 0) {
+      dropped++;
+      continue;
+    }
     const balanceAfter = parseAmount(get(col(/closing balance|^balance/i)));
     out.push({
       date,
@@ -141,5 +159,8 @@ export async function parseCsv(text: string): Promise<RawTxn[]> {
       ...(Number.isFinite(balanceAfter) ? { balanceAfter } : {}),
     });
   }
-  return out;
+  return withWarnings(
+    out,
+    dropped ? ["Dropped " + dropped + " invalid CSV rows."] : [],
+  );
 }

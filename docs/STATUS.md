@@ -23,11 +23,8 @@ Each lane appends 2–3 lines after every push: what works, any API shape change
 - Recurring increment pushed. PDF increment: per-page unpdf extraction, two-page AI batches, Google scanned-PDF file fallback, validated text-only fallback and import warnings. Reproducible statement.pdf sample imports 10 rows without a key.
 - PDF response shape unchanged. Live AI provider calls need a configured key; deterministic fallbacks and all API imports have passed locally.
 
+- PDF increment pushed. Quick-add increment: POST /api/transactions accepts { text, source: "voice" } with AI parsing and a no-key spent/paid/received fallback; existing structured bodies still work.
+- Final verification: parser, EatClub learning, engine, and live HTTP tests pass; all five sample files import and re-import without duplicates. 500-row no-key import measured 61-74 ms. Default npm run build green. AI paths type-checked; live key-dependent accuracy/latency remains unverified.
+
 ## Lane C (Codex #2): Brain
 - (not started)
-
-
-
-
-
-
