@@ -8,8 +8,10 @@ Each lane appends 2–3 lines after every push: what works, any API shape change
 
 ## Lane B (Codex #1): Data engine
 - CSV increment: bank header detection, day-first dates, amount shapes, and 60+ merchant aliases implemented. HDFC 10 / ICICI 3 / SBI 3 rows verified.
-- API shapes unchanged. Production build passes with npm run build -- --webpack; default Turbopack hits a Windows CSS-worker crash.
+- CSV increment pushed. API shapes unchanged. The default npm run build is now green after the UI rebase; the earlier Windows worker failure cleared.
+- Categorization increment: user rules precede 60+ built-in aliases, batched AI (60 per call), then low-confidence Other. Ingest validates rows, persists rule hits, and deduplicates inside each batch and concurrent imports.
 
 ## Lane C (Codex #2): Brain
 - (not started)
+
 
