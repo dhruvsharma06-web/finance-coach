@@ -310,6 +310,14 @@ function YourData() {
   const [confirming, setConfirming] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);
 
+  // /goals#your-data (from the assistant): the section renders after data loads, so scroll once it exists
+  useEffect(() => {
+    if (window.location.hash === "#your-data") {
+      const t = setTimeout(() => document.getElementById("your-data")?.scrollIntoView({ behavior: "smooth", block: "start" }), 500);
+      return () => clearTimeout(t);
+    }
+  }, []);
+
   const run = async (key: string, fn: () => Promise<unknown>, done: string) => {
     setBusy(key);
     try {
@@ -324,7 +332,7 @@ function YourData() {
   };
 
   return (
-    <section className="reveal mt-16 rounded-[var(--radius)] bg-surface p-6 sm:p-10">
+    <section id="your-data" className="reveal mt-16 scroll-mt-24 rounded-[var(--radius)] bg-surface p-6 sm:p-10">
       <div className="flex flex-wrap items-start justify-between gap-6">
         <div className="max-w-[52ch]">
           <h2 className="flex items-center gap-3 font-display text-[36px] leading-none tracking-[-0.02em] sm:text-[44px]">

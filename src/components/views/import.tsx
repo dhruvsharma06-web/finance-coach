@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { ArrowRight, FileSpreadsheet, FileText, MessageSquareText, UploadCloud } from "lucide-react";
 import { api } from "@/lib/client";
@@ -93,6 +94,7 @@ function Result({ r }: { r: ImportResult }) {
 }
 
 export function ImportView() {
+  const params = useSearchParams();
   const [drag, setDrag] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);
   const [sms, setSms] = useState("");
@@ -126,6 +128,13 @@ export function ImportView() {
     const blob = await res.blob();
     return uploadFile(new File([blob], file, { type: blob.type }));
   };
+  // ?sample=<file> (from the assistant) imports that sample straight away
+  useEffect(() => {
+    const sample = params.get("sample");
+    if (sample && SAMPLES.some((x) => x.file === sample)) trySample(sample);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
 
   return (
     <div>

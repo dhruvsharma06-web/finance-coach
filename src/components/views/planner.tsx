@@ -126,6 +126,7 @@ export function PlannerView() {
 
   // Run the ?q= what-if (from nudges / Ask bar), or a baseline so the page is never empty.
   useEffect(() => {
+    if (params.get("fix")) return; // ?fix=1 is handled once fixPlan exists (below)
     const q = params.get("q");
     if (q) ask(q);
     else runScenario([], "Today's plan");
@@ -148,6 +149,12 @@ export function PlannerView() {
       setFixing(false);
     }
   };
+
+  // ?fix=1 (from the assistant or a nudge) runs Fix my plan straight away
+  useEffect(() => {
+    if (params.get("fix")) fixPlan();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const update = (next: ScenarioChange[]) => {
     setChanges(next);
