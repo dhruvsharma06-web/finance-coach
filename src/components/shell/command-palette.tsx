@@ -9,7 +9,7 @@ import { cn } from "../ui";
 type Item = { id: string; label: string; hint?: string; icon: typeof Search; run: () => void };
 
 const PAGES = [
-  ["/", "Overview"],
+  ["/dashboard", "Overview"],
   ["/import", "Import a statement"],
   ["/transactions", "Transactions"],
   ["/subscriptions", "Recurring payments"],

@@ -15,7 +15,7 @@ import { cn } from "../ui";
 
 /** Order matters: it is the "straight flow" of the product, and drives transition direction. */
 export const NAV = [
-  { href: "/", label: "Overview" },
+  { href: "/dashboard", label: "Overview" },
   { href: "/import", label: "Import" },
   { href: "/transactions", label: "Transactions" },
   { href: "/subscriptions", label: "Recurring" },
@@ -28,7 +28,7 @@ export const NAV = [
 
 const indexOf = (path: string) => {
   const i = NAV.findIndex((n) =>
-    n.href === "/" ? path === "/" : path.startsWith(n.href),
+    path === n.href || path.startsWith(n.href + "/"),
   );
   return i < 0 ? 0 : i;
 };
@@ -41,7 +41,7 @@ export function navType(currentPath: string, href: string): string[] {
 function Wordmark() {
   return (
     <Link
-      href="/"
+      href="/dashboard"
       transitionTypes={["nav-back"]}
       className="flex items-baseline gap-0.5 px-3"
     >
@@ -123,6 +123,20 @@ function ResetDemo() {
   );
 }
 
+function SignOut() {
+  const [busy, setBusy] = useState(false);
+  return <button disabled={busy} className="px-3 py-2 text-[14.5px] text-muted hover:text-ink disabled:opacity-50" onClick={async () => {
+    setBusy(true);
+    try {
+      const response = await fetch("/api/auth/logout", { method: "POST" });
+      if (!response.ok) throw new Error("Sign out failed");
+      // A full navigation clears cached protected UI after the session is removed.
+      // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+      window.location.assign("/");
+    } catch { toast.error("Couldn't sign out. Please try again."); setBusy(false); }
+  }}>{busy ? "Signing out…" : "Sign out"}</button>;
+}
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
   const active = indexOf(path);
@@ -136,6 +150,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         behavior: "smooth",
       });
   }, [path]);
+
+  if (path === "/" || path === "/login") return <>{children}</>;
 
   return (
     <>
@@ -176,6 +192,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </nav>
 
           <div className="mt-auto space-y-4 px-1">
+            <SignOut />
             <button
               onClick={() => window.dispatchEvent(new Event("kosh:palette"))}
               className="flex w-full items-center justify-between rounded-full bg-surface px-4 py-2.5 text-[15px] text-muted transition-colors hover:text-ink"
@@ -200,7 +217,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <header className="sticky top-0 z-20 bg-bg lg:hidden">
             <div className="flex items-center justify-between px-3 pt-3">
               <Wordmark />
-              <ThemeToggle />
+              <div className="flex items-center gap-1"><SignOut /><ThemeToggle /></div>
             </div>
             <nav
               aria-label="Main"

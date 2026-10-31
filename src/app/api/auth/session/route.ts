@@ -6,7 +6,7 @@ export const GET = handle(async () => {
   return ok(
     {
       authenticated:
-        !required || validSession((await cookies()).get(SESSION_COOKIE)?.value),
+        validSession((await cookies()).get(SESSION_COOKIE)?.value),
       required,
     },
     { headers: { "Cache-Control": "no-store" } },

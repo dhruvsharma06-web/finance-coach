@@ -1,0 +1,1327 @@
+{
+ "url": "http://localhost:3000",
+ "at": "2026-10-31T12:53:17.152Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.19,
+    0.53,
+    0.16
+   ],
+   "motion": {
+    "elements": 5,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 5,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 2210,
+     "screens": 2.5,
+     "words": 326,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 15,
+     "sections": 6,
+     "horizontalOverflow": 18,
+     "overflowCulprits": [
+      "div (+18px)",
+      "p (+18px)",
+      "svg (+17px)"
+     ],
+     "uiFragments": 2,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 1,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "chars": 30,
+     "lines": 2,
+     "size": 16,
+     "vw": 1.1,
+     "font": "Geist",
+     "weight": 400,
+     "tracking": 0,
+     "leading": 1.5,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 1,
+     "top": 203,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "lines": 2,
+     "size": 16,
+     "font": "Geist"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Geist",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      16
+     ],
+     "sizeCount": 1,
+     "notLoaded": [],
+     "body": {
+      "font": "Geist",
+      "size": 16,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 17.1
+     },
+     "measureChars": 180,
+     "max": {
+      "size": 16,
+      "vw": 1.1,
+      "font": "Geist",
+      "text": "Skip to content"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0c0c0a",
+     "bodyBgHsl": {
+      "h": 60,
+      "s": 0.09,
+      "l": 0.04
+     },
+     "dark": true,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#f1f0ea",
+       "share": 1
+      }
+     ],
+     "button": null,
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 0,
+     "inHero": 0,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 4,
+     "fixed": false,
+     "height": 89,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "geist fallback",
+     "__nextjs-geist"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 2210,
+    "margins": {
+     "left": 0,
+     "right": 662
+    },
+    "sections": [
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 113,
+      "height": 205,
+      "words": 37,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Your money.",
+       "size": 16,
+       "tag": "h1"
+      },
+      "left": 0,
+      "right": 732,
+      "textLeft": 0,
+      "textRight": 732,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#story",
+      "tag": "section",
+      "top": 318,
+      "height": 1125,
+      "words": 136,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "A little scattered.",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 710,
+      "textLeft": -18,
+      "textRight": 710,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 1443,
+      "height": 192,
+      "words": 54,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "A money model.",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 573,
+      "textLeft": 0,
+      "textRight": 573,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#decisions",
+      "tag": "section",
+      "top": 1635,
+      "height": 258,
+      "words": 60,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Before you decide,",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 786,
+      "textLeft": 0,
+      "textRight": 786,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 1893,
+      "height": 204,
+      "words": 30,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Make space",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 1126,
+      "textLeft": 0,
+      "textRight": 1126,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Your money. A clearer picture.",
+      "size": 16,
+      "top": 203,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "Skip to content",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Kosh",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "The idea",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Open Kosh",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Meet your AI money coach.",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Made for the way India spends.",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Follow the money",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Your money.",
+      "side": "left",
+      "px": 0
+     }
+    ],
+    "edges": [
+     {
+      "x": 0,
+      "n": 18
+     }
+    ],
+    "leftBlocks": 18,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.4,
+    "voidBox": {
+     "x": 780,
+     "y": 120,
+     "w": 660,
+     "h": 780
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.22,
+    0.41,
+    0.28
+   ],
+   "motion": {
+    "elements": 5,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 5,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 2060,
+     "screens": 2,
+     "words": 326,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 15,
+     "sections": 6,
+     "horizontalOverflow": 31,
+     "overflowCulprits": [
+      "div (+31px)",
+      "p (+31px)",
+      "path (+9px)"
+     ],
+     "uiFragments": 2,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 1,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "chars": 30,
+     "lines": 2,
+     "size": 16,
+     "vw": 2.1,
+     "font": "Geist",
+     "weight": 400,
+     "tracking": 0,
+     "leading": 1.5,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 1,
+     "top": 203,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "lines": 2,
+     "size": 16,
+     "font": "Geist"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Geist",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      16
+     ],
+     "sizeCount": 1,
+     "notLoaded": [],
+     "body": {
+      "font": "Geist",
+      "size": 16,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 17.1
+     },
+     "measureChars": 96,
+     "max": {
+      "size": 16,
+      "vw": 2.1,
+      "font": "Geist",
+      "text": "Skip to content"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0c0c0a",
+     "bodyBgHsl": {
+      "h": 60,
+      "s": 0.09,
+      "l": 0.04
+     },
+     "dark": true,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#f1f0ea",
+       "share": 1
+      }
+     ],
+     "button": null,
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 0,
+     "inHero": 0,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 4,
+     "fixed": false,
+     "height": 89,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "geist fallback",
+     "__nextjs-geist"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 2060,
+    "margins": {
+     "left": 0,
+     "right": 41
+    },
+    "sections": [
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 113,
+      "height": 205,
+      "words": 37,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Your money.",
+       "size": 16,
+       "tag": "h1"
+      },
+      "left": 0,
+      "right": 60,
+      "textLeft": 0,
+      "textRight": 60,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#story",
+      "tag": "section",
+      "top": 318,
+      "height": 927,
+      "words": 136,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "A little scattered.",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 38,
+      "textLeft": -31,
+      "textRight": 38,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 1245,
+      "height": 240,
+      "words": 54,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "A money model.",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 61,
+      "textLeft": 0,
+      "textRight": 6,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#decisions",
+      "tag": "section",
+      "top": 1485,
+      "height": 258,
+      "words": 60,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Before you decide,",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 114,
+      "textLeft": 0,
+      "textRight": 114,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 1743,
+      "height": 204,
+      "words": 30,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Make space",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 454,
+      "textLeft": 0,
+      "textRight": 454,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Your money. A clearer picture.",
+      "size": 16,
+      "top": 203,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "Skip to content",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Kosh",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "The idea",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Open Kosh",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Meet your AI money coach.",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Made for the way India spends.",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Follow the money",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Your money.",
+      "side": "left",
+      "px": 0
+     }
+    ],
+    "edges": [
+     {
+      "x": 0,
+      "n": 18
+     }
+    ],
+    "leftBlocks": 18,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.45,
+    0.54,
+    0.47
+   ],
+   "motion": {
+    "elements": 5,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 5,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 429,
+     "h": 927
+    },
+    "page": {
+     "height": 2141,
+     "screens": 2.3,
+     "words": 326,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 15,
+     "sections": 6,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 2,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 1,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "chars": 30,
+     "lines": 2,
+     "size": 16,
+     "vw": 3.7,
+     "font": "Geist",
+     "weight": 400,
+     "tracking": 0,
+     "leading": 1.5,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.91,
+     "top": 203,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "lines": 2,
+     "size": 16,
+     "font": "Geist"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Geist",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      16
+     ],
+     "sizeCount": 1,
+     "notLoaded": [],
+     "body": {
+      "font": "Geist",
+      "size": 16,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 17.1
+     },
+     "measureChars": 49,
+     "max": {
+      "size": 16,
+      "vw": 3.7,
+      "font": "Geist",
+      "text": "Skip to content"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0c0c0a",
+     "bodyBgHsl": {
+      "h": 60,
+      "s": 0.09,
+      "l": 0.04
+     },
+     "dark": true,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#f1f0ea",
+       "share": 1
+      }
+     ],
+     "button": null,
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 0,
+     "inHero": 0,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 4,
+     "fixed": false,
+     "height": 89,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "geist fallback",
+     "__nextjs-geist"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 429,
+     "h": 927
+    },
+    "pageH": 2141,
+    "margins": {
+     "left": 0,
+     "right": 39
+    },
+    "sections": [
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 113,
+      "height": 229,
+      "words": 37,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Your money.",
+       "size": 16,
+       "tag": "h1"
+      },
+      "left": 0,
+      "right": 45,
+      "textLeft": 0,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#story",
+      "tag": "section",
+      "top": 342,
+      "height": 912,
+      "words": 136,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "A little scattered.",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 1,
+      "textLeft": -38,
+      "textRight": 39,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 1254,
+      "height": 264,
+      "words": 54,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "A money model.",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 42,
+      "textLeft": 0,
+      "textRight": 42,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#decisions",
+      "tag": "section",
+      "top": 1518,
+      "height": 306,
+      "words": 60,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Before you decide,",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 43,
+      "textLeft": 0,
+      "textRight": 43,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 1824,
+      "height": 204,
+      "words": 30,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Make space",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 0,
+      "right": 115,
+      "textLeft": 0,
+      "textRight": 115,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Your money. A clearer picture.",
+      "size": 16,
+      "top": 203,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "Skip to content",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Kosh",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "The idea",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Open Kosh",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Meet your AI money coach.",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Made for the way India spends.",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Follow the money",
+      "side": "left",
+      "px": 0
+     },
+     {
+      "text": "Your money.",
+      "side": "left",
+      "px": 0
+     }
+    ],
+    "edges": [
+     {
+      "x": 0,
+      "n": 18
+     }
+    ],
+    "leftBlocks": 18,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "palette-cream",
+   "width": 1440,
+   "message": "Yellow-cream background (text #f1f0ea).",
+   "fix": "Use the drawn palette. If you want warmth, take a low-chroma stone or bone, not a yellow cream.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "first-action",
+   "width": 1440,
+   "message": "No visible button in the first screen.",
+   "fix": "Give the one primary action a real button in the first screen (a filled or solid-bordered control, 44px or taller), not only a link in the navigation.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "few-pictures",
+   "width": 1440,
+   "message": "Only 1 picture(s) on the page (0 photographs, footage or raster images, 1 interface fragments). Drawings in SVG do not count.",
+   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "measure",
+   "width": 1440,
+   "message": "Longest paragraph runs about 180 characters per line.",
+   "fix": "Cap paragraphs at 45–75 characters (max-width: 60ch).",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "overflow",
+   "width": 1440,
+   "message": "Page scrolls sideways by 18px at 1440px. Widest offenders: div (+18px), p (+18px), svg (+17px).",
+   "fix": "Constrain the element that is wider than the viewport (max-width: 100%, or overflow: clip on its section)."
+  },
+  {
+   "level": "FAIL",
+   "id": "off-centre",
+   "width": 1440,
+   "message": "The page sits off-centre: its content comes to 0px from the left edge but only to 662px from the right, at 1440px.",
+   "fix": "Give the page one pair of equal margins. Check the wrapper for a max-width without margin-inline: auto, a grid with an empty last column, or padding on one side only. If one side is meant to hold air, it must still be closed by something that reaches the margin (a picture, the navigation's last item, a figure).",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "lopsided",
+   "width": 1440,
+   "message": "A section keeps its content on one side and leaves 786px of the width empty: \"Before you decide,\".",
+   "fix": "Fill the other side with what the section has (its picture, a second column, the figure), or defend the void in one sentence."
+  },
+  {
+   "level": "WARN",
+   "id": "small-title",
+   "width": 1440,
+   "message": "The h1 is 16px (\"Your money. A clearer picture.\").",
+   "fix": "Set the title at display size, or make the large text of the first screen the h1.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "hero-void",
+   "width": 1440,
+   "message": "40% of the first screen is one empty block (660×780px at 780,120).",
+   "fix": "Place the void on purpose or fill it: move the picture, the film or one fact into it, grow the headline to meet it, or shrink the screen to its content. A void reads as placed only when something closes it on the far side and it is the screen's one rest."
+  },
+  {
+   "level": "FAIL",
+   "id": "edge-text",
+   "width": 1440,
+   "message": "8 text block(s) sit within 16px of the screen edge: \"Skip to content\" (0px from the left); \"Kosh\" (0px from the left); \"The idea\" (0px from the left); \"Open Kosh\" (0px from the left)",
+   "fix": "Keep text inside the page margin (16–32px or more). Only display type deliberately bled past the edge may touch it.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "still-page",
+   "width": 1440,
+   "message": "Only 5 element(s) moved while the page loaded and scrolled.",
+   "fix": "Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback."
+  },
+  {
+   "level": "FAIL",
+   "id": "empty-screens",
+   "width": 1440,
+   "message": "2 of 3 desktop screens are almost empty ground (under 20% of the screen holds text, a picture or a colour field): screens 1, 3.",
+   "fix": "An empty screen is a rest only once per page. Elsewhere it means the section is underbuilt: set its content larger, give it the full information, put it on a colour field, or cut it."
+  },
+  {
+   "level": "FAIL",
+   "id": "overflow",
+   "width": 768,
+   "message": "Page scrolls sideways by 31px at 768px. Widest offenders: div (+31px), p (+31px), path (+9px).",
+   "fix": "Constrain the element that is wider than the viewport (max-width: 100%, or overflow: clip on its section)."
+  },
+  {
+   "level": "WARN",
+   "id": "off-centre",
+   "width": 768,
+   "message": "The margins differ: 0px on the left, 41px on the right, at 768px.",
+   "fix": "Put the navigation and the content on one pair of margins; check for padding on one side only, a scrollbar gutter, or a header on another inset than the page."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\after\\desktop-fold.jpg",
+   "pages": [
+    "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\after\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\after\\tablet-fold.jpg",
+   "pages": [
+    "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\after\\tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\after\\mobile-fold.jpg",
+   "pages": [
+    "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\after\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

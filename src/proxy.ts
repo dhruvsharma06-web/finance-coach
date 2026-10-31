@@ -9,6 +9,7 @@ import {
 export function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
   if (
+    path === "/" ||
     path === "/login" ||
     path === "/api/health" ||
     path.startsWith("/api/auth/") ||
@@ -19,7 +20,8 @@ export function proxy(req: NextRequest) {
       ))
   )
     return NextResponse.next();
-  if (!authRequired()) return NextResponse.next();
+  // Keep no-key demo APIs usable, while giving demo visitors the same entry flow.
+  if (!authRequired() && (path === "/api" || path.startsWith("/api/"))) return NextResponse.next();
   const token = req.cookies.get(SESSION_COOKIE)?.value;
   if (validSession(token)) {
     const response = NextResponse.next();

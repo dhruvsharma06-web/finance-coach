@@ -1,0 +1,2053 @@
+{
+ "url": "http://localhost:3000",
+ "at": "2026-10-31T13:02:12.815Z",
+ "allow": [
+  "few-pictures",
+  "no-footage",
+  "palette-cream",
+  "off-centre"
+ ],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 6,
+   "filled": [
+    0.42,
+    1,
+    1,
+    0.37,
+    1,
+    0.83
+   ],
+   "motion": {
+    "elements": 22,
+    "css": 13,
+    "transitions": 4,
+    "scripted": 5,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 4994,
+     "screens": 5.5,
+     "words": 302,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 15,
+     "sections": 6,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 2,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 2,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "chars": 30,
+     "lines": 2,
+     "size": 103.7,
+     "vw": 7.2,
+     "font": "Instrument Serif",
+     "weight": 400,
+     "tracking": -0.035,
+     "leading": 0.96,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "right",
+     "widthRatio": 0.53,
+     "top": 170,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "lines": 2,
+     "size": 103.7,
+     "font": "Instrument Serif"
+    },
+    "headings": [
+     {
+      "text": "Kosh",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 38,
+      "vw": 2.6,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.05,
+      "top": 21,
+      "tag": "a",
+      "kind": "heading"
+     },
+     {
+      "text": "Your money. A clearer picture.",
+      "words": 5,
+      "chars": 30,
+      "lines": 2,
+      "size": 103.7,
+      "vw": 7.2,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.035,
+      "leading": 0.96,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.53,
+      "top": 170,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "A little scattered.",
+      "words": 3,
+      "chars": 19,
+      "lines": 2,
+      "size": 67.7,
+      "vw": 4.7,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.24,
+      "top": 896,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "₹1,80,000",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 43,
+      "vw": 3,
+      "font": "Geist",
+      "weight": 500,
+      "tracking": -0.03,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.28,
+      "top": 1081,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "A money model. With a memory.",
+      "words": 6,
+      "chars": 29,
+      "lines": 2,
+      "size": 67.7,
+      "vw": 4.7,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.39,
+      "top": 2860,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Before you decide, see the difference.",
+      "words": 6,
+      "chars": 38,
+      "lines": 2,
+      "size": 67.7,
+      "vw": 4.7,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.36,
+      "top": 3579,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "60 months",
+      "words": 2,
+      "chars": 9,
+      "lines": 1,
+      "size": 100,
+      "vw": 6.9,
+      "font": "Geist",
+      "weight": 400,
+      "tracking": -0.04,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.39,
+      "top": 3671,
+      "mixedFonts": [
+       "Geist",
+       "Instrument Serif"
+      ],
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Make space for what matters.",
+      "words": 5,
+      "chars": 28,
+      "lines": 2,
+      "size": 129.6,
+      "vw": 9,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 4348,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Kosh.",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 90,
+      "vw": 6.3,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.12,
+      "top": 4854,
+      "tag": "a",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 9,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 1,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 1
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Geist",
+       "share": 0.9,
+       "mono": false
+      },
+      {
+       "family": "Instrument Serif",
+       "share": 0.1,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      13,
+      14,
+      15,
+      17,
+      19,
+      22,
+      38,
+      68,
+      90,
+      104,
+      130
+     ],
+     "sizeCount": 11,
+     "notLoaded": [],
+     "body": {
+      "font": "Geist",
+      "size": 17,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": null
+     },
+     "measureChars": 53,
+     "max": {
+      "size": 129.6,
+      "vw": 9,
+      "font": "Instrument Serif",
+      "text": "Make spacefor what matters."
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.01,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0c0c0a",
+     "bodyBgHsl": {
+      "h": 60,
+      "s": 0.09,
+      "l": 0.04
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#0c0c0a",
+       "top": 0,
+       "hsl": {
+        "h": 60,
+        "s": 0.09,
+        "l": 0.04
+       }
+      },
+      {
+       "color": "#1d1d19",
+       "top": 636,
+       "hsl": {
+        "h": 60,
+        "s": 0.07,
+        "l": 0.11
+       }
+      },
+      {
+       "color": "#141411",
+       "top": 3465,
+       "hsl": {
+        "h": 60,
+        "s": 0.08,
+        "l": 0.07
+       }
+      },
+      {
+       "color": "#f1f0ea",
+       "top": 4147,
+       "hsl": {
+        "h": 51,
+        "s": 0.2,
+        "l": 0.93
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#f1f0ea",
+       "share": 0.75
+      },
+      {
+       "color": "#0c0c0a",
+       "share": 0.17
+      },
+      {
+       "color": "#1a1203",
+       "share": 0.08
+      }
+     ],
+     "button": {
+      "bg": "#f5b33a",
+      "hsl": {
+       "h": 39,
+       "s": 0.9,
+       "l": 0.59
+      },
+      "fg": "#1a1203"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 2,
+     "radius": "pill",
+     "height": 60,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Skip to content",
+      "Find your clarity"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 3,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 4,
+     "fixed": false,
+     "height": 100,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "geist fallback",
+     "instrument serif",
+     "__nextjs-geist"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 4994,
+    "margins": {
+     "left": 58,
+     "right": 172
+    },
+    "sections": [
+     {
+      "sel": "section.koshLanding_hero",
+      "tag": "section",
+      "top": 100,
+      "height": 536,
+      "words": 37,
+      "media": 0,
+      "middle": 315,
+      "heading": {
+       "text": "Your money.",
+       "size": 104,
+       "tag": "h1"
+      },
+      "left": 58,
+      "right": 301,
+      "textLeft": 58,
+      "textRight": 301,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#story.koshLanding_story",
+      "tag": "section",
+      "top": 636,
+      "height": 2070,
+      "words": 100,
+      "media": 1,
+      "middle": 367,
+      "heading": {
+       "text": "A little scattered.",
+       "size": 68,
+       "tag": "h2"
+      },
+      "left": 58,
+      "right": 172,
+      "textLeft": 58,
+      "textRight": 268,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": true
+     },
+     {
+      "sel": "section.koshLanding_connection",
+      "tag": "section",
+      "top": 2706,
+      "height": 759,
+      "words": 54,
+      "media": 0,
+      "middle": 208,
+      "heading": {
+       "text": "A money model.",
+       "size": 68,
+       "tag": "h2"
+      },
+      "left": 58,
+      "right": 278,
+      "textLeft": 58,
+      "textRight": 278,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#decisions.koshLanding_decisions",
+      "tag": "section",
+      "top": 3465,
+      "height": 683,
+      "words": 60,
+      "media": 0,
+      "middle": 211,
+      "heading": {
+       "text": "60",
+       "size": 100,
+       "tag": "p"
+      },
+      "left": 58,
+      "right": 218,
+      "textLeft": 58,
+      "textRight": 218,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.koshLanding_close",
+      "tag": "section",
+      "top": 4147,
+      "height": 657,
+      "words": 30,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Make space",
+       "size": 130,
+       "tag": "h2"
+      },
+      "left": 58,
+      "right": 693,
+      "textLeft": 58,
+      "textRight": 693,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.koshLanding_footer",
+      "tag": "footer",
+      "top": 4804,
+      "height": 190,
+      "words": 14,
+      "media": 0,
+      "middle": 391,
+      "heading": {
+       "text": "Kosh.",
+       "size": 90,
+       "tag": "a"
+      },
+      "left": 58,
+      "right": 91,
+      "textLeft": 58,
+      "textRight": 91,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Your money. A clearer picture.",
+      "size": 104,
+      "top": 170,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 58,
+      "n": 9
+     },
+     {
+      "x": 614,
+      "n": 5
+     }
+    ],
+    "leftBlocks": 14,
+    "bodySize": 17,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.23,
+    "voidBox": {
+     "x": 180,
+     "y": 540,
+     "w": 1260,
+     "h": 240
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 6,
+   "filled": [
+    0.61,
+    1,
+    0.87,
+    0.63,
+    1,
+    0.83
+   ],
+   "motion": {
+    "elements": 24,
+    "css": 13,
+    "transitions": 6,
+    "scripted": 5,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 5371,
+     "screens": 5.2,
+     "words": 302,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 15,
+     "sections": 6,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 2,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 2,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "chars": 30,
+     "lines": 2,
+     "size": 76,
+     "vw": 9.9,
+     "font": "Instrument Serif",
+     "weight": 400,
+     "tracking": -0.035,
+     "leading": 0.96,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "right",
+     "widthRatio": 0.63,
+     "top": 145,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "lines": 2,
+     "size": 76,
+     "font": "Instrument Serif"
+    },
+    "headings": [
+     {
+      "text": "Kosh",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 38,
+      "vw": 4.9,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.1,
+      "top": 21,
+      "tag": "a",
+      "kind": "heading"
+     },
+     {
+      "text": "Your money. A clearer picture.",
+      "words": 5,
+      "chars": 30,
+      "lines": 2,
+      "size": 76,
+      "vw": 9.9,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.035,
+      "leading": 0.96,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.63,
+      "top": 145,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "A little scattered.",
+      "words": 3,
+      "chars": 19,
+      "lines": 1,
+      "size": 44,
+      "vw": 5.7,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.33,
+      "top": 880,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "A little more breathing room.",
+      "words": 5,
+      "chars": 29,
+      "lines": 1,
+      "size": 27,
+      "vw": 3.5,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.12,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.41,
+      "top": 1020,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "₹1,80,000",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 43,
+      "vw": 5.6,
+      "font": "Geist",
+      "weight": 500,
+      "tracking": -0.03,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.41,
+      "top": 1065,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "A money model. With a memory.",
+      "words": 6,
+      "chars": 29,
+      "lines": 2,
+      "size": 44,
+      "vw": 5.7,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.35,
+      "top": 3067,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Before you decide, see the difference.",
+      "words": 6,
+      "chars": 38,
+      "lines": 2,
+      "size": 44,
+      "vw": 5.7,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 3806,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "60 months",
+      "words": 2,
+      "chars": 9,
+      "lines": 1,
+      "size": 100,
+      "vw": 13,
+      "font": "Geist",
+      "weight": 400,
+      "tracking": -0.04,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.85,
+      "top": 4170,
+      "mixedFonts": [
+       "Geist",
+       "Instrument Serif"
+      ],
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Make space for what matters.",
+      "words": 5,
+      "chars": 28,
+      "lines": 2,
+      "size": 69.1,
+      "vw": 9,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 4839,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Kosh.",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 90,
+      "vw": 11.7,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.22,
+      "top": 5231,
+      "tag": "a",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 10,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 2,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 1
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Geist",
+       "share": 0.9,
+       "mono": false
+      },
+      {
+       "family": "Instrument Serif",
+       "share": 0.1,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      19,
+      38,
+      44,
+      69,
+      76,
+      90
+     ],
+     "sizeCount": 11,
+     "notLoaded": [],
+     "body": {
+      "font": "Geist",
+      "size": 17,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 17.1
+     },
+     "measureChars": 52,
+     "max": {
+      "size": 100,
+      "vw": 13,
+      "font": "Geist",
+      "text": "60"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.01,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0c0c0a",
+     "bodyBgHsl": {
+      "h": 60,
+      "s": 0.09,
+      "l": 0.04
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#0c0c0a",
+       "top": 0,
+       "hsl": {
+        "h": 60,
+        "s": 0.09,
+        "l": 0.04
+       }
+      },
+      {
+       "color": "#1d1d19",
+       "top": 558,
+       "hsl": {
+        "h": 60,
+        "s": 0.07,
+        "l": 0.11
+       }
+      },
+      {
+       "color": "#141411",
+       "top": 3692,
+       "hsl": {
+        "h": 60,
+        "s": 0.08,
+        "l": 0.07
+       }
+      },
+      {
+       "color": "#f1f0ea",
+       "top": 4639,
+       "hsl": {
+        "h": 51,
+        "s": 0.2,
+        "l": 0.93
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#f1f0ea",
+       "share": 0.75
+      },
+      {
+       "color": "#0c0c0a",
+       "share": 0.17
+      },
+      {
+       "color": "#1a1203",
+       "share": 0.08
+      }
+     ],
+     "button": {
+      "bg": "#f5b33a",
+      "hsl": {
+       "h": 39,
+       "s": 0.9,
+       "l": 0.59
+      },
+      "fg": "#1a1203"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 2,
+     "radius": "pill",
+     "height": 60,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Skip to content",
+      "Find your clarity"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 3,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 4,
+     "fixed": false,
+     "height": 100,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "geist fallback",
+     "instrument serif",
+     "__nextjs-geist"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 5371,
+    "margins": {
+     "left": 31,
+     "right": 47
+    },
+    "sections": [
+     {
+      "sel": "section.koshLanding_hero",
+      "tag": "section",
+      "top": 100,
+      "height": 458,
+      "words": 37,
+      "media": 0,
+      "middle": 27,
+      "heading": {
+       "text": "Your money.",
+       "size": 76,
+       "tag": "h1"
+      },
+      "left": 31,
+      "right": 55,
+      "textLeft": 31,
+      "textRight": 55,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#story.koshLanding_story",
+      "tag": "section",
+      "top": 558,
+      "height": 2355,
+      "words": 100,
+      "media": 1,
+      "middle": 34,
+      "heading": {
+       "text": "A little scattered.",
+       "size": 44,
+       "tag": "h2"
+      },
+      "left": 31,
+      "right": 32,
+      "textLeft": 31,
+      "textRight": 64,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": true
+     },
+     {
+      "sel": "section.koshLanding_connection",
+      "tag": "section",
+      "top": 2913,
+      "height": 779,
+      "words": 54,
+      "media": 0,
+      "middle": 42,
+      "heading": {
+       "text": "A money model.",
+       "size": 44,
+       "tag": "h2"
+      },
+      "left": 31,
+      "right": 42,
+      "textLeft": 31,
+      "textRight": 42,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#decisions.koshLanding_decisions",
+      "tag": "section",
+      "top": 3692,
+      "height": 947,
+      "words": 60,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "60",
+       "size": 100,
+       "tag": "p"
+      },
+      "left": 31,
+      "right": 59,
+      "textLeft": 31,
+      "textRight": 59,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.koshLanding_close",
+      "tag": "section",
+      "top": 4639,
+      "height": 542,
+      "words": 30,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Make space",
+       "size": 69,
+       "tag": "h2"
+      },
+      "left": 31,
+      "right": 370,
+      "textLeft": 31,
+      "textRight": 370,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.koshLanding_footer",
+      "tag": "footer",
+      "top": 5181,
+      "height": 190,
+      "words": 14,
+      "media": 0,
+      "middle": 82,
+      "heading": {
+       "text": "Kosh.",
+       "size": 90,
+       "tag": "a"
+      },
+      "left": 31,
+      "right": 64,
+      "textLeft": 31,
+      "textRight": 64,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Your money. A clearer picture.",
+      "size": 76,
+      "top": 145,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 31,
+      "n": 9
+     },
+     {
+      "x": 257,
+      "n": 3
+     },
+     {
+      "x": 299,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 14,
+    "bodySize": 17,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 6,
+   "filled": [
+    0.69,
+    1,
+    0.88,
+    0.74,
+    0.98,
+    0.81
+   ],
+   "motion": {
+    "elements": 21,
+    "css": 13,
+    "transitions": 3,
+    "scripted": 5,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 4599,
+     "screens": 5.4,
+     "words": 287,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 15,
+     "sections": 6,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 2,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 1,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "chars": 30,
+     "lines": 2,
+     "size": 56,
+     "vw": 14.4,
+     "font": "Instrument Serif",
+     "weight": 400,
+     "tracking": -0.035,
+     "leading": 0.96,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.89,
+     "top": 118,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Your money. A clearer picture.",
+     "words": 5,
+     "lines": 2,
+     "size": 56,
+     "font": "Instrument Serif"
+    },
+    "headings": [
+     {
+      "text": "Kosh",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 33,
+      "vw": 8.5,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.17,
+      "top": 14,
+      "tag": "a",
+      "kind": "heading"
+     },
+     {
+      "text": "Your money. A clearer picture.",
+      "words": 5,
+      "chars": 30,
+      "lines": 2,
+      "size": 56,
+      "vw": 14.4,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.035,
+      "leading": 0.96,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.89,
+      "top": 118,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "A little scattered.",
+      "words": 3,
+      "chars": 19,
+      "lines": 1,
+      "size": 42,
+      "vw": 10.8,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.89,
+      "top": 617,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "A little more breathing room.",
+      "words": 5,
+      "chars": 29,
+      "lines": 2,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.12,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.64,
+      "top": 919,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "₹1,80,000",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 36,
+      "vw": 9.2,
+      "font": "Geist",
+      "weight": 500,
+      "tracking": -0.03,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.65,
+      "top": 987,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "A money model. With a memory.",
+      "words": 6,
+      "chars": 29,
+      "lines": 2,
+      "size": 48,
+      "vw": 12.3,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.89,
+      "top": 2397,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Before you decide, see the difference.",
+      "words": 6,
+      "chars": 38,
+      "lines": 2,
+      "size": 48,
+      "vw": 12.3,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.89,
+      "top": 3148,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "60 months",
+      "words": 2,
+      "chars": 9,
+      "lines": 1,
+      "size": 80,
+      "vw": 20.5,
+      "font": "Geist",
+      "weight": 400,
+      "tracking": -0.04,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.76,
+      "top": 3514,
+      "mixedFonts": [
+       "Geist",
+       "Instrument Serif"
+      ],
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Make space for what matters.",
+      "words": 5,
+      "chars": 28,
+      "lines": 2,
+      "size": 64,
+      "vw": 16.4,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.89,
+      "top": 4061,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Kosh.",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 65,
+      "vw": 16.7,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.31,
+      "top": 4389,
+      "tag": "a",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 10,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 2,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 1
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Geist",
+       "share": 0.89,
+       "mono": false
+      },
+      {
+       "family": "Instrument Serif",
+       "share": 0.11,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      19,
+      33,
+      42,
+      48,
+      56,
+      64,
+      65
+     ],
+     "sizeCount": 12,
+     "notLoaded": [],
+     "body": {
+      "font": "Geist",
+      "size": 17,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 17.1
+     },
+     "measureChars": 41,
+     "max": {
+      "size": 80,
+      "vw": 20.5,
+      "font": "Geist",
+      "text": "60"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.01,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0c0c0a",
+     "bodyBgHsl": {
+      "h": 60,
+      "s": 0.09,
+      "l": 0.04
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#0c0c0a",
+       "top": 0,
+       "hsl": {
+        "h": 60,
+        "s": 0.09,
+        "l": 0.04
+       }
+      },
+      {
+       "color": "#1d1d19",
+       "top": 535,
+       "hsl": {
+        "h": 60,
+        "s": 0.07,
+        "l": 0.11
+       }
+      },
+      {
+       "color": "#f1f0ea",
+       "top": 838,
+       "hsl": {
+        "h": 51,
+        "s": 0.2,
+        "l": 0.93
+       }
+      },
+      {
+       "color": "#f5b33a",
+       "top": 861,
+       "hsl": {
+        "h": 39,
+        "s": 0.9,
+        "l": 0.59
+       }
+      },
+      {
+       "color": "#141411",
+       "top": 3059,
+       "hsl": {
+        "h": 60,
+        "s": 0.08,
+        "l": 0.07
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#f1f0ea",
+       "share": 0.74
+      },
+      {
+       "color": "#0c0c0a",
+       "share": 0.18
+      },
+      {
+       "color": "#1a1203",
+       "share": 0.08
+      }
+     ],
+     "button": {
+      "bg": "#f5b33a",
+      "hsl": {
+       "h": 39,
+       "s": 0.9,
+       "l": 0.59
+      },
+      "fg": "#1a1203"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 2,
+     "radius": "pill",
+     "height": 50,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Skip to content",
+      "Find your clarity"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 3,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 2,
+     "fixed": false,
+     "height": 80,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "geist fallback",
+     "instrument serif",
+     "__nextjs-geist"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 4599,
+    "margins": {
+     "left": 22,
+     "right": 23
+    },
+    "sections": [
+     {
+      "sel": "section.koshLanding_hero",
+      "tag": "section",
+      "top": 80,
+      "height": 455,
+      "words": 37,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Your money.",
+       "size": 56,
+       "tag": "h1"
+      },
+      "left": 22,
+      "right": 23,
+      "textLeft": 22,
+      "textRight": 23,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#story.koshLanding_story",
+      "tag": "section",
+      "top": 535,
+      "height": 1772,
+      "words": 90,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "A little scattered.",
+       "size": 42,
+       "tag": "h2"
+      },
+      "left": 22,
+      "right": 27,
+      "textLeft": 22,
+      "textRight": 27,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": true
+     },
+     {
+      "sel": "section.koshLanding_connection",
+      "tag": "section",
+      "top": 2308,
+      "height": 751,
+      "words": 54,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "A money model.",
+       "size": 48,
+       "tag": "h2"
+      },
+      "left": 22,
+      "right": 23,
+      "textLeft": 22,
+      "textRight": 23,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#decisions.koshLanding_decisions",
+      "tag": "section",
+      "top": 3059,
+      "height": 849,
+      "words": 60,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "60",
+       "size": 80,
+       "tag": "p"
+      },
+      "left": 22,
+      "right": 46,
+      "textLeft": 22,
+      "textRight": 46,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.koshLanding_close",
+      "tag": "section",
+      "top": 3907,
+      "height": 447,
+      "words": 30,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Make space",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 22,
+      "right": 28,
+      "textLeft": 22,
+      "textRight": 28,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.koshLanding_footer",
+      "tag": "footer",
+      "top": 4354,
+      "height": 245,
+      "words": 14,
+      "media": 0,
+      "middle": 59,
+      "heading": {
+       "text": "Kosh.",
+       "size": 65,
+       "tag": "a"
+      },
+      "left": 22,
+      "right": 55,
+      "textLeft": 22,
+      "textRight": 55,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Your money. A clearer picture.",
+      "size": 56,
+      "top": 118,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 22,
+      "n": 14
+     }
+    ],
+    "leftBlocks": 14,
+    "bodySize": 17,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "mixed-font-headline",
+   "width": 1440,
+   "message": "1 headline(s) switch typeface or to italic mid-line (the \"one italic serif word\" move).",
+   "fix": "Set the whole headline in one face. Emphasis comes from the words.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "size-count",
+   "width": 1440,
+   "message": "11 different font sizes (13, 14, 15, 17, 19, 22, 38, 68, 90, 104, 130).",
+   "fix": "A page needs about five: display, heading, lead, body, small.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "lopsided",
+   "width": 1440,
+   "message": "A section keeps its content on one side and leaves 693px of the width empty: \"Make space\".",
+   "fix": "Fill the other side with what the section has (its picture, a second column, the figure), or defend the void in one sentence.",
+   "alsoAt": [
+    768
+   ]
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\verified\\desktop-fold.jpg",
+   "pages": [
+    "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\verified\\desktop-page-01.jpg",
+    "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\verified\\desktop-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\verified\\tablet-fold.jpg",
+   "pages": [
+    "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\verified\\tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\verified\\mobile-fold.jpg",
+   "pages": [
+    "C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\finance-coach\\.taste-skill\\verified\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

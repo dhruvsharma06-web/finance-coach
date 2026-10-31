@@ -45,14 +45,14 @@ const NEXT_COPY: Record<string, string> = {
   "/coach": "Ask the coach anything",
   "/report": "Read this month's review",
   "/how-it-works": "See how Kosh works under the hood",
-  "/": "Back to your overview",
+  "/dashboard": "Back to your overview",
 };
 
 /** Big "next step" link at the bottom of every page, following the nav order. */
 export function NextStep() {
   const path = usePathname();
-  const i = NAV.findIndex((n) => (n.href === "/" ? path === "/" : path.startsWith(n.href)));
-  if (i < 0 || path === "/") return null; // the Overview already has the journey strip
+  const i = NAV.findIndex((n) => path === n.href || path.startsWith(n.href + "/"));
+  if (i < 0 || path === "/dashboard") return null; // the Overview already has the journey strip
   const next = NAV[(i + 1) % NAV.length];
   return (
     <Link
