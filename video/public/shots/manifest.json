@@ -1,316 +1,316 @@
 {
-  "base": "https://finance-coach-six.vercel.app",
-  "capturedAt": "2026-10-31T14:52:39.676Z",
+  "base": "http://localhost:3200",
+  "capturedAt": "2026-10-31T15:00:50.857Z",
   "shots": [
     {
       "name": "landing-hero",
       "note": "Landing hero: 3D wallet and coins",
-      "url": "https://finance-coach-six.vercel.app/"
+      "url": "http://localhost:3200/"
     },
     {
       "name": "landing-story-1",
       "note": "Landing scroll story, chapter 1",
-      "url": "https://finance-coach-six.vercel.app/"
+      "url": "http://localhost:3200/"
     },
     {
       "name": "landing-story-2",
       "note": "Landing scroll story, chapter 2",
-      "url": "https://finance-coach-six.vercel.app/"
+      "url": "http://localhost:3200/"
     },
     {
       "name": "landing-story-3",
       "note": "Landing scroll story, chapter 3",
-      "url": "https://finance-coach-six.vercel.app/"
+      "url": "http://localhost:3200/"
     },
     {
       "name": "landing-memory-1",
       "note": "Memory loop step 1",
-      "url": "https://finance-coach-six.vercel.app/"
+      "url": "http://localhost:3200/"
     },
     {
       "name": "landing-memory-2",
       "note": "Memory loop step 2",
-      "url": "https://finance-coach-six.vercel.app/"
+      "url": "http://localhost:3200/"
     },
     {
       "name": "landing-memory-3",
       "note": "Memory loop step 3",
-      "url": "https://finance-coach-six.vercel.app/"
+      "url": "http://localhost:3200/"
     },
     {
       "name": "landing-memory-4",
       "note": "Memory loop step 4",
-      "url": "https://finance-coach-six.vercel.app/"
+      "url": "http://localhost:3200/"
     },
     {
       "name": "landing-memory-5",
       "note": "Memory loop step 5",
-      "url": "https://finance-coach-six.vercel.app/"
+      "url": "http://localhost:3200/"
     },
     {
       "name": "landing-decisions",
       "note": "Landing what-if calculator",
-      "url": "https://finance-coach-six.vercel.app/"
+      "url": "http://localhost:3200/"
     },
     {
       "name": "landing-close",
       "note": "Landing close",
-      "url": "https://finance-coach-six.vercel.app/"
+      "url": "http://localhost:3200/"
     },
     {
       "name": "login",
       "note": "Login with demo entry",
-      "url": "https://finance-coach-six.vercel.app/login"
+      "url": "http://localhost:3200/login"
     },
     {
       "name": "dashboard-hero",
       "note": "Overview headline and Ask bar",
-      "url": "https://finance-coach-six.vercel.app/dashboard"
+      "url": "http://localhost:3200/dashboard"
     },
     {
       "name": "dashboard-1",
       "note": "Overview sections (1)",
-      "url": "https://finance-coach-six.vercel.app/dashboard"
+      "url": "http://localhost:3200/dashboard"
     },
     {
       "name": "dashboard-2",
       "note": "Overview sections (2)",
-      "url": "https://finance-coach-six.vercel.app/dashboard"
+      "url": "http://localhost:3200/dashboard"
     },
     {
       "name": "dashboard-3",
       "note": "Overview sections (3)",
-      "url": "https://finance-coach-six.vercel.app/dashboard"
+      "url": "http://localhost:3200/dashboard"
     },
     {
       "name": "dashboard-4",
       "note": "Overview sections (4)",
-      "url": "https://finance-coach-six.vercel.app/dashboard"
+      "url": "http://localhost:3200/dashboard"
     },
     {
       "name": "dashboard-5",
       "note": "Overview sections (5)",
-      "url": "https://finance-coach-six.vercel.app/dashboard"
+      "url": "http://localhost:3200/dashboard"
     },
     {
       "name": "import",
       "note": "Import page",
-      "url": "https://finance-coach-six.vercel.app/import"
+      "url": "http://localhost:3200/import"
     },
     {
       "name": "import-result",
       "note": "Import result with categorised rows",
-      "url": "https://finance-coach-six.vercel.app/import"
+      "url": "http://localhost:3200/import"
     },
     {
       "name": "transactions",
       "note": "Transactions ledger",
-      "url": "https://finance-coach-six.vercel.app/transactions"
+      "url": "http://localhost:3200/transactions"
     },
     {
       "name": "transactions-eatclub",
       "note": "EatClub rows needing review",
-      "url": "https://finance-coach-six.vercel.app/transactions?q=eatclub"
+      "url": "http://localhost:3200/transactions?q=eatclub"
     },
     {
       "name": "transactions-picker",
       "note": "Category picker open",
-      "url": "https://finance-coach-six.vercel.app/transactions?q=eatclub"
+      "url": "http://localhost:3200/transactions?q=eatclub"
     },
     {
       "name": "transactions-learned",
       "note": "Rule learned toast, similar rows updated",
-      "url": "https://finance-coach-six.vercel.app/transactions?q=eatclub"
+      "url": "http://localhost:3200/transactions?q=eatclub"
     },
     {
       "name": "recurring",
       "note": "Recurring payments",
-      "url": "https://finance-coach-six.vercel.app/subscriptions"
+      "url": "http://localhost:3200/subscriptions"
     },
     {
       "name": "recurring-1",
       "note": "Recurring details (1)",
-      "url": "https://finance-coach-six.vercel.app/subscriptions"
+      "url": "http://localhost:3200/subscriptions"
     },
     {
       "name": "recurring-2",
       "note": "Recurring details (2)",
-      "url": "https://finance-coach-six.vercel.app/subscriptions"
+      "url": "http://localhost:3200/subscriptions"
     },
     {
       "name": "goals",
       "note": "Money model",
-      "url": "https://finance-coach-six.vercel.app/goals"
+      "url": "http://localhost:3200/goals"
     },
     {
       "name": "goals-1",
       "note": "Money model details (1)",
-      "url": "https://finance-coach-six.vercel.app/goals"
+      "url": "http://localhost:3200/goals"
     },
     {
       "name": "goals-2",
       "note": "Money model details (2)",
-      "url": "https://finance-coach-six.vercel.app/goals"
+      "url": "http://localhost:3200/goals"
     },
     {
       "name": "planner-whatif",
       "note": "What-if with goal dates",
-      "url": "https://finance-coach-six.vercel.app/planner?q=What%20if%20I%20cut%20dining%20out%20by%2030%25%20and%20my%20rent%20goes%20up%20by%203%2C000%20from%20January%3F"
+      "url": "http://localhost:3200/planner?q=What%20if%20I%20cut%20dining%20out%20by%2030%25%20and%20my%20rent%20goes%20up%20by%203%2C000%20from%20January%3F"
     },
     {
       "name": "planner-fixplan",
       "note": "Fix my plan result",
-      "url": "https://finance-coach-six.vercel.app/planner?q=What%20if%20I%20cut%20dining%20out%20by%2030%25%20and%20my%20rent%20goes%20up%20by%203%2C000%20from%20January%3F"
+      "url": "http://localhost:3200/planner?q=What%20if%20I%20cut%20dining%20out%20by%2030%25%20and%20my%20rent%20goes%20up%20by%203%2C000%20from%20January%3F"
     },
     {
       "name": "family",
       "note": "Family headline",
-      "url": "https://finance-coach-six.vercel.app/family"
+      "url": "http://localhost:3200/family"
     },
     {
       "name": "family-1",
       "note": "Family sections (1)",
-      "url": "https://finance-coach-six.vercel.app/family"
+      "url": "http://localhost:3200/family"
     },
     {
       "name": "family-2",
       "note": "Family sections (2)",
-      "url": "https://finance-coach-six.vercel.app/family"
+      "url": "http://localhost:3200/family"
     },
     {
       "name": "family-3",
       "note": "Family sections (3)",
-      "url": "https://finance-coach-six.vercel.app/family"
+      "url": "http://localhost:3200/family"
     },
     {
       "name": "family-whatif",
       "note": "Family what-if: Papa retires",
-      "url": "https://finance-coach-six.vercel.app/family"
+      "url": "http://localhost:3200/family"
     },
     {
       "name": "splits",
       "note": "Splits: Goa trip settle-up",
-      "url": "https://finance-coach-six.vercel.app/splits"
+      "url": "http://localhost:3200/splits"
     },
     {
       "name": "splits-1",
       "note": "Splits details (1)",
-      "url": "https://finance-coach-six.vercel.app/splits"
+      "url": "http://localhost:3200/splits"
     },
     {
       "name": "festivals",
       "note": "Festivals: Diwali countdown",
-      "url": "https://finance-coach-six.vercel.app/festivals"
+      "url": "http://localhost:3200/festivals"
     },
     {
       "name": "festivals-1",
       "note": "Festival timeline and pots (1)",
-      "url": "https://finance-coach-six.vercel.app/festivals"
+      "url": "http://localhost:3200/festivals"
     },
     {
       "name": "festivals-2",
       "note": "Festival timeline and pots (2)",
-      "url": "https://finance-coach-six.vercel.app/festivals"
+      "url": "http://localhost:3200/festivals"
     },
     {
       "name": "coach-guardrail",
       "note": "Coach guardrail: educates, never picks products",
-      "url": "https://finance-coach-six.vercel.app/coach"
+      "url": "http://localhost:3200/coach"
     },
     {
       "name": "coach-afford",
       "note": "Coach: affordability with a simulation",
-      "url": "https://finance-coach-six.vercel.app/coach"
+      "url": "http://localhost:3200/coach"
     },
     {
       "name": "ask-kosh",
       "note": "Ask Kosh avatar assistant, Hinglish",
-      "url": "https://finance-coach-six.vercel.app/dashboard"
+      "url": "http://localhost:3200/dashboard"
     },
     {
       "name": "report",
       "note": "Monthly review",
-      "url": "https://finance-coach-six.vercel.app/report"
+      "url": "http://localhost:3200/report"
     },
     {
       "name": "report-1",
       "note": "Monthly review details (1)",
-      "url": "https://finance-coach-six.vercel.app/report"
+      "url": "http://localhost:3200/report"
     },
     {
       "name": "report-2",
       "note": "Monthly review details (2)",
-      "url": "https://finance-coach-six.vercel.app/report"
+      "url": "http://localhost:3200/report"
     },
     {
       "name": "how-it-works",
       "note": "How it works",
-      "url": "https://finance-coach-six.vercel.app/how-it-works"
+      "url": "http://localhost:3200/how-it-works"
     },
     {
       "name": "wrapped-1",
       "note": "Monthly Wrapped card 1",
-      "url": "https://finance-coach-six.vercel.app/wrapped?month=2026-10"
+      "url": "http://localhost:3200/wrapped?month=2026-10"
     },
     {
       "name": "wrapped-2",
       "note": "Monthly Wrapped card 2",
-      "url": "https://finance-coach-six.vercel.app/wrapped?month=2026-10"
+      "url": "http://localhost:3200/wrapped?month=2026-10"
     },
     {
       "name": "wrapped-3",
       "note": "Monthly Wrapped card 3",
-      "url": "https://finance-coach-six.vercel.app/wrapped?month=2026-10"
+      "url": "http://localhost:3200/wrapped?month=2026-10"
     },
     {
       "name": "wrapped-4",
       "note": "Monthly Wrapped card 4",
-      "url": "https://finance-coach-six.vercel.app/wrapped?month=2026-10"
+      "url": "http://localhost:3200/wrapped?month=2026-10"
     },
     {
       "name": "wrapped-5",
       "note": "Monthly Wrapped card 5",
-      "url": "https://finance-coach-six.vercel.app/wrapped?month=2026-10"
+      "url": "http://localhost:3200/wrapped?month=2026-10"
     },
     {
       "name": "wrapped-6",
       "note": "Monthly Wrapped card 6",
-      "url": "https://finance-coach-six.vercel.app/wrapped?month=2026-10"
+      "url": "http://localhost:3200/wrapped?month=2026-10"
     },
     {
       "name": "wrapped-7",
       "note": "Monthly Wrapped card 7",
-      "url": "https://finance-coach-six.vercel.app/wrapped?month=2026-10"
+      "url": "http://localhost:3200/wrapped?month=2026-10"
     },
     {
       "name": "wrapped-8",
       "note": "Monthly Wrapped card 8",
-      "url": "https://finance-coach-six.vercel.app/wrapped?month=2026-10"
+      "url": "http://localhost:3200/wrapped?month=2026-10"
     },
     {
       "name": "wrapped-9",
       "note": "Monthly Wrapped card 9",
-      "url": "https://finance-coach-six.vercel.app/wrapped?month=2026-10"
+      "url": "http://localhost:3200/wrapped?month=2026-10"
     },
     {
       "name": "wrapped-10",
       "note": "Monthly Wrapped card 10",
-      "url": "https://finance-coach-six.vercel.app/wrapped?month=2026-10"
+      "url": "http://localhost:3200/wrapped?month=2026-10"
     },
     {
       "name": "mobile-dashboard",
       "note": "Phone: /dashboard",
-      "url": "https://finance-coach-six.vercel.app/dashboard"
+      "url": "http://localhost:3200/dashboard"
     },
     {
       "name": "mobile-family",
       "note": "Phone: /family",
-      "url": "https://finance-coach-six.vercel.app/family"
+      "url": "http://localhost:3200/family"
     },
     {
       "name": "mobile-festivals",
       "note": "Phone: /festivals",
-      "url": "https://finance-coach-six.vercel.app/festivals"
+      "url": "http://localhost:3200/festivals"
     }
   ]
 }

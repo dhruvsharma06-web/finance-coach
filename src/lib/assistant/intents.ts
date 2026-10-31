@@ -6,7 +6,7 @@ export function routeIntent(text:string):AssistantIntent{
  if(/dark mode|light mode|dark theme|light theme/.test(s))return {kind:"theme",actions:[{type:"theme",value:/dark/.test(s)?"dark":"light"}]};
  if(/data.*(safe|privacy)|privacy|delete.*data|export.*data|data.*(delete|export)|mera data.*safe/.test(s))return {kind:"privacy",actions:[{type:"navigate",href:"/goals#your-data",label:"Your data"}]};
  if(/fix my plan|back on track|goals kaise|plan.*(?:theek|sahi)/.test(s))return {kind:"fix",actions:[{type:"fix_plan"}]};
- if(/^(?:what if|can i afford|could i afford|agar (?:main|mai)|what happens if)/.test(s))return {kind:"simulate",actions:[{type:"simulate",prompt:text}]};
+ if(/^(?:what if|can i afford|could i afford|agar (?:main|mai)|what happens if)/.test(s)||/\b(?:kar(?:u|un|oon|du|doon)|ho (?:jaye|gayi|gaya))\s*(?:toh|to)?\??$|\b(?:kam|badh|aadh[ia])\b.*\b(?:kar|ho|le)/.test(s))return {kind:"simulate",actions:[{type:"simulate",prompt:text}]};
  if(/sample|import|bank sms|statement upload|statement.*(?:add|lao)/.test(s)){
  const actions:AssistantAction[]=[{type:"navigate",href:"/import",label:"Import a statement"}];
  if(/sample|demo statement/.test(s))actions.push({type:"import_sample",file:"kosh-demo-statement.csv"});
