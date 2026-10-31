@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { History, Mic, Plus, Trash2 } from "lucide-react";
+import { Download, History, LogOut, Mic, Plus, RotateCcw, ShieldCheck, Trash2 } from "lucide-react";
 import { api } from "@/lib/client";
 import { useApi } from "@/lib/use-api";
 import { getCategory } from "@/lib/categories";
@@ -298,6 +298,78 @@ export function GoalsView() {
           )}
         </div>
       </div>
+
+      <YourData />
     </div>
+  );
+}
+
+/** Privacy controls: export, erase, restore demo, sign out (when a passcode is set). */
+function YourData() {
+  const { data: session } = useApi(() => api.session().catch(() => ({ authenticated: false, required: false })));
+  const [confirming, setConfirming] = useState(false);
+  const [busy, setBusy] = useState<string | null>(null);
+
+  const run = async (key: string, fn: () => Promise<unknown>, done: string) => {
+    setBusy(key);
+    try {
+      await fn();
+      toast.success(done);
+      window.location.reload();
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Something went wrong");
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  return (
+    <section className="reveal mt-16 rounded-[var(--radius)] bg-surface p-6 sm:p-10">
+      <div className="flex flex-wrap items-start justify-between gap-6">
+        <div className="max-w-[52ch]">
+          <h2 className="flex items-center gap-3 font-display text-[36px] leading-none tracking-[-0.02em] sm:text-[44px]">
+            <ShieldCheck size={28} className="text-positive" /> Your data
+          </h2>
+          <p className="mt-4 text-[17px] leading-relaxed text-muted">
+            Account and card numbers are masked to the last 4 digits, statement files are read in memory and never kept, and nothing
+            here is ever shared. Take a copy or erase it whenever you like.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <a href="/api/data/export" download>
+            <Button size="lg">
+              <Download size={16} /> Export everything
+            </Button>
+          </a>
+          <Button size="lg" loading={busy === "reset"} onClick={() => run("reset", api.reset, "Demo data restored")}>
+            <RotateCcw size={16} /> Restore demo
+          </Button>
+          {session?.required && (
+            <Button size="lg" loading={busy === "logout"} onClick={() => run("logout", api.logout, "Signed out")}>
+              <LogOut size={16} /> Sign out
+            </Button>
+          )}
+        </div>
+      </div>
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-danger-soft px-5 py-4">
+        <p className="text-[16.5px] text-danger">
+          {confirming ? "This erases every transaction, rule, goal and report. It can’t be undone." : "Delete all of your data from Kosh."}
+        </p>
+        {confirming ? (
+          <div className="flex gap-2">
+            <Button variant="ghost" onClick={() => setConfirming(false)}>
+              Keep my data
+            </Button>
+            <Button variant="danger" loading={busy === "delete"} onClick={() => run("delete", api.deleteAllData, "Everything was deleted")}>
+              <Trash2 size={15} /> Yes, delete everything
+            </Button>
+          </div>
+        ) : (
+          <Button variant="danger" onClick={() => setConfirming(true)}>
+            <Trash2 size={15} /> Delete my data
+          </Button>
+        )}
+      </div>
+    </section>
   );
 }

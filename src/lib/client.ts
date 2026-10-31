@@ -12,6 +12,7 @@ import type {
   Nudge,
   RecurringPayment,
   Scenario,
+  ScenarioChange,
   SimulationResult,
   Transaction,
 } from "./types";
@@ -68,4 +69,13 @@ export const api = {
   reportMonths: () => req<string[]>("/api/report/months"),
   coach: (messages: CoachMessage[]) => req<CoachMessage>("/api/coach", { method: "POST", body: JSON.stringify({ messages }) }),
   reset: () => req<{ ok: true }>("/api/reset", { method: "POST" }),
+  /** Smallest realistic cuts that put goals back on track (deterministic solver). */
+  fixPlan: (goalId?: string) =>
+    req<{ changes: ScenarioChange[]; result: SimulationResult; explanation: string; feasible: boolean }>("/api/plan/fix", {
+      method: "POST",
+      body: JSON.stringify(goalId ? { goalId } : {}),
+    }),
+  session: () => req<{ authenticated: boolean; required: boolean }>("/api/auth/session"),
+  logout: () => req<{ authenticated: false }>("/api/auth/logout", { method: "POST" }),
+  deleteAllData: () => req<{ ok: true }>("/api/data", { method: "DELETE" }),
 };

@@ -89,6 +89,8 @@ export function PlannerView() {
   const [name, setName] = useState("");
   const [result, setResult] = useState<SimulationResult | null>(null);
   const [busy, setBusy] = useState(false);
+  const [fixing, setFixing] = useState(false);
+  const [fixNote, setFixNote] = useState<{ text: string; feasible: boolean } | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const runScenario = useCallback(async (next: ScenarioChange[], scenarioName: string) => {
@@ -105,6 +107,7 @@ export function PlannerView() {
   const ask = useCallback(async (text: string) => {
     const t = text.trim();
     if (!t) return;
+    setFixNote(null);
     setBusy(true);
     try {
       const r = await api.simulate({ prompt: t });
@@ -128,6 +131,23 @@ export function PlannerView() {
     else runScenario([], "Today's plan");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const fixPlan = async () => {
+    setFixing(true);
+    try {
+      const r = await api.fixPlan();
+      setResult(r.result);
+      setChanges(r.changes);
+      setName("Kosh’s plan");
+      setPrompt("");
+      setFixNote({ text: r.explanation, feasible: r.feasible });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Couldn’t build a plan");
+    } finally {
+      setFixing(false);
+    }
+  };
 
   const update = (next: ScenarioChange[]) => {
     setChanges(next);
@@ -197,9 +217,19 @@ export function PlannerView() {
         </div>
       </form>
 
+      {fixNote && (
+        <div className={cn("rise mt-6 flex gap-4 rounded-[var(--radius)] p-5 sm:p-6", fixNote.feasible ? "bg-positive-soft" : "bg-warn-soft")}>
+          <Sparkles size={20} className={cn("mt-1 shrink-0", fixNote.feasible ? "text-positive" : "text-warn")} />
+          <div>
+            <p className="text-[18px] font-semibold text-ink">{fixNote.feasible ? "Here’s a plan that gets every goal on time" : "This is the closest Kosh can get with spending cuts alone"}</p>
+            <p className="mt-1 text-[16.5px] leading-relaxed text-ink/80">{fixNote.text}</p>
+          </div>
+        </div>
+      )}
+
       {changes.length > 0 && (
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className="text-[14.5px] text-muted">Kosh understood:</span>
+          <span className="text-[14.5px] text-muted">{fixNote ? "Kosh’s plan:" : "Kosh understood:"}</span>
           {changes.map((c, i) => (
             <span key={i} className="rise inline-flex items-center gap-1.5 rounded-full bg-accent-soft py-1 pr-1.5 pl-3 text-[14.5px] text-accent">
               {describe(c, result?.projected[0]?.month)}
@@ -262,6 +292,14 @@ export function PlannerView() {
               </ul>
             )}
           </Panel>
+
+          <section className="reveal rounded-[var(--radius)] bg-ink p-6 text-bg sm:p-7">
+            <h2 className="font-display text-[30px] leading-[1.05] tracking-[-0.01em]">Behind on a goal?</h2>
+            <p className="mt-2 text-[16px] leading-relaxed opacity-75">Kosh finds the smallest, most realistic spending cuts that put every goal back on time.</p>
+            <Button variant="primary" size="lg" className="mt-5 w-full" loading={fixing} onClick={fixPlan}>
+              <Sparkles size={16} /> Fix my plan
+            </Button>
+          </section>
 
           <Panel title="Fine-tune" description="Drag to change monthly spending">
             <ul className="space-y-4">
