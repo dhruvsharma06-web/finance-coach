@@ -7,7 +7,9 @@ Each lane appends 2–3 lines after every push: what works, any API shape change
 - 31 Oct, afternoon: full UI for all 8 screens shipped (ledger-ink + marigold design system, route view-transitions, intro, count-ups). Calls: `api.lifeEvent` → `POST /api/profile/life-event` (Lane C), quick-add sends `{ text, source: "voice", description, amount }` to `POST /api/transactions` (Lane B: parse `text` when present). Report page renders `byCategory`, `topMerchants`, `goalsProgress`, `wins`, `watchouts`, `narrative` (Lane C). Planner renders `GoalOutcome` dates + `summary` (Lane C).
 
 ## Lane B (Codex #1): Data engine
-- (not started)
+- CSV increment: bank header detection, day-first dates, amount shapes, and 60+ merchant aliases implemented. HDFC 10 / ICICI 3 / SBI 3 rows verified.
+- API shapes unchanged. Production build passes with npm run build -- --webpack; default Turbopack hits a Windows CSS-worker crash.
 
 ## Lane C (Codex #2): Brain
 - (not started)
+
