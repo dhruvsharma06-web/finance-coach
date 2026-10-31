@@ -11,13 +11,15 @@ export function fail(message: string, status = 400) {
 }
 
 /** Wrap a handler so thrown errors become JSON 500s instead of HTML pages. */
-export function handle<A extends unknown[]>(fn: (...args: A) => Promise<Response>) {
+export function handle<A extends unknown[]>(
+  fn: (...args: A) => Promise<Response>,
+) {
   return async (...args: A) => {
     await connection(); // opt out of prerendering (cacheComponents); must stay outside try/catch
     try {
-      if(args[0] instanceof Request){
-        const blocked=limitRequest(args[0],new URL(args[0].url).pathname);
-        if(blocked)return blocked;
+      if (args[0] instanceof Request) {
+        const blocked = limitRequest(args[0], new URL(args[0].url).pathname);
+        if (blocked) return blocked;
       }
       return await fn(...args);
     } catch (e) {
