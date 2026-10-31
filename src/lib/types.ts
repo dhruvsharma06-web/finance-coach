@@ -94,6 +94,9 @@ export type Cadence = "weekly" | "monthly" | "quarterly" | "yearly";
 export type RecurringStatus = "active" | "price_changed" | "possibly_unused" | "cancelled";
 
 export interface RecurringPayment {
+  /** True when the first observed charge was within the last 45 days. */
+  isNewSubscription?: boolean;
+  firstSeenDate?: string;
   id: string;
   merchant: string;
   category: CategoryId;
@@ -330,3 +333,4 @@ export interface Database {
   nudges: Nudge[];
   reports: MonthlyReport[];
 }
+

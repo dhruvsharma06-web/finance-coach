@@ -17,8 +17,12 @@ Each lane appends 2–3 lines after every push: what works, any API shape change
 - Correction increment pushed. SMS increment: HDFC/ICICI/SBI/Axis/Kotak formats, statement dates, VPA/payee extraction, masks and payment modes; 10 real messages parsed, 3 spam/reminders ignored.
 - ImportResult.warnings now carries ignored/unmatched SMS diagnostics. Unknown financial messages use one batched AI fallback; no-key sample fully passes.
 
+- SMS increment pushed. Recurring increment: persisted weekly/monthly/quarterly/yearly detection, stable amounts and one price step; Netflix price_changed, Hotstar possibly_unused, rent/SIP/EMI not subscriptions. User confirmations/cancellations and ids survive refresh.
+- Optional contract fields isNewSubscription and firstSeenDate are logged in CHANGELOG-CONTRACT.md for Lane C. The existing generateNudges() call is preserved.
+
 ## Lane C (Codex #2): Brain
 - (not started)
+
 
 
 
