@@ -1,4 +1,5 @@
 "use client";
+import { Assistant } from "@/components/assistant";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -110,6 +111,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <>
       <Intro />
       <CommandPalette />
+      <Assistant />
       <RevealObserver />
       <div aria-hidden className="scroll-progress fixed inset-x-0 top-0 z-[60] h-[2px] origin-left scale-x-0 bg-fill" />
       <div className="flex min-h-screen">
@@ -190,3 +192,4 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     </>
   );
 }
+

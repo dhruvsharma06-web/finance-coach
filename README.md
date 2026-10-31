@@ -38,3 +38,7 @@ Stack: Next.js 16, React 19, TypeScript, Tailwind v4, Vercel AI SDK (Gemini/Open
 
 ## Team
 Dhruv Sharma + teammate. See [docs/WISPR_LOG.md](docs/WISPR_LOG.md) for how we built it by voice.
+
+## Licence
+Kosh is licensed under AGPL-3.0-only; see [LICENSE](LICENSE). Source code for this network-served application is available in this public repository.
+Avatar engine: Bible Strong Avatar Lab by smontlouis, AGPL-3.0. [Upstream source](https://github.com/smontlouis/bible-strong-avatar-lab).

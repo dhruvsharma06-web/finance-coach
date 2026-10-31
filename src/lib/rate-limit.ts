@@ -12,7 +12,7 @@ export function checkLimit(
   windowMs: number,
   now = Date.now(),
 ): { allowed: boolean; retryAfter: number } {
-  let hits = (windows.get(key) ?? []).filter((t) => t > now - windowMs);
+  const hits = (windows.get(key) ?? []).filter((t) => t > now - windowMs);
   if (hits.length >= limit) {
     windows.set(key, hits);
     return {
@@ -42,6 +42,7 @@ export function rateLimitedResponse(retryAfter: number): Response {
 export function limitRequest(req: Request, path: string): Response | null {
   const limits: Record<string, number> = {
     "/api/coach": 20,
+    "/api/assistant": 30,
     "/api/simulate": 40,
     "/api/plan/fix": 20,
     "/api/import": 10,
@@ -53,3 +54,4 @@ export function limitRequest(req: Request, path: string): Response | null {
   const result = checkLimit(path + ":" + clientIp(req), limit, 60000);
   return result.allowed ? null : rateLimitedResponse(result.retryAfter);
 }
+
