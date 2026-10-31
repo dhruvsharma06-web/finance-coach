@@ -39,7 +39,7 @@ async function main() {
         "2026-11-15",
       );
     }
-    console.log(file + ": " + rows.length + " rows", rows.slice(0, 3));
+    console.log(file + ": " + rows.length + " rows");
   }
   assert.equal(toIsoDate("04-Nov-26"), "2026-11-04");
   assert.equal(toIsoDate("31/02/26"), "");

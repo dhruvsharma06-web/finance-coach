@@ -51,6 +51,8 @@ export type PaymentMode = "upi" | "card" | "netbanking" | "atm" | "neft" | "imps
 export type CategorySource = "user_rule" | "builtin" | "ai" | "user" | "default";
 
 export interface Transaction {
+  /** SHA-256 import fingerprint preserves dedupe after account/reference masking. */
+  dedupeKey?: string;
   id: string;
   date: string; // YYYY-MM-DD
   /** Raw description exactly as it appeared in the statement/SMS */
@@ -156,6 +158,7 @@ export interface FinancialProfile {
 }
 
 export type NudgeType =
+  | "unusual"
   | "overspend_pace"
   | "price_change"
   | "unused_subscription"
@@ -165,6 +168,9 @@ export type NudgeType =
   | "positive";
 
 export interface Nudge {
+  relatedTransactionId?: string;
+  /** Data month used for stable month-scoped deduplication. */
+  month?: string;
   id: string;
   type: NudgeType;
   severity: "info" | "warning" | "critical" | "positive";

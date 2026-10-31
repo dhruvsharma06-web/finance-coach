@@ -8,6 +8,7 @@ import { parsePdf } from "./pdf";
 import { parseSms } from "./sms";
 import { cleanMerchant } from "./merchant";
 import { parserWarnings } from "./warnings";
+import { transactionKey, protectTransaction, maskSensitive } from "./privacy";
 export interface RawTxn {
   date: string;
   description: string;
@@ -56,14 +57,7 @@ export async function importSms(text: string): Promise<ImportResult> {
 export function deriveMerchant(description: string): string {
   return cleanMerchant(description);
 }
-const key = (t: RawTxn) =>
-  t.date +
-  "|" +
-  t.direction +
-  "|" +
-  t.amount.toFixed(2) +
-  "|" +
-  t.description.toLowerCase().replace(/\s+/g, " ").trim();
+const key = transactionKey;
 async function prepare(
   raw: RawTxn[],
   source: TxnSource,
@@ -101,6 +95,9 @@ async function prepare(
   }
   const withMerchant = fresh.map((r) => ({
     ...r,
+    dedupeKey: transactionKey(r),
+    description: maskSensitive(r.description),
+    ...(r.account ? {account:maskSensitive(r.account)} : {}),
     merchant:
       typeof r.merchant === "string" && r.merchant.trim()
         ? cleanMerchant(r.merchant)
@@ -108,7 +105,7 @@ async function prepare(
     balanceAfter: Number.isFinite(r.balanceAfter) ? r.balanceAfter : undefined,
   }));
   const cats = await categorizeBatch(withMerchant, db.rules);
-  const transactions = withMerchant.map((r, i) => ({
+  const transactions = withMerchant.map((r, i) => protectTransaction({
     ...r,
     id: newId(),
     source,
@@ -144,6 +141,7 @@ export async function ingest(
   let duplicates = preview.duplicates,
     txns: Transaction[] = preview.transactions.map((t) => ({ ...t, importId }));
   await updateDb((d) => {
+    d.transactions = d.transactions.map(protectTransaction);
     const current = new Set(d.transactions.map(key));
     txns = txns.filter((t) => {
       const k = key(t);
