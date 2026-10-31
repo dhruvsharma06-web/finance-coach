@@ -8,7 +8,7 @@ import { api } from "@/lib/client";
 import { useApi } from "@/lib/use-api";
 import { CATEGORIES, getCategory } from "@/lib/categories";
 import { formatINR, monthLabel } from "@/lib/format";
-import type { CategoryId, Transaction } from "@/lib/types";
+import type { CategoryId, CorrectionResult, Transaction } from "@/lib/types";
 import { CategoryIcon, CategoryPicker } from "../category";
 import { Badge, Button, Empty, ErrorNote, PageHeader, Panel, Skeleton, cn } from "../ui";
 
@@ -176,8 +176,27 @@ export function TransactionsView() {
     router.replace(`/transactions${p.size ? `?${p}` : ""}`);
   };
 
+  /** Put every touched transaction back the way it was and forget the rule. */
+  const undo = async (t: Transaction, prev: CategoryId, res: CorrectionResult, before: Map<string, Transaction>) => {
+    setData((cur) => (cur ?? []).map((x) => before.get(x.id) ?? x));
+    try {
+      if (res.rule) await api.deleteRule(res.rule.id);
+      await Promise.all(
+        [t.id, ...res.similarIds].map((id) => {
+          const orig = before.get(id);
+          return orig ? api.correct(id, id === t.id ? prev : orig.category, { createRule: false, applyToSimilar: false }) : null;
+        }),
+      );
+      toast.message(`Undone. ${t.merchant} is back to ${getCategory(prev).label}.`);
+    } catch {
+      toast.error("Couldn't undo everything. Reload to see the current state.");
+      reload();
+    }
+  };
+
   const correct = async (t: Transaction, next: CategoryId) => {
     const prev = t.category;
+    const before = new Map((data ?? []).map((x) => [x.id, x]));
     setData((data ?? []).map((x) => (x.id === t.id ? { ...x, category: next, categorySource: "user", confidence: 1 } : x)));
     try {
       const res = await api.correct(t.id, next, { createRule: true, applyToSimilar: true });
@@ -194,7 +213,8 @@ export function TransactionsView() {
           res.appliedCount > 0
             ? `Also updated ${res.appliedCount} similar transaction${res.appliedCount > 1 ? "s" : ""}. Future imports will follow this rule.`
             : "Future imports from this merchant will follow this rule.",
-        action: { label: "View rules", onClick: () => setRulesOpen(true) },
+        action: { label: "Undo", onClick: () => undo(t, prev, res, before) },
+        cancel: { label: "Rules", onClick: () => setRulesOpen(true) },
       });
     } catch (e) {
       setData((cur) => (cur ?? []).map((x) => (x.id === t.id ? { ...x, category: prev } : x)));

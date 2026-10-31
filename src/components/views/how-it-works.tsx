@@ -58,9 +58,9 @@ export function HowItWorksView() {
         </p>
       </header>
 
-      <ol className="stagger mt-16 grid gap-px overflow-hidden rounded-[var(--radius)] bg-line sm:grid-cols-2 lg:grid-cols-3">
+      <ol className="stagger mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {PIPELINE.map((p, i) => (
-          <li key={p.title} className="group flex flex-col bg-surface p-7">
+          <li key={p.title} className="group flex flex-col rounded-[var(--radius)] bg-surface p-7">
             <span className="font-display text-[44px] leading-none text-subtle transition-colors group-hover:text-accent">{i + 1}</span>
             <h2 className="mt-6 text-[18px] font-semibold tracking-[-0.01em]">{p.title}</h2>
             <p className="mt-2 flex-1 text-[14.5px] leading-relaxed text-muted">{p.body}</p>
