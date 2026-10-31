@@ -25,3 +25,13 @@ This is shared demo access, not per-user accounts. Signing-secret rotation revok
 
 ## Verification
 npx tsx tests/round2.test.ts; npx tsx tests/brain.test.ts; npm run build; npx tsx scripts/test-security.ts. The security script starts and stops localhost-only production servers with an ephemeral test passcode and restores demo data after testing delete/reset.
+
+## Round 3 final pass
+- AES-256-GCM at rest: KOSH_DATA_KEY accepts 32-byte base64 or 64-character hex. Each write uses a fresh 12-byte IV and authentication tag, then an atomic rename. Plaintext DBs migrate when a key is configured. Wrong keys/corrupt ciphertext fail closed and never silently replace user data with a seed. Without a key local development remains plaintext; the hosted demo configures a key.
+- Scrypt: optional KOSH_PASSCODE_HASH uses scrypt$salt$hexDigest (64-byte digest). Generate with hashPasscode() in src/lib/auth.ts. Hash takes precedence over plaintext and comparisons remain timing safe. KOSH_SECRET is still required for a strong independent signing key.
+- Idle expiry: signed sessions carry issued-at/last-activity and expire after 30 idle minutes, with a seven-day absolute lifetime. Proxy refreshes activity only after validating a protected request.
+- CSRF: non-GET API requests reject a foreign/null Origin or cross-site fetch metadata. Requests without Origin remain available to CLI clients; browser cookies use SameSite=Lax.
+- Uploads: 5 MB maximum per file, PDF magic header validation, UTF-8/control-byte validation for text. The platform's transport cap may be lower.
+- /api/health is public and contains version/provider/availability flags only, never credentials. Assistant is limited to 30 requests/minute per instance/IP.
+- Vercel /tmp storage, rate limits and lockouts are ephemeral and per instance; data can differ between instances. Use sample data on the public demo. Production path: Vercel KV/Upstash Redis for shared sessions/limits and Postgres (Neon/Supabase) with per-user authorization and row-level encryption.
+- Avatar CSP: the published renderer used runtime AJV compilation. Kosh vendors its AGPL core with a generated standalone schema validator, retaining full validation without unsafe-eval. scripts/prepare-avatar.cjs regenerates the fork from the pinned package; generated upstream code is excluded from style lint only.

@@ -1,6 +1,13 @@
 import { spawnSync } from "node:child_process";
 /** Re-exec only the test process under server-only's documented react-server condition. */
 export function serverTest(file: string, run: () => Promise<void>): void {
+  try {
+    process.loadEnvFile(".env.local");
+  } catch {}
+  if (process.env.TEST_LIVE_AI !== "1") {
+    delete process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+    delete process.env.OPENAI_API_KEY;
+  }
   if (!(process.env.NODE_OPTIONS ?? "").includes("--conditions=react-server")) {
     const result = spawnSync(
       process.execPath,

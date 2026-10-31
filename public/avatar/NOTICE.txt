@@ -1,0 +1,5 @@
+Kosh's avatar preset is adapted from the Strobi example in Bible Strong Avatar Lab by Stephane Montlouis-Calixte (smontlouis).
+Upstream: https://github.com/smontlouis/bible-strong-avatar-lab
+Source revision: 79fe9ba06e4874b11394b8e8a3f2c493c9d197ba
+Licence: AGPL-3.0-only (see the application LICENSE and upstream package licences).
+Kosh modifications: name, marigold/ink palette, expression-state mapping and mouth overlay.

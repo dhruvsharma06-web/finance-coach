@@ -27,7 +27,9 @@ export const NAV = [
 ] as const;
 
 const indexOf = (path: string) => {
-  const i = NAV.findIndex((n) => (n.href === "/" ? path === "/" : path.startsWith(n.href)));
+  const i = NAV.findIndex((n) =>
+    n.href === "/" ? path === "/" : path.startsWith(n.href),
+  );
   return i < 0 ? 0 : i;
 };
 
@@ -38,8 +40,14 @@ export function navType(currentPath: string, href: string): string[] {
 
 function Wordmark() {
   return (
-    <Link href="/" transitionTypes={["nav-back"]} className="flex items-baseline gap-0.5 px-3">
-      <span className="font-display text-[30px] leading-none tracking-[-0.02em] text-ink">Kosh</span>
+    <Link
+      href="/"
+      transitionTypes={["nav-back"]}
+      className="flex items-baseline gap-0.5 px-3"
+    >
+      <span className="font-display text-[30px] leading-none tracking-[-0.02em] text-ink">
+        Kosh
+      </span>
       <span className="size-[7px] translate-y-[-2px] rounded-full bg-fill" />
     </Link>
   );
@@ -52,17 +60,29 @@ function ThemeToggle() {
     try {
       saved = localStorage.getItem("kosh-theme");
     } catch {}
-    const isDark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = saved
+      ? saved === "dark"
+      : window.matchMedia("(prefers-color-scheme: dark)").matches;
     document.documentElement.dataset.theme = isDark ? "dark" : "light";
     setDark(isDark);
+    const observer = new MutationObserver(() =>
+      setDark(document.documentElement.dataset.theme === "dark"),
+    );
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+    return () => observer.disconnect();
   }, []);
   const flip = () => {
-    const next = !dark;
+    const next = document.documentElement.dataset.theme !== "dark";
     const apply = () => {
       setDark(next);
       document.documentElement.dataset.theme = next ? "dark" : "light";
     };
-    const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };
+    const doc = document as Document & {
+      startViewTransition?: (cb: () => void) => unknown;
+    };
     if (doc.startViewTransition) doc.startViewTransition(apply);
     else apply();
     try {
@@ -70,7 +90,11 @@ function ThemeToggle() {
     } catch {}
   };
   return (
-    <button onClick={flip} aria-label="Toggle theme" className="grid size-9 place-items-center rounded-full text-muted hover:bg-surface-2 hover:text-ink">
+    <button
+      onClick={flip}
+      aria-label="Toggle theme"
+      className="grid size-9 place-items-center rounded-full text-muted hover:bg-surface-2 hover:text-ink"
+    >
       {dark ? <Sun size={16} /> : <Moon size={16} />}
     </button>
   );
@@ -104,7 +128,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const active = indexOf(path);
   // keep the active chip visible in the scrolling mobile nav
   useEffect(() => {
-    document.querySelector("[data-mobile-active]")?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    document
+      .querySelector("[data-mobile-active]")
+      ?.scrollIntoView({
+        inline: "center",
+        block: "nearest",
+        behavior: "smooth",
+      });
   }, [path]);
 
   return (
@@ -113,7 +143,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <CommandPalette />
       <Assistant />
       <RevealObserver />
-      <div aria-hidden className="scroll-progress fixed inset-x-0 top-0 z-[60] h-[2px] origin-left scale-x-0 bg-fill" />
+      <div
+        aria-hidden
+        className="scroll-progress fixed inset-x-0 top-0 z-[60] h-[2px] origin-left scale-x-0 bg-fill"
+      />
       <div className="flex min-h-screen">
         <aside className="sticky top-0 hidden h-screen w-[232px] shrink-0 flex-col bg-surface-2/60 px-3 pt-8 pb-5 lg:flex">
           <Wordmark />
@@ -148,10 +181,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               className="flex w-full items-center justify-between rounded-full bg-surface px-4 py-2.5 text-[15px] text-muted transition-colors hover:text-ink"
             >
               Search or ask
-              <kbd className="rounded bg-surface-2 px-1.5 text-[12px]">Ctrl K</kbd>
+              <kbd className="rounded bg-surface-2 px-1.5 text-[12px]">
+                Ctrl K
+              </kbd>
             </button>
             <p className="px-3 text-[14.5px] leading-relaxed text-muted">
-              Every box takes voice. Hold your Wispr Flow key and say what you mean.
+              Every box takes voice. Hold your Wispr Flow key and say what you
+              mean.
             </p>
             <div className="flex items-center justify-between">
               <ResetDemo />
@@ -166,7 +202,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <Wordmark />
               <ThemeToggle />
             </div>
-            <nav aria-label="Main" className="flex gap-1 overflow-x-auto px-3 py-3 [scrollbar-width:none]">
+            <nav
+              aria-label="Main"
+              className="flex gap-1 overflow-x-auto px-3 py-3 [scrollbar-width:none]"
+            >
               {NAV.map(({ href, label }, i) => (
                 <Link
                   key={href}
@@ -175,7 +214,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   data-mobile-active={i === active ? "" : undefined}
                   className={cn(
                     "shrink-0 rounded-full px-3.5 py-1.5 text-[15px]",
-                    i === active ? "bg-ink text-bg" : "text-muted hover:bg-surface-2",
+                    i === active
+                      ? "bg-ink text-bg"
+                      : "text-muted hover:bg-surface-2",
                   )}
                 >
                   {label}
@@ -192,4 +233,3 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     </>
   );
 }
-

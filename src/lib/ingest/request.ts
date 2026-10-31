@@ -37,9 +37,9 @@ export async function handleImportRequest(
       { error: "Unsupported file type. Upload CSV, PDF or TXT." },
       { status: 400 },
     );
-  if (file.size > 10 * 1024 * 1024)
+  if (file.size > 5 * 1024 * 1024)
     return Response.json(
-      { error: "File exceeds 10 MB. Split the statement into smaller files." },
+      { error: "File exceeds 5 MB. Split the statement into smaller files." },
       { status: 413 },
     );
   const input = {
@@ -47,6 +47,29 @@ export async function handleImportRequest(
     type: file.type,
     buffer: Buffer.from(await file.arrayBuffer()),
   };
+  const pdf =
+    file.name.toLowerCase().endsWith(".pdf") ||
+    (!/\.(csv|txt)$/i.test(file.name) && file.type.includes("pdf"));
+  if (pdf && !input.buffer.subarray(0, 5).equals(Buffer.from("%PDF-")))
+    return Response.json(
+      { error: "This file is not a valid PDF." },
+      { status: 400 },
+    );
+  if (!pdf) {
+    try {
+      const header = input.buffer.subarray(0, 8).toString("latin1");
+      if (/^(?:MZ|PK\x03\x04|%PDF-|\x89PNG)/.test(header)) throw new Error();
+      const text = new TextDecoder("utf-8", { fatal: true }).decode(
+        input.buffer,
+      );
+      if (/[\x00-\x08\x0e-\x1f]/.test(text)) throw new Error();
+    } catch {
+      return Response.json(
+        { error: "Upload a UTF-8 text/CSV file, not a binary file." },
+        { status: 400 },
+      );
+    }
+  }
   return Response.json(
     await (preview ? previewFile(input) : importFile(input)),
   );

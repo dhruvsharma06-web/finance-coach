@@ -20,6 +20,8 @@ function start(port: number, required: boolean): Promise<ChildProcess> {
         stdio: ["ignore", "pipe", "pipe"],
         env: {
           ...process.env,
+          GOOGLE_GENERATIVE_AI_API_KEY: "",
+          OPENAI_API_KEY: "",
           KOSH_PASSCODE: required ? passcode : "",
           KOSH_SECRET: required ? randomBytes(32).toString("hex") : "",
         },
@@ -115,6 +117,38 @@ async function main() {
       cookie: sessionCookie,
       "content-type": "application/json",
     };
+    assert.equal((await fetch(base + "/api/health")).status, 200);
+    assert.equal(
+      (
+        await fetch(base + "/api/data", {
+          method: "DELETE",
+          headers: { ...headers, origin: "https://foreign.example" },
+        })
+      ).status,
+      403,
+    );
+    for (const [name, blob, status] of [
+      ["fake.pdf", new Blob(["not PDF"], { type: "application/pdf" }), 400],
+      ["fake.csv", new Blob(["MZ executable"], { type: "text/csv" }), 400],
+      ["large.csv", new Blob([new Uint8Array(5 * 1024 * 1024 + 1)]), 413],
+    ] as const) {
+      const form = new FormData();
+      form.set("file", blob, name);
+      assert.equal(
+        (
+          await fetch(base + "/api/import", {
+            method: "POST",
+            headers: { cookie: sessionCookie },
+            body: form,
+          })
+        ).status,
+        status,
+      );
+    }
+    checks.push({
+      test: "Public health, CSRF rejection, upload size/magic checks",
+      status: "PASS",
+    });
     assert.equal(
       (await fetch(base + "/api/transactions", { headers })).status,
       200,

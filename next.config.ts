@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -27,6 +28,7 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
+    resolveAlias:{"@bible-strong/avatar-core":"./src/components/assistant/avatar-engine/index.js"},
     rules: {
       "*.css": {
         loaders: ["@tailwindcss/turbopack"],
@@ -34,6 +36,7 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  webpack(config){config.resolve.alias["@bible-strong/avatar-core"]=path.resolve("./src/components/assistant/avatar-engine/index.js");return config;},
 };
 
 export default nextConfig;

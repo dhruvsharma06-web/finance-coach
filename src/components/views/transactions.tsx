@@ -10,7 +10,16 @@ import { CATEGORIES, getCategory } from "@/lib/categories";
 import { formatINR, monthLabel } from "@/lib/format";
 import type { CategoryId, CorrectionResult, Transaction } from "@/lib/types";
 import { CategoryIcon, CategoryPicker } from "../category";
-import { Badge, Button, Empty, ErrorNote, PageHeader, Panel, Skeleton, cn } from "../ui";
+import {
+  Badge,
+  Button,
+  Empty,
+  ErrorNote,
+  PageHeader,
+  Panel,
+  Skeleton,
+  cn,
+} from "../ui";
 
 const SOURCE_LABEL: Record<Transaction["source"], string> = {
   csv: "CSV",
@@ -22,9 +31,20 @@ const SOURCE_LABEL: Record<Transaction["source"], string> = {
 };
 
 function SourceTag({ t }: { t: Transaction }) {
-  if (t.categorySource === "user") return <Badge tone="accent">You set this</Badge>;
-  if (t.categorySource === "user_rule") return <Badge tone="accent"><BookOpenCheck size={11} /> Learned rule</Badge>;
-  if (t.categorySource === "ai") return <Badge tone="info"><Sparkles size={11} /> AI</Badge>;
+  if (t.categorySource === "user")
+    return <Badge tone="accent">You set this</Badge>;
+  if (t.categorySource === "user_rule")
+    return (
+      <Badge tone="accent">
+        <BookOpenCheck size={11} /> Learned rule
+      </Badge>
+    );
+  if (t.categorySource === "ai")
+    return (
+      <Badge tone="info">
+        <Sparkles size={11} /> AI
+      </Badge>
+    );
   if (t.confidence < 0.6) return <Badge tone="warn">Needs review</Badge>;
   return null;
 }
@@ -41,7 +61,9 @@ function QuickAdd({ onAdded }: { onAdded: () => void }) {
         setBusy(true);
         try {
           // Natural-language quick add (Lane B parses `text`); falls back to a simple pattern here.
-          const m = t.match(/(\d[\d,]*)\s*(?:rs|₹|rupees)?\s*(?:on|at|for)\s+(.+)/i);
+          const m = t.match(
+            /(\d[\d,]*)\s*(?:rs|₹|rupees)?\s*(?:on|at|for)\s+(.+)/i,
+          );
           const res = await fetch("/api/transactions", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -55,11 +77,18 @@ function QuickAdd({ onAdded }: { onAdded: () => void }) {
           const data = await res.json();
           if (!res.ok) throw new Error(data.error ?? "Couldn't add that");
           const added = data.transactions?.[0] as Transaction | undefined;
-          toast.success(added ? `Added ${formatINR(added.amount)} · ${added.merchant} → ${getCategory(added.category).label}` : "Added");
+          toast.success(
+            added
+              ? `Added ${formatINR(added.amount)} · ${added.merchant} → ${getCategory(added.category).label}`
+              : "Added",
+          );
           setText("");
           onAdded();
         } catch (err) {
-          toast.error(err instanceof Error ? err.message : "Couldn't add that", { description: "Try “spent 450 on Swiggy”" });
+          toast.error(
+            err instanceof Error ? err.message : "Couldn't add that",
+            { description: "Try “spent 450 on Swiggy”" },
+          );
         } finally {
           setBusy(false);
         }
@@ -73,28 +102,51 @@ function QuickAdd({ onAdded }: { onAdded: () => void }) {
         placeholder="Log by voice: “spent 450 on Swiggy”"
         className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-subtle"
       />
-      <Button type="submit" size="sm" variant="primary" loading={busy} disabled={!text.trim()}>
+      <Button
+        type="submit"
+        size="sm"
+        variant="primary"
+        loading={busy}
+        disabled={!text.trim()}
+      >
         Add
       </Button>
     </form>
   );
 }
 
-function RulesDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+function RulesDrawer({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
   const { data: rules, reload, setData } = useApi(() => api.rules(), [open]);
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-40 flex justify-end bg-ink/20" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-40 flex justify-end bg-ink/20"
+      onClick={onClose}
+    >
       <aside
         onClick={(e) => e.stopPropagation()}
         className="rise flex h-full w-full max-w-md flex-col border-l border-line bg-surface shadow-[-12px_0_40px_-12px_rgb(0_0_0/0.2)]"
       >
         <header className="flex items-start justify-between border-b border-line px-6 py-5">
           <div>
-            <h2 className="font-display text-[26px] leading-tight">What Kosh has learned</h2>
-            <p className="mt-1 text-[14.5px] text-muted">Every fix you make becomes a rule for future imports.</p>
+            <h2 className="font-display text-[26px] leading-tight">
+              What Kosh has learned
+            </h2>
+            <p className="mt-1 text-[14.5px] text-muted">
+              Every fix you make becomes a rule for future imports.
+            </p>
           </div>
-          <button onClick={onClose} aria-label="Close" className="text-muted hover:text-ink">
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            className="text-muted hover:text-ink"
+          >
             <X size={18} />
           </button>
         </header>
@@ -117,10 +169,16 @@ function RulesDrawer({ open, onClose }: { open: boolean; onClose: () => void }) 
                   <CategoryIcon id={r.category} size={14} />
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-[15.5px] text-ink">
-                      <span className="capitalize">{r.pattern}</span> → {getCategory(r.category).label}
+                      <span className="capitalize">{r.pattern}</span> →{" "}
+                      {getCategory(r.category).label}
                     </p>
                     <p className="text-[13.5px] text-muted">
-                      {r.matchType === "contains" ? "Contains" : r.matchType === "regex" ? "Pattern" : "Exact merchant"} · used {r.hits}×
+                      {r.matchType === "contains"
+                        ? "Contains"
+                        : r.matchType === "regex"
+                          ? "Pattern"
+                          : "Exact merchant"}{" "}
+                      · used {r.hits}×
                     </p>
                   </div>
                   <button
@@ -146,16 +204,37 @@ function RulesDrawer({ open, onClose }: { open: boolean; onClose: () => void }) 
 export function TransactionsView() {
   const params = useSearchParams();
   const router = useRouter();
-  const [q, setQ] = useState("");
+  const q = params.get("q") ?? "";
+  const setQ = (value: string) => {
+    const p = new URLSearchParams(params.toString());
+    if (value) p.set("q", value);
+    else p.delete("q");
+    router.replace("/transactions?" + p, { scroll: false });
+  };
   const category = params.get("category") ?? "";
   const [month, setMonth] = useState("");
-  const [onlyReview, setOnlyReview] = useState(false);
+  const onlyReview = params.get("needsReview") === "true";
+  const setOnlyReview = () => {
+    const p = new URLSearchParams(params.toString());
+    if (onlyReview) p.delete("needsReview");
+    else p.set("needsReview", "true");
+    router.replace("/transactions?" + p, { scroll: false });
+  };
   const [rulesOpen, setRulesOpen] = useState(false);
   const [flashIds, setFlashIds] = useState<Set<string>>(new Set());
-  const { data, error, loading, reload, setData } = useApi(() => api.transactions(), []);
+  const { data, error, loading, reload, setData } = useApi(
+    () => api.transactions(),
+    [],
+  );
   const { data: rules, reload: reloadRules } = useApi(() => api.rules(), []);
 
-  const months = useMemo(() => [...new Set((data ?? []).map((t) => t.date.slice(0, 7)))].sort().reverse(), [data]);
+  const months = useMemo(
+    () =>
+      [...new Set((data ?? []).map((t) => t.date.slice(0, 7)))]
+        .sort()
+        .reverse(),
+    [data],
+  );
   const list = useMemo(() => {
     const ql = q.toLowerCase();
     return (data ?? []).filter(
@@ -167,8 +246,12 @@ export function TransactionsView() {
     );
   }, [data, q, month, category, onlyReview]);
 
-  const reviewCount = (data ?? []).filter((t) => t.confidence < 0.6 && t.categorySource !== "user").length;
-  const total = list.filter((t) => t.direction === "debit").reduce((s, t) => s + t.amount, 0);
+  const reviewCount = (data ?? []).filter(
+    (t) => t.confidence < 0.6 && t.categorySource !== "user",
+  ).length;
+  const total = list
+    .filter((t) => t.direction === "debit")
+    .reduce((s, t) => s + t.amount, 0);
 
   const setCategoryFilter = (c: string) => {
     const p = new URLSearchParams(params.toString());
@@ -178,18 +261,38 @@ export function TransactionsView() {
   };
 
   /** Put every touched transaction back the way it was and forget the rule. */
-  const undo = async (t: Transaction, prev: CategoryId, res: CorrectionResult, before: Map<string, Transaction>) => {
+  const undo = async (
+    t: Transaction,
+    prev: CategoryId,
+    res: CorrectionResult,
+    before: Map<string, Transaction>,
+  ) => {
     setData((cur) => (cur ?? []).map((x) => before.get(x.id) ?? x));
     try {
-      if (res.rule) await api.deleteRule(res.rule.id);
-      await Promise.all(
-        [t.id, ...res.similarIds].map((id) => {
-          const orig = before.get(id);
-          return orig ? api.correct(id, id === t.id ? prev : orig.category, { createRule: false, applyToSimilar: false }) : null;
+      const response = await fetch("/api/transactions/undo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          transactions: [t.id, ...res.similarIds]
+            .map((id) => before.get(id))
+            .filter((x): x is Transaction => !!x)
+            .map(({ id, category, categorySource, confidence, ruleId }) => ({
+              id,
+              category,
+              categorySource,
+              confidence,
+              ruleId,
+            })),
+          expectedCategory: res.transaction.category,
+          removeRuleId: res.rule?.id,
+          restoreRule: rules?.find((r) => r.id === res.rule?.id),
         }),
-      );
+      });
+      if (!response.ok) throw new Error("Undo conflict");
       reloadRules();
-      toast.message(`Undone. ${t.merchant} is back to ${getCategory(prev).label}.`);
+      toast.message(
+        `Undone. ${t.merchant} is back to ${getCategory(prev).label}.`,
+      );
     } catch {
       toast.error("Couldn't undo everything. Reload to see the current state.");
       reload();
@@ -199,13 +302,31 @@ export function TransactionsView() {
   const correct = async (t: Transaction, next: CategoryId) => {
     const prev = t.category;
     const before = new Map((data ?? []).map((x) => [x.id, x]));
-    setData((data ?? []).map((x) => (x.id === t.id ? { ...x, category: next, categorySource: "user", confidence: 1 } : x)));
+    setData(
+      (data ?? []).map((x) =>
+        x.id === t.id
+          ? { ...x, category: next, categorySource: "user", confidence: 1 }
+          : x,
+      ),
+    );
     try {
-      const res = await api.correct(t.id, next, { createRule: true, applyToSimilar: true });
+      const res = await api.correct(t.id, next, {
+        createRule: true,
+        applyToSimilar: true,
+      });
       const changed = new Set(res.similarIds);
       setData((cur) =>
         (cur ?? []).map((x) =>
-          x.id === t.id ? res.transaction : changed.has(x.id) ? { ...x, category: next, categorySource: "user_rule", confidence: 1 } : x,
+          x.id === t.id
+            ? res.transaction
+            : changed.has(x.id)
+              ? {
+                  ...x,
+                  category: next,
+                  categorySource: "user_rule",
+                  confidence: 1,
+                }
+              : x,
         ),
       );
       reloadRules();
@@ -220,7 +341,9 @@ export function TransactionsView() {
         cancel: { label: "Rules", onClick: () => setRulesOpen(true) },
       });
     } catch (e) {
-      setData((cur) => (cur ?? []).map((x) => (x.id === t.id ? { ...x, category: prev } : x)));
+      setData((cur) =>
+        (cur ?? []).map((x) => (x.id === t.id ? { ...x, category: prev } : x)),
+      );
       toast.error(e instanceof Error ? e.message : "Couldn't update category");
     }
   };
@@ -274,10 +397,12 @@ export function TransactionsView() {
           </select>
           {reviewCount > 0 && (
             <button
-              onClick={() => setOnlyReview((v) => !v)}
+              onClick={() => setOnlyReview()}
               className={cn(
                 "h-10 rounded-full border px-4 text-sm transition-colors",
-                onlyReview ? "border-warn bg-warn-soft text-warn" : "border-dashed border-warn/50 text-warn hover:bg-warn-soft",
+                onlyReview
+                  ? "border-warn bg-warn-soft text-warn"
+                  : "border-dashed border-warn/50 text-warn hover:bg-warn-soft",
               )}
             >
               {reviewCount} need review
@@ -289,13 +414,21 @@ export function TransactionsView() {
 
       {data && (
         <p className="reveal mb-10 max-w-[30ch] font-display text-[30px] leading-[1.15] tracking-[-0.01em] text-ink sm:text-[40px]">
-          {data.length} transactions across {months.length} month{months.length === 1 ? "" : "s"}.{" "}
+          {data.length} transactions across {months.length} month
+          {months.length === 1 ? "" : "s"}.{" "}
           {reviewCount ? (
             <>
-              <span className="text-warn">{reviewCount} still need your eye</span>, and Kosh has learned {rules?.length ?? 0} rule{rules?.length === 1 ? "" : "s"} from you.
+              <span className="text-warn">
+                {reviewCount} still need your eye
+              </span>
+              , and Kosh has learned {rules?.length ?? 0} rule
+              {rules?.length === 1 ? "" : "s"} from you.
             </>
           ) : (
-            <>Everything is categorized, with {rules?.length ?? 0} rule{rules?.length === 1 ? "" : "s"} learned from you.</>
+            <>
+              Everything is categorized, with {rules?.length ?? 0} rule
+              {rules?.length === 1 ? "" : "s"} learned from you.
+            </>
           )}
         </p>
       )}
@@ -316,7 +449,11 @@ export function TransactionsView() {
             ))}
           </div>
         ) : list.length === 0 ? (
-          <Empty icon={<Search size={26} />} title="Nothing matches" body="Try a different search or clear the filters." />
+          <Empty
+            icon={<Search size={26} />}
+            title="Nothing matches"
+            body="Try a different search or clear the filters."
+          />
         ) : (
           <ul className="divide-y divide-line">
             {list.slice(0, 300).map((t) => (
@@ -330,18 +467,27 @@ export function TransactionsView() {
                 <CategoryIcon id={t.category} size={14} />
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className="truncate text-[16px] font-medium text-ink">{t.merchant}</p>
+                    <p className="truncate text-[16px] font-medium text-ink">
+                      {t.merchant}
+                    </p>
                     <SourceTag t={t} />
                   </div>
                   <p className="truncate text-[14px] text-muted">
-                    {new Date(t.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" })} · {SOURCE_LABEL[t.source]}
-                    {t.mode ? ` · ${t.mode.toUpperCase()}` : ""} · <span className="text-subtle">{t.description}</span>
+                    {new Date(t.date).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                    })}{" "}
+                    · {SOURCE_LABEL[t.source]}
+                    {t.mode ? ` · ${t.mode.toUpperCase()}` : ""} ·{" "}
+                    <span className="text-subtle">{t.description}</span>
                   </p>
                 </div>
                 <div className="col-span-3 col-start-2 sm:col-span-1 sm:col-start-auto">
                   <CategoryPicker
                     value={t.category}
-                    needsReview={t.confidence < 0.6 && t.categorySource !== "user"}
+                    needsReview={
+                      t.confidence < 0.6 && t.categorySource !== "user"
+                    }
                     onChange={(c) => correct(t, c)}
                   />
                 </div>

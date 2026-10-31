@@ -1,9 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { authRequired, validSession, SESSION_COOKIE } from "./lib/auth";
+import {
+  authRequired,
+  validSession,
+  SESSION_COOKIE,
+  refreshSession,
+  sessionCookieOptions,
+} from "./lib/auth";
 export function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
   if (
     path === "/login" ||
+    path === "/api/health" ||
     path.startsWith("/api/auth/") ||
     path.startsWith("/_next/") ||
     (!path.startsWith("/api/") &&
@@ -12,8 +19,17 @@ export function proxy(req: NextRequest) {
       ))
   )
     return NextResponse.next();
-  if (!authRequired() || validSession(req.cookies.get(SESSION_COOKIE)?.value))
-    return NextResponse.next();
+  if (!authRequired()) return NextResponse.next();
+  const token = req.cookies.get(SESSION_COOKIE)?.value;
+  if (validSession(token)) {
+    const response = NextResponse.next();
+    response.cookies.set(
+      SESSION_COOKIE,
+      refreshSession(token!),
+      sessionCookieOptions(),
+    );
+    return response;
+  }
   if (path === "/api" || path.startsWith("/api/"))
     return NextResponse.json(
       { error: "Authentication required" },

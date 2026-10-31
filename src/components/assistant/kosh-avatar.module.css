@@ -1,0 +1,18 @@
+.talking {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: speak 280ms ease-in-out infinite alternate;
+}
+@keyframes speak {
+  from {
+    transform: scaleY(0.65);
+  }
+  to {
+    transform: scaleY(2.2);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .talking {
+    animation: none;
+  }
+}

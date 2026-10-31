@@ -23,8 +23,9 @@ export function aiAvailable(): boolean {
 }
 
 export function model() {
-  if (PROVIDER === "openai") return openai(process.env.AI_MODEL ?? "gpt-4.1-mini");
-  return google(process.env.AI_MODEL ?? "gemini-2.5-flash");
+  if (PROVIDER === "openai")
+    return openai(process.env.AI_MODEL ?? "gpt-4.1-mini");
+  return google(process.env.AI_MODEL ?? "gemini-3.8-flash");
 }
 
 /** Structured output, validated by a zod schema. */
@@ -43,8 +44,15 @@ export async function aiObject<T>(opts: {
 }
 
 /** Plain text completion. */
-export async function aiText(opts: { system?: string; prompt: string }): Promise<string> {
-  const { text } = await generateText({ model: model(), system: opts.system, prompt: opts.prompt });
+export async function aiText(opts: {
+  system?: string;
+  prompt: string;
+}): Promise<string> {
+  const { text } = await generateText({
+    model: model(),
+    system: opts.system,
+    prompt: opts.prompt,
+  });
   return text;
 }
 

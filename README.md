@@ -42,3 +42,12 @@ Dhruv Sharma + teammate. See [docs/WISPR_LOG.md](docs/WISPR_LOG.md) for how we b
 ## Licence
 Kosh is licensed under AGPL-3.0-only; see [LICENSE](LICENSE). Source code for this network-served application is available in this public repository.
 Avatar engine: Bible Strong Avatar Lab by smontlouis, AGPL-3.0. [Upstream source](https://github.com/smontlouis/bible-strong-avatar-lab).
+
+## Deploy
+See [Vercel deployment instructions](docs/DEPLOY.md). Node 22.x is configured on the hosted project; the public demo uses sample data and leaves the optional passcode unset.
+
+## Security
+See [security model and prototype limitations](docs/SECURITY.md). Storage supports AES-256-GCM, passcodes support scrypt, sessions expire after 30 idle minutes, and mutation requests enforce Origin checks. Public-demo storage and process-local limits are not per-user production infrastructure.
+
+## Verify
+`npm run build`, `npx tsc --noEmit`, `npx eslint src`, `npx tsx tests/brain.test.ts`, `npx tsx tests/round2.test.ts`, `npx tsx tests/assistant.test.ts`, `npx tsx scripts/test-security.ts`.
