@@ -1,0 +1,107 @@
+{
+  "fps": 30,
+  "voiceover": false,
+  "music": false,
+  "scenes": [
+    {
+      "id": "problem",
+      "chapter": "The problem",
+      "title": "Your salary lands on the 1st.\nBy the 5th, it's everywhere.",
+      "seconds": 20,
+      "voice": "Your salary lands on the first. · By the fifth, it's scattered: UPI payments, a bank statement, subscriptions you forgot, money sent home. · Most apps record where it went. None of them tell you what it means for next month.",
+      "beats": [
+        { "shot": "landing-hero", "seconds": 20, "from": [1.0, 0, 0], "to": [1.08, -40, 10], "chaos": true }
+      ]
+    },
+    {
+      "id": "meet",
+      "chapter": "Meet Kosh",
+      "title": "A money model.\nWith a memory.",
+      "seconds": 20,
+      "voice": "This is Kosh: a living money model. · Statements, SMS and recurring payments come in messy. Kosh understands each line, finds the merchant, and recognises what repeats.",
+      "beats": [
+        { "shot": "landing-memory-1", "seconds": 10, "from": [1.0, 0, 0], "to": [1.12, -180, 0] },
+        { "shot": "landing-memory-2", "seconds": 10, "from": [1.12, -180, 0], "to": [1.0, 0, 0] }
+      ]
+    },
+    {
+      "id": "learn",
+      "chapter": "Import & learn",
+      "title": "One fix becomes memory.",
+      "seconds": 30,
+      "voice": "Import a PDF, a CSV from any bank, or just paste your SMS. OTPs and spam are ignored. · Now watch this. EatClub was filed as 'Other'. I fix it once, · and Kosh writes a rule, corrects five past payments, and every future EatClub payment follows it. · One fix becomes memory.",
+      "beats": [
+        { "shot": "import", "seconds": 5, "from": [1.0, 0, 0], "to": [1.06, 0, -40] },
+        { "shot": "import-result", "seconds": 6, "from": [1.05, 0, 0], "to": [1.18, 0, -120], "callouts": [{ "text": "Categorised automatically", "x": 0.55, "y": 0.35, "at": 1.5 }] },
+        { "shot": "transactions-eatclub", "seconds": 5, "from": [1.0, 0, 0], "to": [1.25, -200, -180], "callouts": [{ "text": "Filed as 'Other'", "x": 0.7, "y": 0.42, "at": 1.5 }] },
+        { "shot": "transactions-picker", "seconds": 4, "from": [1.25, -200, -180], "to": [1.4, -380, -220] },
+        { "shot": "transactions-learned", "seconds": 5, "from": [1.15, -150, -120], "to": [1.0, 0, 0], "callouts": [{ "text": "Rule learned · 5 past payments fixed", "x": 0.78, "y": 0.86, "at": 1 }] },
+        { "shot": "landing-memory-3", "seconds": 5, "from": [1.0, 0, 0], "to": [1.1, -120, 0] }
+      ]
+    },
+    {
+      "id": "month",
+      "chapter": "Understand the month",
+      "title": "Every rupee, followed.",
+      "seconds": 20,
+      "voice": "Here's October at a glance: ninety-five thousand in, seventy-two thousand three hundred out, twenty-four percent kept. · Kosh also noticed Netflix went up thirty percent, and asks if I still use Hotstar instead of guessing.",
+      "beats": [
+        { "shot": "dashboard-hero", "seconds": 5, "from": [1.0, 0, 0], "to": [1.12, -120, 40] },
+        { "shot": "dashboard-1", "seconds": 6, "from": [1.0, 0, 0], "to": [1.1, -80, -60], "callouts": [{ "text": "Live money flow", "x": 0.6, "y": 0.3, "at": 1.5 }] },
+        { "shot": "recurring", "seconds": 5, "from": [1.0, 0, 0], "to": [1.15, -100, -120], "callouts": [{ "text": "Netflix +30% flagged", "x": 0.42, "y": 0.62, "at": 1.2 }] },
+        { "shot": "recurring-1", "seconds": 4, "from": [1.05, 0, 0], "to": [1.0, 0, -40] }
+      ]
+    },
+    {
+      "id": "decide",
+      "chapter": "Decide before you spend",
+      "title": "See the difference first.",
+      "seconds": 30,
+      "voice": "Before I decide, I ask. · Kosh turns plain words into numbers, and a deterministic engine projects the next year. My goal dates move in front of me. · Behind on a goal? Fix my plan finds the smallest realistic cuts that put everything back on time.",
+      "beats": [
+        { "shot": "planner-whatif", "seconds": 15, "from": [1.0, 0, 0], "to": [1.18, -160, -160], "callouts": [{ "text": "Plain words → structured changes", "x": 0.4, "y": 0.42, "at": 2 }, { "text": "Goal dates move", "x": 0.82, "y": 0.6, "at": 7 }] },
+        { "shot": "planner-fixplan", "seconds": 15, "from": [1.15, 0, -60], "to": [1.0, 0, 0], "callouts": [{ "text": "Fix my plan · every goal on time", "x": 0.5, "y": 0.34, "at": 2 }] }
+      ]
+    },
+    {
+      "id": "india",
+      "chapter": "Built for India",
+      "title": "Money in India\nis a family affair.",
+      "seconds": 40,
+      "voice": "Money in India is a family affair. · Kosh shows who's carrying the house, and the support that goes to Chhotu and Dadi. · Splitting a Goa trip? It settles the group in the fewest payments, without ever moving your money. · And Diwali is eight days away. Kosh saw it coming and built a pot for it.",
+      "beats": [
+        { "shot": "family", "seconds": 5, "from": [1.0, 0, 0], "to": [1.1, -60, 30] },
+        { "shot": "family-1", "seconds": 5, "from": [1.08, 0, 0], "to": [1.0, 0, -40], "callouts": [{ "text": "The household, as one flow", "x": 0.6, "y": 0.3, "at": 1 }] },
+        { "shot": "family-2", "seconds": 4, "from": [1.0, 0, 0], "to": [1.15, -120, -60], "callouts": [{ "text": "Who's carrying the house", "x": 0.35, "y": 0.3, "at": 1 }] },
+        { "shot": "splits", "seconds": 8, "from": [1.0, 0, 0], "to": [1.15, -100, -100], "callouts": [{ "text": "Fewest payments to settle", "x": 0.4, "y": 0.6, "at": 2 }] },
+        { "shot": "festivals", "seconds": 9, "from": [1.0, 0, 0], "to": [1.12, -80, -40], "callouts": [{ "text": "Diwali, planned months ahead", "x": 0.6, "y": 0.4, "at": 2 }] },
+        { "phones": ["mobile-dashboard", "mobile-family", "mobile-festivals"], "seconds": 9 }
+      ]
+    },
+    {
+      "id": "coach",
+      "chapter": "Coach & review",
+      "title": "AI explains.\nCode computes.",
+      "seconds": 25,
+      "voice": "Ask in English or Hinglish. Kosh answers from your own numbers. · It explains concepts, but it will never push a stock or promise returns. · AI reads and explains; plain code computes every rupee. · And at the end of the month, your story, wrapped.",
+      "beats": [
+        { "shot": "ask-kosh", "seconds": 6, "from": [1.0, 0, 0], "to": [1.25, -380, -260], "callouts": [{ "text": "Ask Kosh · English or Hinglish", "x": 0.75, "y": 0.5, "at": 1 }] },
+        { "shot": "coach-guardrail", "seconds": 6, "from": [1.0, 0, 0], "to": [1.12, -60, -100], "callouts": [{ "text": "Guardrail: no product picks", "x": 0.5, "y": 0.45, "at": 1.5 }] },
+        { "shot": "report", "seconds": 5, "from": [1.0, 0, 0], "to": [1.1, 0, -80] },
+        { "wrapped": 10, "seconds": 8 }
+      ]
+    },
+    {
+      "id": "close",
+      "chapter": "",
+      "title": "Import. Understand.\nSimulate. Act.",
+      "seconds": 25,
+      "voice": "Import. Understand. Simulate. Act. · Kosh keeps your money model in step with your life. · Built entirely by voice, with Wispr Flow. · Open Kosh and see your own money in a new dimension.",
+      "beats": [
+        { "shot": "landing-memory-5", "seconds": 8, "from": [1.0, 0, 0], "to": [1.1, -160, 0] },
+        { "shot": "how-it-works", "seconds": 5, "from": [1.0, 0, 0], "to": [1.08, 0, -60] },
+        { "endcard": true, "seconds": 12 }
+      ]
+    }
+  ]
+}

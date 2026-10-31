@@ -19,6 +19,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "video/**",
     "src/components/assistant/avatar-engine/**", // Generated, licensed upstream runtime + precompiled schema.
   ]),
 ]);

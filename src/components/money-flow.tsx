@@ -168,7 +168,13 @@ export function MoneyFlow({ income, segments, height = 340 }: { income: number; 
 
     resize();
     raf = requestAnimationFrame(draw);
-    const ro = new ResizeObserver(() => resize());
+    // resizing clears the canvas, so always repaint (static mode has no running loop)
+    const ro = new ResizeObserver(() => {
+      resize();
+      cancelAnimationFrame(raf);
+      last = performance.now();
+      raf = requestAnimationFrame(draw);
+    });
     ro.observe(box);
     const io = new IntersectionObserver(([e]) => {
       const was = visible;

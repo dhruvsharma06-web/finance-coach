@@ -52,3 +52,9 @@ next-env.d.ts
 
 # local design-review artifacts
 /.taste-skill/
+
+# video workspace: generated output
+/video/node_modules/
+/video/out/
+/video/public/shots/*.png
+/video/public/voiceover.*
