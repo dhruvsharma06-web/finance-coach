@@ -37,3 +37,5 @@ Each lane appends 2–3 lines after every push: what works, any API shape change
 ## Round 2 (Codex)
 - Part 1: POST /api/plan/fix { goalId?: string } returns { changes: ScenarioChange[], result: SimulationResult, explanation: string, feasible: boolean }. Deterministic weighted 5% search, cap-aware subscription cancellation, fewer than 400 simulations; seed solves in about 110 ms.
 - User-approved demo assumption: MacBook target moved from September to 30 November 2027; SIP and all cut caps stay unchanged. No profile is mutated by the solver. Default production build and solver acceptance pass.
+- Part 2: optional KOSH_PASSCODE login; GET /api/auth/session -> { authenticated, required }, POST /api/auth/login { passcode } -> { authenticated, required }, POST /api/auth/logout -> { authenticated: false }. HMAC-signed 7-day HttpOnly cookie and five-failure IP lockout; protected API requests return 401.
+- Next.js 16 src/proxy.ts protects pages/APIs while leaving auth/static assets reachable. Simple /login uses existing UI tokens and Button. Passcode unset preserves the fully open demo; production build passes.
