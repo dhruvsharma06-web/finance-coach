@@ -153,6 +153,7 @@ export function TransactionsView() {
   const [rulesOpen, setRulesOpen] = useState(false);
   const [flashIds, setFlashIds] = useState<Set<string>>(new Set());
   const { data, error, loading, reload, setData } = useApi(() => api.transactions(), []);
+  const { data: rules, reload: reloadRules } = useApi(() => api.rules(), []);
 
   const months = useMemo(() => [...new Set((data ?? []).map((t) => t.date.slice(0, 7)))].sort().reverse(), [data]);
   const list = useMemo(() => {
@@ -187,6 +188,7 @@ export function TransactionsView() {
           return orig ? api.correct(id, id === t.id ? prev : orig.category, { createRule: false, applyToSimilar: false }) : null;
         }),
       );
+      reloadRules();
       toast.message(`Undone. ${t.merchant} is back to ${getCategory(prev).label}.`);
     } catch {
       toast.error("Couldn't undo everything. Reload to see the current state.");
@@ -206,6 +208,7 @@ export function TransactionsView() {
           x.id === t.id ? res.transaction : changed.has(x.id) ? { ...x, category: next, categorySource: "user_rule", confidence: 1 } : x,
         ),
       );
+      reloadRules();
       setFlashIds(new Set([t.id, ...res.similarIds]));
       setTimeout(() => setFlashIds(new Set()), 2300);
       toast.success(`Learned: ${t.merchant} → ${getCategory(next).label}`, {
@@ -283,6 +286,19 @@ export function TransactionsView() {
         </div>
         <QuickAdd onAdded={reload} />
       </div>
+
+      {data && (
+        <p className="reveal mb-10 max-w-[30ch] font-display text-[30px] leading-[1.15] tracking-[-0.01em] text-ink sm:text-[40px]">
+          {data.length} transactions across {months.length} month{months.length === 1 ? "" : "s"}.{" "}
+          {reviewCount ? (
+            <>
+              <span className="text-warn">{reviewCount} still need your eye</span>, and Kosh has learned {rules?.length ?? 0} rule{rules?.length === 1 ? "" : "s"} from you.
+            </>
+          ) : (
+            <>Everything is categorized, with {rules?.length ?? 0} rule{rules?.length === 1 ? "" : "s"} learned from you.</>
+          )}
+        </p>
+      )}
 
       {error && <ErrorNote error={error} retry={reload} />}
 

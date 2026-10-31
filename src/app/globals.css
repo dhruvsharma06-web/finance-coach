@@ -246,6 +246,15 @@ html.motion .reveal.in {
   }
 }
 
+/* Bars that grow from the baseline when their .reveal parent enters view */
+.grow-bar {
+  transform-origin: bottom;
+  transition: transform 0.9s var(--ease-out);
+}
+html.motion .reveal:not(.in) .grow-bar {
+  transform: scaleY(0);
+}
+
 /* Typewriter caret for the rotating what-if band */
 @keyframes caret {
   50% {

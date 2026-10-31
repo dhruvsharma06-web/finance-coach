@@ -8,6 +8,7 @@ import { formatINR } from "@/lib/format";
 import type { RecurringPayment } from "@/lib/types";
 import { CategoryIcon } from "../category";
 import { CountUp } from "../motion";
+import { AutopayStrip } from "../autopay-strip";
 import { Badge, Button, Empty, ErrorNote, PageHeader, Panel, Skeleton } from "../ui";
 
 const PER_MONTH: Record<RecurringPayment["cadence"], number> = { weekly: 52 / 12, monthly: 1, quarterly: 1 / 3, yearly: 1 / 12 };
@@ -122,6 +123,8 @@ export function RecurringView() {
             )}
             .
           </p>
+
+          <AutopayStrip items={list} />
 
           <div className="grid gap-6 lg:grid-cols-2">
             <Panel title="Subscriptions" description={`${formatINR(subs.filter((r) => r.status !== "cancelled").reduce((s, r) => s + r.lastAmount * PER_MONTH[r.cadence], 0))} a month`} bleed>

@@ -10,6 +10,7 @@ import { formatINR } from "@/lib/format";
 import type { ImportResult } from "@/lib/types";
 import { CategoryIcon } from "../category";
 import { NudgeList } from "../nudges";
+import { ParseDemo } from "../parse-demo";
 import { Badge, Button, PageHeader, Panel, cn } from "../ui";
 
 const SAMPLES = [
@@ -196,6 +197,16 @@ export function ImportView() {
           </Button>
         ))}
       </div>
+
+      {!result && (
+        <section className="reveal mt-20">
+          <h2 className="font-display text-[40px] leading-none tracking-[-0.02em] sm:text-[56px]">Messy in. Clean out.</h2>
+          <p className="mt-3 mb-8 max-w-[56ch] text-[17px] text-muted">
+            Every line your bank sends goes through the same path: read it, find the merchant, pick the category, skip the noise.
+          </p>
+          <ParseDemo />
+        </section>
+      )}
 
       {result && (
         <div className="mt-10">

@@ -20,7 +20,8 @@ export async function detectRecurring(): Promise<RecurringPayment[]> {
     );
     const groups = new Map<string, Transaction[]>();
     for (const t of db.transactions)
-      if (t.direction === "debit") {
+      // cash withdrawals repeat but aren't commitments
+      if (t.direction === "debit" && t.category !== "cash") {
         const key = normalizeMerchant(t.merchant);
         if (!groups.has(key)) groups.set(key, []);
         groups.get(key)!.push(t);
