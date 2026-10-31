@@ -25,6 +25,10 @@ Output:
 
 Capture a local build instead of the live site with `KOSH_URL=http://localhost:3000 npm run capture`.
 
+## Windows notes
+- If Remotion can't download its own Chrome, point it at Playwright's: add `--browser-executable="%LOCALAPPDATA%\ms-playwright\chromium_headless_shell-1248\chrome-headless-shell-win64\chrome-headless-shell.exe"` to the render command.
+- If rendering fails with `spawn …ffmpeg.exe ENOENT`, the folder path is longer than Windows allows. Clone the repo to a short path like `C:\kosh`, or map one temporarily with `subst K: <repo path>`, run from `K:\video`, then remove it with `subst K: /D`.
+
 ## Adding your voiceover
 1. Read `out/voiceover-script.txt`. Each block shows the scene and how many seconds it gets.
 2. Record it as one track, about 3:30 long. Save it as `video/public/voiceover.mp3`.
