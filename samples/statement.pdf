@@ -1,0 +1,42 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 900 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 705 >>
+stream
+BT /F1 8 Tf 30 800 Td 16 TL (Kosh sample bank statement - November 2026) Tj
+T* (01/11/2026 NEFT CR-ACME DESIGN LABS PVT LTD-SALARY 95000.00 Cr) Tj
+T* (02/11/2026 UPI-SUNITA RAO-sunita.rao@okhdfc-RENT NOV 25000.00 Dr) Tj
+T* (03/11/2026 ACH D- BSE LTD MF SIP 10000.00 Dr) Tj
+T* (04/11/2026 UPI-SWIGGY-swiggy@icici-430698765432 486.00 Dr) Tj
+T* (04/11/2026 UPI-EATCLUB BRANDS PVT-PAYTM-430611112222 342.00 Dr) Tj
+T* (05/11/2026 UPI-BLINKIT-COMMERCE-blinkit@hdfcbank 1284.00 Dr) Tj
+T* (06/11/2026 POS 4821XXXXXX1234 UBER INDIA 312.00 Dr) Tj
+T* (07/11/2026 UPI-RAMESH KUMAR-9845XXXX12@okaxis 1500.00 Dr) Tj
+T* (08/11/2026 NETFLIX.COM SI 649.00 Dr) Tj
+T* (09/11/2026 UPI-ZOMATO LTD-zomato@kotak 712.00 Dr) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1067
+%%EOF

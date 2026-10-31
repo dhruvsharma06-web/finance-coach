@@ -20,8 +20,12 @@ Each lane appends 2–3 lines after every push: what works, any API shape change
 - SMS increment pushed. Recurring increment: persisted weekly/monthly/quarterly/yearly detection, stable amounts and one price step; Netflix price_changed, Hotstar possibly_unused, rent/SIP/EMI not subscriptions. User confirmations/cancellations and ids survive refresh.
 - Optional contract fields isNewSubscription and firstSeenDate are logged in CHANGELOG-CONTRACT.md for Lane C. The existing generateNudges() call is preserved.
 
+- Recurring increment pushed. PDF increment: per-page unpdf extraction, two-page AI batches, Google scanned-PDF file fallback, validated text-only fallback and import warnings. Reproducible statement.pdf sample imports 10 rows without a key.
+- PDF response shape unchanged. Live AI provider calls need a configured key; deterministic fallbacks and all API imports have passed locally.
+
 ## Lane C (Codex #2): Brain
 - (not started)
+
 
 
 
