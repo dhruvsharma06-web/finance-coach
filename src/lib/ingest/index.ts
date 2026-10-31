@@ -97,7 +97,7 @@ async function prepare(
     ...r,
     dedupeKey: transactionKey(r),
     description: maskSensitive(r.description),
-    ...(r.account ? {account:maskSensitive(r.account)} : {}),
+    ...(r.account ? { account: maskSensitive(r.account) } : {}),
     merchant:
       typeof r.merchant === "string" && r.merchant.trim()
         ? cleanMerchant(r.merchant)
@@ -105,12 +105,14 @@ async function prepare(
     balanceAfter: Number.isFinite(r.balanceAfter) ? r.balanceAfter : undefined,
   }));
   const cats = await categorizeBatch(withMerchant, db.rules);
-  const transactions = withMerchant.map((r, i) => protectTransaction({
-    ...r,
-    id: newId(),
-    source,
-    ...cats[i],
-  }));
+  const transactions = withMerchant.map((r, i) =>
+    protectTransaction({
+      ...r,
+      id: newId(),
+      source,
+      ...cats[i],
+    }),
+  );
   if (!raw.length) warnings.push("No transactions found in this input.");
   return {
     source,

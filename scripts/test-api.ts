@@ -1,8 +1,11 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 const base = process.env.TEST_BASE_URL ?? "http://localhost:3000";
+let requestNumber = 0;
 async function request(path: string, init?: RequestInit) {
-  const response = await fetch(base + path, init);
+  const headers = new Headers(init?.headers);
+  headers.set("x-forwarded-for", "functional-test-" + ++requestNumber);
+  const response = await fetch(base + path, { ...init, headers });
   const body = await response.json();
   assert(response.ok, JSON.stringify(body));
   return body;
