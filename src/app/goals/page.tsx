@@ -1,4 +1,10 @@
-/** LANE A (Claude) — placeholder, real UI coming. */
+import { GoalsView } from "@/components/views/goals";
+import { PageTransition } from "@/components/page-transition";
+
 export default function Page() {
-  return <h1 className="text-2xl font-semibold tracking-tight">Profile and Goals</h1>;
+  return (
+    <PageTransition>
+      <GoalsView />
+    </PageTransition>
+  );
 }

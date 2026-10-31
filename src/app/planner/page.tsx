@@ -1,4 +1,11 @@
-/** LANE A (Claude) — placeholder, real UI coming. */
+import { Suspense } from "react";
+import { PlannerView } from "@/components/views/planner";
+import { PageTransition } from "@/components/page-transition";
+
 export default function Page() {
-  return <h1 className="text-2xl font-semibold tracking-tight">What-if Planner</h1>;
+  return (
+    <PageTransition>
+      <Suspense><PlannerView /></Suspense>
+    </PageTransition>
+  );
 }

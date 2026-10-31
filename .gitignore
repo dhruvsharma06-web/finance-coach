@@ -43,3 +43,6 @@ next-env.d.ts
 
 # local JSON database
 /data/
+
+# generated from samples/
+/public/samples/

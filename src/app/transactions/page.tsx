@@ -1,4 +1,11 @@
-/** LANE A (Claude) — placeholder, real UI coming. */
+import { Suspense } from "react";
+import { TransactionsView } from "@/components/views/transactions";
+import { PageTransition } from "@/components/page-transition";
+
 export default function Page() {
-  return <h1 className="text-2xl font-semibold tracking-tight">Transactions</h1>;
+  return (
+    <PageTransition>
+      <Suspense><TransactionsView /></Suspense>
+    </PageTransition>
+  );
 }

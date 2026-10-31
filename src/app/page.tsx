@@ -1,4 +1,10 @@
-/** LANE A (Claude) — placeholder, real UI coming. */
-export default function Home() {
-  return <h1 className="text-2xl font-semibold tracking-tight">Overview</h1>;
+import { OverviewView } from "@/components/views/overview";
+import { PageTransition } from "@/components/page-transition";
+
+export default function Page() {
+  return (
+    <PageTransition>
+      <OverviewView />
+    </PageTransition>
+  );
 }

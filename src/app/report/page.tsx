@@ -1,4 +1,10 @@
-/** LANE A (Claude) — placeholder, real UI coming. */
+import { ReportView } from "@/components/views/report";
+import { PageTransition } from "@/components/page-transition";
+
 export default function Page() {
-  return <h1 className="text-2xl font-semibold tracking-tight">Monthly Review</h1>;
+  return (
+    <PageTransition>
+      <ReportView />
+    </PageTransition>
+  );
 }

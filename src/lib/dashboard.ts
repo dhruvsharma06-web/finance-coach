@@ -53,7 +53,9 @@ export function buildDashboard(db: Database, month?: string, today = new Date())
   });
 
   const daily = new Map<string, number>();
-  for (const t of debits) daily.set(t.date, (daily.get(t.date) ?? 0) + t.amount);
+  // Day-to-day spend only: big fixed obligations would flatten the chart.
+  const FIXED: CategoryId[] = ["rent", "emi", "insurance", "utilities"];
+  for (const t of debits) if (!FIXED.includes(t.category)) daily.set(t.date, (daily.get(t.date) ?? 0) + t.amount);
   const dailySpend = Array.from({ length: daysInMonth }, (_, i) => {
     const date = `${m}-${String(i + 1).padStart(2, "0")}`;
     return { date, amount: daily.get(date) ?? 0 };

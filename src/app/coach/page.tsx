@@ -1,4 +1,11 @@
-/** LANE A (Claude) — placeholder, real UI coming. */
+import { Suspense } from "react";
+import { CoachView } from "@/components/views/coach";
+import { PageTransition } from "@/components/page-transition";
+
 export default function Page() {
-  return <h1 className="text-2xl font-semibold tracking-tight">Coach</h1>;
+  return (
+    <PageTransition>
+      <Suspense><CoachView /></Suspense>
+    </PageTransition>
+  );
 }

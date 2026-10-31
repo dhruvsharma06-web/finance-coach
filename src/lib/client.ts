@@ -54,6 +54,12 @@ export const api = {
   profile: () => req<FinancialProfile>("/api/profile"),
   updateProfile: (patch: Partial<FinancialProfile>) =>
     req<FinancialProfile>("/api/profile", { method: "PUT", body: JSON.stringify(patch) }),
+  /** Lane C: "my rent went up to 28k" → profile mutations. */
+  lifeEvent: (description: string) =>
+    req<{ profile: FinancialProfile; changes: string[] }>("/api/profile/life-event", {
+      method: "POST",
+      body: JSON.stringify({ description }),
+    }),
   simulate: (input: { prompt?: string; scenario?: Scenario; horizonMonths?: number }) =>
     req<SimulationResult>("/api/simulate", { method: "POST", body: JSON.stringify(input) }),
   nudges: () => req<Nudge[]>("/api/nudges"),

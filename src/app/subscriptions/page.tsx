@@ -1,4 +1,10 @@
-/** LANE A (Claude) — placeholder, real UI coming. */
+import { RecurringView } from "@/components/views/recurring";
+import { PageTransition } from "@/components/page-transition";
+
 export default function Page() {
-  return <h1 className="text-2xl font-semibold tracking-tight">Recurring</h1>;
+  return (
+    <PageTransition>
+      <RecurringView />
+    </PageTransition>
+  );
 }

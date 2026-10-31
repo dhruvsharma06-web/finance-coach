@@ -1,4 +1,10 @@
-/** LANE A (Claude) — placeholder, real UI coming. */
+import { ImportView } from "@/components/views/import";
+import { PageTransition } from "@/components/page-transition";
+
 export default function Page() {
-  return <h1 className="text-2xl font-semibold tracking-tight">Import</h1>;
+  return (
+    <PageTransition>
+      <ImportView />
+    </PageTransition>
+  );
 }

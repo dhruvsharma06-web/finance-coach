@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "predev": "node tools/sync-samples.mjs",
+    "prebuild": "node tools/sync-samples.mjs"
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.109",

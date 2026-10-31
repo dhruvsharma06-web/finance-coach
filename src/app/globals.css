@@ -1,95 +1,106 @@
 @import "tailwindcss";
 
 /*
- * Design tokens — owned by Lane A (Claude). Use these via Tailwind classes
- * (bg-surface, text-muted, border-line, text-accent …) — never hard-code hex in components.
+ * Kosh design tokens — owned by Lane A (Claude).
+ * Direction: an Indian ledger (bahi-khata) — ink on paper, one marigold accent.
+ * Use via Tailwind classes (bg-surface, text-muted, bg-fill, text-accent …). Never hard-code hex in components.
  */
 :root {
-  --bg: #f7f7f4;
+  --bg: #f4f4f0;
   --surface: #ffffff;
-  --surface-2: #f1f1ec;
-  --line: #e4e4dd;
-  --ink: #15171a;
-  --muted: #6b6f76;
-  --subtle: #9a9ea5;
-  --accent: #0f7a5c; /* deep emerald */
-  --accent-soft: #e3f2ec;
-  --accent-ink: #ffffff;
-  --warn: #b45309;
-  --warn-soft: #fdf1e2;
-  --danger: #c2410c;
-  --danger-soft: #fdeae2;
-  --info: #2563eb;
-  --info-soft: #e8effd;
-  --positive: #15803d;
-  --positive-soft: #e6f4ea;
+  --surface-2: #eaeae4;
+  --line: #e0e0d8;
+  --ink: #0f100d;
+  --muted: #55574f;
+  --subtle: #8a8c83;
+  --accent: #9a5f00; /* marigold, text-safe on paper */
+  --fill: #f2ac2b; /* marigold, for the one primary action */
+  --fill-ink: #1a1203;
+  --accent-soft: #f8ecd2;
+  --warn: #b0481a;
+  --warn-soft: #f7e4da;
+  --danger: #b3261e;
+  --danger-soft: #f6dedb;
+  --info: #35577f;
+  --info-soft: #e1e8f1;
+  --positive: #2c7046;
+  --positive-soft: #dfeee3;
 
-  --cat-income: #15803d;
-  --cat-rent: #7c3aed;
-  --cat-groceries: #65a30d;
-  --cat-dining: #ea580c;
-  --cat-transport: #0284c7;
-  --cat-fuel: #0369a1;
-  --cat-shopping: #db2777;
-  --cat-utilities: #ca8a04;
-  --cat-subscriptions: #9333ea;
-  --cat-entertainment: #e11d48;
-  --cat-health: #0d9488;
-  --cat-education: #4f46e5;
-  --cat-travel: #0891b2;
-  --cat-emi: #57534e;
-  --cat-insurance: #475569;
-  --cat-investments: #0f7a5c;
-  --cat-transfers: #64748b;
-  --cat-cash: #78716c;
-  --cat-fees: #a16207;
-  --cat-other: #94a3b8;
+  --cat-income: #2c7046;
+  --cat-rent: #4b4e6d;
+  --cat-groceries: #6a8638;
+  --cat-dining: #d08422;
+  --cat-transport: #3b729e;
+  --cat-fuel: #2d5873;
+  --cat-shopping: #a8506f;
+  --cat-utilities: #9a8233;
+  --cat-subscriptions: #725690;
+  --cat-entertainment: #a8443b;
+  --cat-health: #36837b;
+  --cat-education: #52609e;
+  --cat-travel: #34849a;
+  --cat-emi: #6b6660;
+  --cat-insurance: #5b6874;
+  --cat-investments: #2c7046;
+  --cat-transfers: #7a8086;
+  --cat-cash: #85796a;
+  --cat-fees: #946f2e;
+  --cat-other: #9a9c94;
 
-  --radius: 14px;
+  --radius: 6px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0c0d0f;
-    --surface: #141518;
-    --surface-2: #1b1d21;
-    --line: #26292e;
-    --ink: #ecedee;
-    --muted: #9ba1a8;
-    --subtle: #6b7077;
-    --accent: #34d399;
-    --accent-soft: #10291f;
-    --accent-ink: #052e1f;
-    --warn: #f59e0b;
-    --warn-soft: #2a1f0b;
-    --danger: #fb923c;
-    --danger-soft: #2b160c;
-    --info: #60a5fa;
-    --info-soft: #0f1d33;
-    --positive: #4ade80;
-    --positive-soft: #0e2416;
+    --bg: #0c0c0a;
+    --surface: #141411;
+    --surface-2: #1d1d19;
+    --line: #272722;
+    --ink: #f1f0ea;
+    --muted: #a6a59c;
+    --subtle: #6f6e66;
+    --accent: #f5b33a;
+    --fill: #f5b33a;
+    --fill-ink: #1a1203;
+    --accent-soft: #2a210f;
+    --warn: #ec8a54;
+    --warn-soft: #2c1a10;
+    --danger: #f2796a;
+    --danger-soft: #2d1513;
+    --info: #92b2d9;
+    --info-soft: #141d2a;
+    --positive: #74c48f;
+    --positive-soft: #11231a;
+    --cat-rent: #8a8db3;
+    --cat-emi: #a39d95;
+    --cat-fuel: #5f93b5;
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #0c0d0f;
-  --surface: #141518;
-  --surface-2: #1b1d21;
-  --line: #26292e;
-  --ink: #ecedee;
-  --muted: #9ba1a8;
-  --subtle: #6b7077;
-  --accent: #34d399;
-  --accent-soft: #10291f;
-  --accent-ink: #052e1f;
-  --warn: #f59e0b;
-  --warn-soft: #2a1f0b;
-  --danger: #fb923c;
-  --danger-soft: #2b160c;
-  --info: #60a5fa;
-  --info-soft: #0f1d33;
-  --positive: #4ade80;
-  --positive-soft: #0e2416;
+  --bg: #0c0c0a;
+  --surface: #141411;
+  --surface-2: #1d1d19;
+  --line: #272722;
+  --ink: #f1f0ea;
+  --muted: #a6a59c;
+  --subtle: #6f6e66;
+  --accent: #f5b33a;
+  --fill: #f5b33a;
+  --fill-ink: #1a1203;
+  --accent-soft: #2a210f;
+  --warn: #ec8a54;
+  --warn-soft: #2c1a10;
+  --danger: #f2796a;
+  --danger-soft: #2d1513;
+  --info: #92b2d9;
+  --info-soft: #141d2a;
+  --positive: #74c48f;
+  --positive-soft: #11231a;
+  --cat-rent: #8a8db3;
+  --cat-emi: #a39d95;
+  --cat-fuel: #5f93b5;
 }
 
 @theme inline {
@@ -101,8 +112,9 @@
   --color-muted: var(--muted);
   --color-subtle: var(--subtle);
   --color-accent: var(--accent);
+  --color-fill: var(--fill);
+  --color-fill-ink: var(--fill-ink);
   --color-accent-soft: var(--accent-soft);
-  --color-accent-ink: var(--accent-ink);
   --color-warn: var(--warn);
   --color-warn-soft: var(--warn-soft);
   --color-danger: var(--danger);
@@ -113,7 +125,11 @@
   --color-positive-soft: var(--positive-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --radius-card: var(--radius);
+  --font-display: var(--font-serif), Georgia, serif;
+}
+
+html {
+  background: var(--bg);
 }
 
 body {
@@ -123,6 +139,150 @@ body {
   font-feature-settings: "ss01", "cv11";
 }
 
-.tabular {
+::selection {
+  background: color-mix(in oklab, var(--fill) 45%, transparent);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--fill);
+  outline-offset: 2px;
+}
+
+input,
+textarea {
+  caret-color: var(--fill);
+}
+
+input[type="range"] {
+  accent-color: var(--fill);
+}
+
+* {
+  scrollbar-color: var(--line) transparent;
+}
+
+.num {
   font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Entrances: staggered rise, visible by default if CSS animations are off ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(4px);
+  }
+}
+.rise {
+  animation: rise 0.8s var(--ease-out) both;
+}
+.stagger > * {
+  animation: rise 0.8s var(--ease-out) both;
+}
+.stagger > *:nth-child(1) { animation-delay: 40ms; }
+.stagger > *:nth-child(2) { animation-delay: 110ms; }
+.stagger > *:nth-child(3) { animation-delay: 180ms; }
+.stagger > *:nth-child(4) { animation-delay: 250ms; }
+.stagger > *:nth-child(5) { animation-delay: 320ms; }
+.stagger > *:nth-child(6) { animation-delay: 390ms; }
+.stagger > *:nth-child(n + 7) { animation-delay: 450ms; }
+
+@keyframes flash {
+  0% {
+    background: color-mix(in oklab, var(--fill) 26%, transparent);
+  }
+  100% {
+    background: transparent;
+  }
+}
+.flash {
+  animation: flash 2.4s ease-out;
+}
+
+/* ---------- Cinematic intro (first visit per session) ---------- */
+@keyframes intro-word {
+  0% { opacity: 0; transform: translateY(40%); filter: blur(10px); letter-spacing: 0.08em; }
+  100% { opacity: 1; transform: none; filter: blur(0); letter-spacing: -0.03em; }
+}
+@keyframes intro-line {
+  from { transform: scaleX(0); }
+}
+@keyframes intro-sub {
+  from { opacity: 0; transform: translateY(8px); }
+}
+@keyframes intro-out {
+  to { clip-path: inset(0 0 100% 0); }
+}
+.intro {
+  animation: intro-out 0.9s cubic-bezier(0.77, 0, 0.18, 1) 1.65s both;
+}
+.intro-word { animation: intro-word 1.1s var(--ease-out) 0.1s both; }
+.intro-line { animation: intro-line 1s var(--ease-out) 0.55s both; transform-origin: left; }
+.intro-sub { animation: intro-sub 0.7s var(--ease-out) 0.8s both; }
+
+/* ---------- Route transitions (React <ViewTransition>) ---------- */
+::view-transition-old(.nav-forward),
+::view-transition-old(.nav-back) {
+  animation: vt-out 260ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(.nav-forward) {
+  --from: 48px;
+  animation: vt-in 620ms var(--ease-out) 120ms both;
+}
+::view-transition-new(.nav-back) {
+  --from: -48px;
+  animation: vt-in 620ms var(--ease-out) 120ms both;
+}
+::view-transition-old(.nav-forward) { --to: -28px; }
+::view-transition-old(.nav-back) { --to: 28px; }
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: translateY(var(--to, -24px)) scale(0.985);
+    filter: blur(6px);
+  }
+}
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--from, 40px)) scale(0.985);
+    filter: blur(8px);
+  }
+}
+
+/* active nav marker morphs between items */
+::view-transition-group(.nav-pill) {
+  animation-duration: 520ms;
+  animation-timing-function: var(--ease-out);
+}
+
+/* keep the sidebar still while pages move */
+::view-transition-group(root) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+@media print {
+  aside,
+  header,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
 }
