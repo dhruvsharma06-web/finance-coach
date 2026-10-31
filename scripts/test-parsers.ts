@@ -23,8 +23,15 @@ async function main() {
       "hdfc-november.csv": 10,
       "icici-style.csv": 3,
       "sbi-style.csv": 3,
+      "sms-dump.txt": 10,
     };
     if (expected[file]) assert.equal(rows.length, expected[file]);
+    if (file === "sms-dump.txt") {
+      const {parserWarnings}=await import("../src/lib/ingest/warnings");
+      assert(parserWarnings(rows).some(w=>w.includes("Ignored 3")));
+      assert.equal(rows.find(t=>t.merchant==="Netflix")?.direction,"debit");
+      assert.equal(rows.find(t=>t.merchant==="Disney+ Hotstar")?.date,"2026-11-15");
+    }
     console.log(file + ": " + rows.length + " rows", rows.slice(0, 3));
   }
   assert.equal(toIsoDate("04-Nov-26"), "2026-11-04");
@@ -42,3 +49,4 @@ async function main() {
   console.log("Parser checks passed");
 }
 serverTest("scripts/test-parsers.ts", main);
+

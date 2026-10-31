@@ -14,8 +14,12 @@ Each lane appends 2–3 lines after every push: what works, any API shape change
 - Categorization increment pushed. Correction increment: branded contains rules, exact person rules, direction scoping, conflict updates, and manual-category protection. EatClub test: preview 5 / appliedCount 5 / next import dining via user_rule.
 - Added GET /api/transactions/:id/similar?category=x returning { similarIds, count }; PATCH /api/rules/:id accepts { category } and returns the updated rule. Existing correction response unchanged.
 
+- Correction increment pushed. SMS increment: HDFC/ICICI/SBI/Axis/Kotak formats, statement dates, VPA/payee extraction, masks and payment modes; 10 real messages parsed, 3 spam/reminders ignored.
+- ImportResult.warnings now carries ignored/unmatched SMS diagnostics. Unknown financial messages use one batched AI fallback; no-key sample fully passes.
+
 ## Lane C (Codex #2): Brain
 - (not started)
+
 
 
 
