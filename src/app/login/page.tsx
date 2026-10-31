@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { EyeOff, Lock, ShieldCheck, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui";
 import { Words } from "@/components/in-view";
@@ -16,6 +17,15 @@ export default function LoginPage() {
   const [passcode, setPasscode] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [required, setRequired] = useState<boolean | null>(null);
+  useEffect(() => {
+    fetch("/api/auth/session").then(response => {
+      if (!response.ok) throw new Error("Session unavailable");
+      return response.json();
+    }).then(body => setRequired(body.required)).catch(() => {
+      setRequired(true);
+    });
+  }, []);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,9 +43,9 @@ export default function LoginPage() {
         return;
       }
       // only ever redirect within this site
-      const next = new URLSearchParams(window.location.search).get("next") ?? "/";
+      const next = new URLSearchParams(window.location.search).get("next") ?? "/dashboard";
       const target = new URL(next, window.location.origin);
-      window.location.assign(target.origin === window.location.origin && !target.pathname.startsWith("/login") ? target.pathname + target.search : "/");
+      window.location.assign(target.origin === window.location.origin && target.pathname !== "/" && !target.pathname.startsWith("/login") ? target.pathname + target.search : "/dashboard");
     } catch {
       setError("Couldn't connect. Check your connection and try again.");
     } finally {
@@ -69,6 +79,7 @@ export default function LoginPage() {
 
       <section className="flex min-h-dvh items-center justify-center px-6 py-14 sm:px-12">
         <div className="w-full max-w-md">
+          <Link href="/" className="mb-10 inline-block text-[15px] text-muted hover:text-ink">← Back to Kosh</Link>
           <div className="mb-14 flex items-baseline gap-0.5 lg:hidden">
             <span className="font-display text-[32px] leading-none">Kosh</span>
             <span className="size-2 rounded-full bg-fill" />
@@ -76,10 +87,10 @@ export default function LoginPage() {
           <h1 className="font-display text-[46px] leading-[1.02] tracking-[-0.025em] sm:text-[56px]">
             <Words text="Welcome back." />
           </h1>
-          <p className="rise mt-4 text-[18px] leading-relaxed text-muted [animation-delay:300ms]">Enter your passcode to open your money model.</p>
+          <p className="rise mt-4 text-[18px] leading-relaxed text-muted [animation-delay:300ms]">{required === false ? "Explore Kosh with the sample money model. This demo is shared; it isn't a personal account." : "Enter your passcode to open your money model."}</p>
 
           <form className="rise mt-10 space-y-5 [animation-delay:450ms]" onSubmit={submit}>
-            <div>
+            {required !== false && <div>
               <label htmlFor="passcode" className="mb-2 block text-[16px] font-medium">
                 Passcode
               </label>
@@ -96,14 +107,14 @@ export default function LoginPage() {
                 aria-describedby={error ? "login-error" : undefined}
                 className="h-14 w-full rounded-2xl border border-line bg-surface px-5 text-[19px] tracking-widest text-ink outline-none transition-colors focus:border-ink"
               />
-            </div>
+            </div>}
             {error && (
               <p id="login-error" role="alert" className="rounded-xl bg-danger-soft px-4 py-3 text-[16px] text-danger">
                 {error}
               </p>
             )}
-            <Button type="submit" variant="primary" size="lg" className="h-14 w-full text-[17px]" loading={busy} disabled={!passcode.trim()}>
-              Open Kosh
+            <Button type="submit" variant="primary" size="lg" className="h-14 w-full text-[17px]" loading={busy} disabled={required === null || (required && !passcode.trim())}>
+              {required === null ? "Checking session…" : required ? "Open Kosh" : "Explore the demo"}
             </Button>
           </form>
 

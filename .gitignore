@@ -49,3 +49,6 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# local design-review artifacts
+/.taste-skill/

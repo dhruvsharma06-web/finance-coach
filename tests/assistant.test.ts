@@ -5,7 +5,7 @@ serverTest("tests/assistant.test.ts",async()=>{
  const {assistantReply}=await import("../src/lib/assistant");
  const {checkGuardrails}=await import("../src/lib/coach/guardrails");
  const cases:[string,string,string?][]=[
- ["take me to recurring","navigate","/subscriptions"],["open my subscriptions","navigate","/subscriptions"],["show the monthly review","navigate","/report"],["go to what if","navigate","/planner"],["where are my goals","navigate","/goals"],["home","navigate","/"],["settings / my data","navigate","/goals#your-data"],["how does this work","navigate","/how-it-works"],
+ ["take me to recurring","navigate","/subscriptions"],["open my subscriptions","navigate","/subscriptions"],["show the monthly review","navigate","/report"],["go to what if","navigate","/planner"],["where are my goals","navigate","/goals"],["home","navigate","/dashboard"],["settings / my data","navigate","/goals#your-data"],["how does this work","navigate","/how-it-works"],
  ["show my dining transactions","filter"],["swiggy wale transactions dikhao","filter"],["what did I spend on uber","filter"],["Show dining","filter"],["show shopping transactions","filter"],["zomato transactions dikhao","filter"],
  ["what if I cut dining by 30%","simulate"],["can I afford a 50k phone","simulate"],["agar main khana bahar 30% kam karu","simulate"],
  ["fix my plan","fix"],["how do I get back on track","fix"],["goals kaise poore honge","fix"],["plan theek karo","fix"],

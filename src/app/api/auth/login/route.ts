@@ -10,11 +10,14 @@ import {
 import { clientIp, rateLimitedResponse } from "@/lib/rate-limit";
 const failures = new Map<string, number[]>();
 export const POST = handle(async (req: Request) => {
-  if (!authRequired())
-    return NextResponse.json(
+  if (!authRequired()) {
+    const response = NextResponse.json(
       { authenticated: true, required: false },
       { headers: { "Cache-Control": "no-store" } },
     );
+    response.cookies.set(SESSION_COOKIE, createSession(), sessionCookieOptions());
+    return response;
+  }
   const ip = clientIp(req),
     now = Date.now(),
     recent = (failures.get(ip) ?? []).filter((t) => t > now - 600000);

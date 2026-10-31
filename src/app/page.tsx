@@ -1,10 +1,5 @@
-import { OverviewView } from "@/components/views/overview";
-import { PageTransition } from "@/components/page-transition";
+import { Landing } from "@/components/landing/landing";
 
 export default function Page() {
-  return (
-    <PageTransition>
-      <OverviewView />
-    </PageTransition>
-  );
+  return <Landing />;
 }

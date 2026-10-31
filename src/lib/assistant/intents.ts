@@ -21,7 +21,7 @@ export function routeIntent(text:string):AssistantIntent{
  return {kind:"filter",category:merchant?undefined:cat??undefined,q:merchant,actions:[{type:"filter_transactions",...(merchant?{q:merchant}:{category:cat??undefined})}]};
  }
  if(/settings|my data|your data/.test(s))return nav("/goals#your-data","Your data");
- if(/^(?:home|overview|ghar)\??$/.test(s)||/go (?:to )?home/.test(s))return nav("/","Overview");
+ if(/^(?:home|overview|ghar)\??$/.test(s)||/go (?:to )?home/.test(s))return nav("/dashboard","Overview");
  if(/how (?:does )?this work|how kosh works|kaise kaam/.test(s))return nav("/how-it-works","How Kosh works");
  if(/take me|open|show|go to|where are|dikhao|kholo|le chalo/.test(s)){
  if(/recurring|subscriptions?|autopay/.test(s))return nav("/subscriptions","Recurring payments");
@@ -33,8 +33,8 @@ export function routeIntent(text:string):AssistantIntent{
  }
  return {kind:"coach",actions:[]};
 }
-export const SUGGESTIONS:Record<string,string[]>={"/":["Where did my money go?","Fix my plan","Am I on track?"],"/transactions":["Show dining","What needs review?","Where did my money go?"],"/planner":["What if rent goes up 3k?","Fix my plan","Can I afford a ₹50k phone?"],"/subscriptions":["What can I cancel?","Open my subscriptions","Fix my plan"],"/report":["Summarise my month","Fix my plan","Show dining"],"/import":["Try the sample statement","Add my bank SMS","How does this work?"],"/goals":["Fix my plan","Is my data safe?","Export my data"]};
-export function pageSuggestions(page:string):string[]{return SUGGESTIONS[page.split(/[?#]/)[0]]??SUGGESTIONS["/"];}
+export const SUGGESTIONS:Record<string,string[]>={"/dashboard":["Where did my money go?","Fix my plan","Am I on track?"],"/transactions":["Show dining","What needs review?","Where did my money go?"],"/planner":["What if rent goes up 3k?","Fix my plan","Can I afford a ₹50k phone?"],"/subscriptions":["What can I cancel?","Open my subscriptions","Fix my plan"],"/report":["Summarise my month","Fix my plan","Show dining"],"/import":["Try the sample statement","Add my bank SMS","How does this work?"],"/goals":["Fix my plan","Is my data safe?","Export my data"]};
+export function pageSuggestions(page:string):string[]{return SUGGESTIONS[page.split(/[?#]/)[0]]??SUGGESTIONS["/dashboard"];}
 export function actionHref(action:AssistantAction):string|null{
  switch(action.type){
  case "navigate":return action.href;

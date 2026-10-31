@@ -107,7 +107,7 @@ export function WrappedView() {
     setI((x) => Math.max(0, Math.min(n - 1, x + d)));
     setT0(Date.now());
   }, [n]);
-  const close = useCallback(() => (window.history.length > 1 ? router.back() : router.push("/")), [router]);
+  const close = useCallback(() => (window.history.length > 1 ? router.back() : router.push("/dashboard")), [router]);
 
   useEffect(() => {
     if (!data || paused || i >= n - 1) return;
