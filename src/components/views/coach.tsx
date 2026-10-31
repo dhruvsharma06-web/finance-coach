@@ -20,7 +20,7 @@ function Bubble({ m }: { m: CoachMessage }) {
   if (m.role === "user") {
     return (
       <div className="rise flex justify-end">
-        <p className="max-w-[78%] rounded-2xl rounded-br-md bg-ink px-4 py-2.5 text-[14.5px] leading-relaxed text-bg">{m.content}</p>
+        <p className="max-w-[78%] rounded-2xl rounded-br-md bg-ink px-4 py-2.5 text-[16px] leading-relaxed text-bg">{m.content}</p>
       </div>
     );
   }
@@ -28,25 +28,25 @@ function Bubble({ m }: { m: CoachMessage }) {
   const diff = sim ? (sim.projected.at(-1)?.cumulativeSavings ?? 0) - (sim.baseline.at(-1)?.cumulativeSavings ?? 0) : 0;
   return (
     <div className="rise flex gap-3">
-      <span className="mt-1 grid size-7 shrink-0 place-items-center rounded-full bg-accent-soft font-display text-[15px] text-accent">K</span>
+      <span className="mt-1 grid size-7 shrink-0 place-items-center rounded-full bg-accent-soft font-display text-[16.5px] text-accent">K</span>
       <div className="min-w-0 max-w-[85%] space-y-2">
         {m.guardrail?.triggered && (
           <Badge tone="info">
             <ShieldCheck size={11} /> Guardrail: Kosh teaches, it doesn&rsquo;t pick investments
           </Badge>
         )}
-        <p className="whitespace-pre-wrap text-[14.5px] leading-relaxed text-ink">{m.content}</p>
+        <p className="whitespace-pre-wrap text-[16px] leading-relaxed text-ink">{m.content}</p>
         {sim && (
           <div className="rounded-xl border border-line bg-surface p-4">
             <div className="mb-2 flex items-baseline justify-between gap-3">
-              <p className="text-[13px] font-medium text-ink">{sim.scenario.name}</p>
-              <span className={cn("num text-[13px]", diff >= 0 ? "text-positive" : "text-danger")}>
+              <p className="text-[14.5px] font-medium text-ink">{sim.scenario.name}</p>
+              <span className={cn("num text-[14.5px]", diff >= 0 ? "text-positive" : "text-danger")}>
                 {diff >= 0 ? "+" : "−"}
                 {formatINR(Math.abs(diff))} over a year
               </span>
             </div>
             <ProjectionChart baseline={sim.baseline} projected={sim.projected} height={170} />
-            <p className="num mt-2 text-[12px] text-muted">Ends at {formatINRCompact(sim.projected.at(-1)?.cumulativeSavings ?? 0)} saved</p>
+            <p className="num mt-2 text-[13.5px] text-muted">Ends at {formatINRCompact(sim.projected.at(-1)?.cumulativeSavings ?? 0)} saved</p>
           </div>
         )}
       </div>
@@ -106,7 +106,7 @@ export function CoachView() {
               <button
                 key={s}
                 onClick={() => send(s)}
-                className="rounded-xl border border-line bg-surface px-4 py-3.5 text-left text-[14px] text-ink transition-colors hover:border-subtle"
+                className="rounded-xl border border-line bg-surface px-4 py-3.5 text-left text-[15.5px] text-ink transition-colors hover:border-subtle"
               >
                 {s}
               </button>
@@ -118,7 +118,7 @@ export function CoachView() {
         ))}
         {busy && (
           <div className="flex gap-3">
-            <span className="grid size-7 place-items-center rounded-full bg-accent-soft font-display text-[15px] text-accent">K</span>
+            <span className="grid size-7 place-items-center rounded-full bg-accent-soft font-display text-[16.5px] text-accent">K</span>
             <span className="flex items-center gap-1 pt-2">
               {[0, 1, 2].map((i) => (
                 <span key={i} className="size-1.5 animate-pulse rounded-full bg-subtle" style={{ animationDelay: `${i * 150}ms` }} />
@@ -141,7 +141,7 @@ export function CoachView() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Ask Kosh, or hold your Wispr key and talk"
-          className="min-w-0 flex-1 bg-transparent text-[15px] outline-none placeholder:text-subtle"
+          className="min-w-0 flex-1 bg-transparent text-[16.5px] outline-none placeholder:text-subtle"
         />
         <button
           type="submit"

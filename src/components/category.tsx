@@ -116,7 +116,7 @@ export function CategoryPicker({
           setQ("");
         }}
         className={cn(
-          "group inline-flex h-7 items-center gap-1.5 rounded-full border px-2.5 text-[12.5px] font-medium transition-colors",
+          "group inline-flex h-7 items-center gap-1.5 rounded-full border px-2.5 text-[14px] font-medium transition-colors",
           needsReview
             ? "border-dashed border-warn/60 bg-warn-soft text-warn hover:border-warn"
             : "border-line bg-surface text-ink hover:border-subtle",

@@ -15,8 +15,8 @@ import { Button, ErrorNote, Meter, Skeleton, cn } from "../ui";
 function Body({ r }: { r: MonthlyReport }) {
   const maxCat = Math.max(...r.byCategory.map((c) => Math.max(c.amount, c.budget ?? 0)), 1);
   return (
-    <article className="stagger space-y-14">
-      <header>
+    <article className="space-y-14">
+      <header className="stagger">
         <h1 className="max-w-[24ch] font-display text-[46px] leading-[0.98] tracking-[-0.03em] text-ink text-balance sm:text-[72px]">
           In {monthLabel(r.month).split(" ")[0]} you kept{" "}
           <CountUp value={Math.round(r.totals.savingsRate * 100)} format={(n) => `${Math.round(n)}%`} /> of what you earned.
@@ -28,7 +28,7 @@ function Body({ r }: { r: MonthlyReport }) {
             ["Kept", r.totals.savings],
           ].map(([l, v]) => (
             <div key={l as string}>
-              <dt className="text-[13px] text-muted">{l}</dt>
+              <dt className="text-[14.5px] text-muted">{l}</dt>
               <dd className="mt-1 text-[22px] font-medium tracking-tight text-ink"><CountUp value={v as number} format={formatINR} /></dd>
             </div>
           ))}
@@ -36,7 +36,7 @@ function Body({ r }: { r: MonthlyReport }) {
       </header>
 
       {r.narrative && (
-        <section className="max-w-[68ch] space-y-4 text-[17px] leading-[1.7] text-ink text-pretty">
+        <section className="reveal max-w-[68ch] space-y-4 text-[17px] leading-[1.7] text-ink text-pretty">
           {r.narrative.split(/\n\s*\n/).map((para, i) => (
             <p key={i}>{para}</p>
           ))}
@@ -44,24 +44,24 @@ function Body({ r }: { r: MonthlyReport }) {
       )}
 
       {(r.wins.length > 0 || r.watchouts.length > 0) && (
-        <section className="grid gap-8 sm:grid-cols-2">
+        <section className="reveal grid gap-8 sm:grid-cols-2">
           <div>
-            <h2 className="mb-3 flex items-center gap-2 text-[15px] font-semibold text-positive">
+            <h2 className="mb-3 flex items-center gap-2 text-[16.5px] font-semibold text-positive">
               <ThumbsUp size={16} /> What went well
             </h2>
             <ul className="space-y-2.5">
               {r.wins.map((w) => (
-                <li key={w} className="text-[15px] leading-relaxed text-ink">{w}</li>
+                <li key={w} className="text-[16.5px] leading-relaxed text-ink">{w}</li>
               ))}
             </ul>
           </div>
           <div>
-            <h2 className="mb-3 flex items-center gap-2 text-[15px] font-semibold text-warn">
+            <h2 className="mb-3 flex items-center gap-2 text-[16.5px] font-semibold text-warn">
               <Eye size={16} /> Keep an eye on
             </h2>
             <ul className="space-y-2.5">
               {r.watchouts.map((w) => (
-                <li key={w} className="text-[15px] leading-relaxed text-ink">{w}</li>
+                <li key={w} className="text-[16.5px] leading-relaxed text-ink">{w}</li>
               ))}
             </ul>
           </div>
@@ -70,18 +70,18 @@ function Body({ r }: { r: MonthlyReport }) {
 
       {r.byCategory.length > 0 && (
         <section>
-          <h2 className="mb-4 text-[15px] font-semibold text-ink">Spending by category</h2>
+          <h2 className="mb-4 text-[16.5px] font-semibold text-ink">Spending by category</h2>
           <ul className="divide-y divide-line border-y border-line">
             {r.byCategory.map((c) => (
               <li key={c.category} className="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 py-3 sm:grid-cols-[200px_1fr_110px_80px]">
-                <span className="flex items-center gap-2 text-[14px] text-ink">
+                <span className="flex items-center gap-2 text-[15.5px] text-ink">
                   <CategoryDot id={c.category} /> {getCategory(c.category).label}
                 </span>
                 <Meter className="order-last col-span-2 sm:order-none sm:col-span-1" value={c.amount / maxCat} color={getCategory(c.category).color} marker={c.budget ? c.budget / maxCat : undefined} />
-                <span className="num text-right text-[14px] text-ink">{formatINR(c.amount)}</span>
+                <span className="num text-right text-[15.5px] text-ink">{formatINR(c.amount)}</span>
                 <span
                   className={cn(
-                    "num hidden text-right text-[13px] sm:block",
+                    "num hidden text-right text-[14.5px] sm:block",
                     c.changePct === null ? "text-subtle" : c.changePct > 0 ? "text-danger" : "text-positive",
                   )}
                 >
@@ -90,20 +90,20 @@ function Body({ r }: { r: MonthlyReport }) {
               </li>
             ))}
           </ul>
-          <p className="mt-2 text-[12px] text-subtle">Tick marks show your budget. Change is vs the previous month.</p>
+          <p className="mt-2 text-[13.5px] text-subtle">Tick marks show your budget. Change is vs the previous month.</p>
         </section>
       )}
 
       {r.topMerchants.length > 0 && (
-        <section className="grid gap-10 sm:grid-cols-2">
+        <section className="reveal grid gap-10 sm:grid-cols-2">
           <div>
-            <h2 className="mb-4 text-[15px] font-semibold text-ink">Where it went most</h2>
+            <h2 className="mb-4 text-[16.5px] font-semibold text-ink">Where it went most</h2>
             <ol className="space-y-2.5">
               {r.topMerchants.map((m, i) => (
-                <li key={m.merchant} className="flex items-baseline gap-3 text-[14.5px]">
+                <li key={m.merchant} className="flex items-baseline gap-3 text-[16px]">
                   <span className="num w-4 text-subtle">{i + 1}</span>
                   <span className="flex-1 text-ink">{m.merchant}</span>
-                  <span className="text-[12.5px] text-muted">{m.count}×</span>
+                  <span className="text-[14px] text-muted">{m.count}×</span>
                   <span className="num text-ink">{formatINR(m.amount)}</span>
                 </li>
               ))}
@@ -111,11 +111,11 @@ function Body({ r }: { r: MonthlyReport }) {
           </div>
           {r.goalsProgress.length > 0 && (
             <div>
-              <h2 className="mb-4 text-[15px] font-semibold text-ink">Goals</h2>
+              <h2 className="mb-4 text-[16.5px] font-semibold text-ink">Goals</h2>
               <ul className="space-y-4">
                 {r.goalsProgress.map((g) => (
                   <li key={g.goalId}>
-                    <div className="mb-1.5 flex justify-between text-[14px]">
+                    <div className="mb-1.5 flex justify-between text-[15.5px]">
                       <span className="text-ink">{g.name}</span>
                       <span className={g.onTrack ? "text-positive" : "text-warn"}>{g.onTrack ? "On track" : "Behind"}</span>
                     </div>
@@ -128,7 +128,7 @@ function Body({ r }: { r: MonthlyReport }) {
         </section>
       )}
 
-      <footer className="border-t border-line pt-4 text-[12px] text-subtle">
+      <footer className="border-t border-line pt-4 text-[13.5px] text-subtle">
         Generated by Kosh on {new Date(r.generatedAt).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}. Educational
         insights only, not investment advice.
       </footer>
@@ -151,7 +151,7 @@ export function ReportView() {
             <button
               key={m}
               onClick={() => setMonth(m)}
-              className={cn("rounded-full px-3.5 py-1.5 text-[13px]", m === month ? "bg-ink text-bg" : "text-muted hover:text-ink")}
+              className={cn("rounded-full px-3.5 py-1.5 text-[14.5px]", m === month ? "bg-ink text-bg" : "text-muted hover:text-ink")}
             >
               <span className="sm:hidden">{monthLabel(m).slice(0, 3)}</span>
               <span className="hidden sm:inline">{monthLabel(m)}</span>

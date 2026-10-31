@@ -35,7 +35,7 @@ export function NudgeList({ nudges, onDismiss, limit }: { nudges: Nudge[]; onDis
             </span>
             <div className="min-w-0 flex-1">
               <div className="flex items-start justify-between gap-3">
-                <p className="text-[14.5px] font-medium text-ink">{n.title}</p>
+                <p className="text-[16px] font-medium text-ink">{n.title}</p>
                 <button
                   aria-label="Dismiss"
                   onClick={async () => {
@@ -47,11 +47,11 @@ export function NudgeList({ nudges, onDismiss, limit }: { nudges: Nudge[]; onDis
                   <X size={15} />
                 </button>
               </div>
-              <p className="mt-0.5 text-[13.5px] leading-relaxed text-muted">{n.body}</p>
+              <p className="mt-0.5 text-[15px] leading-relaxed text-muted">{n.body}</p>
               {n.action && (
                 <Link
                   href={n.action.href}
-                  className="mt-2 inline-flex items-center gap-1 text-[13px] font-medium text-ink underline-offset-4 hover:underline"
+                  className="mt-2 inline-flex items-center gap-1 text-[14.5px] font-medium text-ink underline-offset-4 hover:underline"
                 >
                   {n.action.label}
                   <ArrowRight size={13} />
@@ -63,7 +63,7 @@ export function NudgeList({ nudges, onDismiss, limit }: { nudges: Nudge[]; onDis
       })}
     </ul>
     {limit && sorted.length > limit && (
-      <button onClick={() => setAll((v) => !v)} className="mt-4 text-[13px] font-medium text-muted underline-offset-4 hover:text-ink hover:underline">
+      <button onClick={() => setAll((v) => !v)} className="mt-4 text-[14.5px] font-medium text-muted underline-offset-4 hover:text-ink hover:underline">
         {all ? "Show fewer" : `Show ${sorted.length - limit} more`}
       </button>
     )}

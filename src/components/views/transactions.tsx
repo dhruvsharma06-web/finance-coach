@@ -92,7 +92,7 @@ function RulesDrawer({ open, onClose }: { open: boolean; onClose: () => void }) 
         <header className="flex items-start justify-between border-b border-line px-6 py-5">
           <div>
             <h2 className="font-display text-[26px] leading-tight">What Kosh has learned</h2>
-            <p className="mt-1 text-[13px] text-muted">Every fix you make becomes a rule for future imports.</p>
+            <p className="mt-1 text-[14.5px] text-muted">Every fix you make becomes a rule for future imports.</p>
           </div>
           <button onClick={onClose} aria-label="Close" className="text-muted hover:text-ink">
             <X size={18} />
@@ -116,10 +116,10 @@ function RulesDrawer({ open, onClose }: { open: boolean; onClose: () => void }) 
                 <li key={r.id} className="flex items-center gap-3 px-6 py-3.5">
                   <CategoryIcon id={r.category} size={14} />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-[14px] text-ink">
+                    <p className="truncate text-[15.5px] text-ink">
                       <span className="capitalize">{r.pattern}</span> → {getCategory(r.category).label}
                     </p>
-                    <p className="text-[12px] text-muted">
+                    <p className="text-[13.5px] text-muted">
                       {r.matchType === "contains" ? "Contains" : r.matchType === "regex" ? "Pattern" : "Exact merchant"} · used {r.hits}×
                     </p>
                   </div>
@@ -287,7 +287,7 @@ export function TransactionsView() {
       {error && <ErrorNote error={error} retry={reload} />}
 
       <Panel bleed>
-        <div className="flex items-center justify-between border-b border-line px-5 py-3 text-[13px] text-muted">
+        <div className="flex items-center justify-between border-b border-line px-5 py-3 text-[14.5px] text-muted">
           <span>{loading ? "Loading…" : `${list.length} transactions`}</span>
           <span className="num">
             Spent <span className="text-ink">{formatINR(total)}</span>
@@ -314,10 +314,10 @@ export function TransactionsView() {
                 <CategoryIcon id={t.category} size={14} />
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className="truncate text-[14.5px] font-medium text-ink">{t.merchant}</p>
+                    <p className="truncate text-[16px] font-medium text-ink">{t.merchant}</p>
                     <SourceTag t={t} />
                   </div>
-                  <p className="truncate text-[12.5px] text-muted">
+                  <p className="truncate text-[14px] text-muted">
                     {new Date(t.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" })} · {SOURCE_LABEL[t.source]}
                     {t.mode ? ` · ${t.mode.toUpperCase()}` : ""} · <span className="text-subtle">{t.description}</span>
                   </p>
@@ -331,7 +331,7 @@ export function TransactionsView() {
                 </div>
                 <span
                   className={cn(
-                    "num row-start-1 text-right text-[14.5px] col-start-3 sm:col-start-auto sm:row-start-auto",
+                    "num row-start-1 text-right text-[16px] col-start-3 sm:col-start-auto sm:row-start-auto",
                     t.direction === "credit" ? "text-positive" : "text-ink",
                   )}
                 >

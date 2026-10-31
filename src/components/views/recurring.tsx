@@ -33,24 +33,24 @@ function Row({ r, onChange }: { r: RecurringPayment; onChange: (r: RecurringPaym
         <CategoryIcon id={r.category} size={15} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <p className="text-[15px] font-medium text-ink">{r.merchant}</p>
+            <p className="text-[16.5px] font-medium text-ink">{r.merchant}</p>
             {r.status === "price_changed" && r.priceChange && <Badge tone="warn">+{Math.round(r.priceChange.pct)}% price</Badge>}
             {r.status === "possibly_unused" && <Badge tone="info">Possibly unused</Badge>}
             {cancelled && <Badge>Marked cancelled</Badge>}
           </div>
-          <p className="mt-0.5 text-[12.5px] text-muted">
+          <p className="mt-0.5 text-[14px] text-muted">
             {CADENCE[r.cadence]} · next {new Date(r.nextExpectedDate).toLocaleDateString("en-IN", { day: "numeric", month: "short" })} ·{" "}
             {r.transactionIds.length} payments seen
           </p>
         </div>
         <div className="text-right">
-          <p className="num text-[15px] text-ink">{formatINR(r.lastAmount)}</p>
-          <p className="num text-[12px] text-muted">{formatINR(r.lastAmount * PER_MONTH[r.cadence] * 12)}/yr</p>
+          <p className="num text-[16.5px] text-ink">{formatINR(r.lastAmount)}</p>
+          <p className="num text-[13.5px] text-muted">{formatINR(r.lastAmount * PER_MONTH[r.cadence] * 12)}/yr</p>
         </div>
       </div>
 
       {r.status === "price_changed" && r.priceChange && (
-        <p className="mt-3 ml-[50px] rounded-lg bg-warn-soft px-3 py-2 text-[13px] text-warn">
+        <p className="mt-3 ml-[50px] rounded-lg bg-warn-soft px-3 py-2 text-[14.5px] text-warn">
           Went from <span className="num">{formatINR(r.priceChange.from)}</span> to <span className="num">{formatINR(r.priceChange.to)}</span> on{" "}
           {new Date(r.priceChange.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}. That&rsquo;s{" "}
           <span className="num">{formatINR((r.priceChange.to - r.priceChange.from) * 12 * PER_MONTH[r.cadence])}</span> more a year.
@@ -59,7 +59,7 @@ function Row({ r, onChange }: { r: RecurringPayment; onChange: (r: RecurringPaym
 
       {r.status === "possibly_unused" && (
         <div className="mt-3 ml-[50px] flex flex-wrap items-center gap-3 rounded-lg bg-info-soft px-3 py-2">
-          <p className="flex-1 text-[13px] text-info">
+          <p className="flex-1 text-[14.5px] text-info">
             Still using {r.merchant}? Cancelling saves <span className="num">{formatINR(r.lastAmount * PER_MONTH[r.cadence] * 12)}</span> a year.
           </p>
           <div className="flex gap-2">
@@ -74,7 +74,7 @@ function Row({ r, onChange }: { r: RecurringPayment; onChange: (r: RecurringPaym
       )}
 
       {cancelled && (
-        <button onClick={() => patch({ status: "active" }, "Restored")} className="mt-2 ml-[50px] text-[12.5px] text-muted underline underline-offset-4 hover:text-ink">
+        <button onClick={() => patch({ status: "active" }, "Restored")} className="mt-2 ml-[50px] text-[14px] text-muted underline underline-offset-4 hover:text-ink">
           Undo
         </button>
       )}
@@ -111,7 +111,7 @@ export function RecurringView() {
           <Empty icon={<Repeat size={28} />} title="No recurring payments yet" body="Import two or more months of statements and Kosh will find them." />
         </Panel>
       ) : (
-        <div className="stagger space-y-6">
+        <div className="space-y-6">
           <p className="max-w-[30ch] font-display text-[34px] leading-snug text-ink">
             <CountUp value={monthly} format={formatINR} /> leaves your account every month on autopilot
             {flagged > 0 && (
@@ -137,7 +137,7 @@ export function RecurringView() {
                   <Row key={r.id} r={r} onChange={onChange} />
                 ))}
               </ul>
-              <a href="/planner?q=what%20if%20I%20cancel%20my%20unused%20subscriptions" className="flex items-center gap-1 border-t border-line px-5 py-3 text-[13px] text-muted hover:text-ink">
+              <a href="/planner?q=what%20if%20I%20cancel%20my%20unused%20subscriptions" className="flex items-center gap-1 border-t border-line px-5 py-3 text-[14.5px] text-muted hover:text-ink">
                 See what cutting subscriptions does for your goals <ArrowRight size={13} />
               </a>
             </Panel>

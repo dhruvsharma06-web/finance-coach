@@ -116,9 +116,9 @@ export function CommandPalette() {
               }
             }}
             placeholder="Go anywhere, or ask a question…"
-            className="h-14 flex-1 bg-transparent text-[16px] outline-none placeholder:text-subtle"
+            className="h-14 flex-1 bg-transparent text-[17px] outline-none placeholder:text-subtle"
           />
-          <kbd className="rounded-md bg-surface-2 px-1.5 py-0.5 text-[11px] text-muted">esc</kbd>
+          <kbd className="rounded-md bg-surface-2 px-1.5 py-0.5 text-[12px] text-muted">esc</kbd>
         </div>
         <ul className="max-h-[50vh] overflow-y-auto p-2">
           {items.map((it, i) => (
@@ -126,11 +126,11 @@ export function CommandPalette() {
               <button
                 onMouseEnter={() => setSel(i)}
                 onClick={it.run}
-                className={cn("flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[14.5px]", i === sel ? "bg-surface-2 text-ink" : "text-muted")}
+                className={cn("flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[16px]", i === sel ? "bg-surface-2 text-ink" : "text-muted")}
               >
                 <it.icon size={15} className={i === sel ? "text-accent" : "text-subtle"} />
                 <span className="flex-1 truncate">{it.label}</span>
-                {it.hint && <span className="text-[12px] text-subtle">{it.hint}</span>}
+                {it.hint && <span className="text-[13.5px] text-subtle">{it.hint}</span>}
                 {i === sel && <CornerDownLeft size={13} className="text-subtle" />}
               </button>
             </li>

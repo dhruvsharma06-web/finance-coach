@@ -52,7 +52,7 @@ function GoalRow({ g }: { g: GoalOutcome }) {
   return (
     <li className="py-3.5 first:pt-0 last:pb-0">
       <div className="flex items-start justify-between gap-3">
-        <p className="text-[14.5px] font-medium text-ink">{g.name}</p>
+        <p className="text-[16px] font-medium text-ink">{g.name}</p>
         {g.onTrackScenario ? (
           <Badge tone="positive">
             <CalendarCheck size={11} /> On track
@@ -63,7 +63,7 @@ function GoalRow({ g }: { g: GoalOutcome }) {
           </Badge>
         )}
       </div>
-      <p className="num mt-1 flex flex-wrap items-center gap-x-2 text-[13px] text-muted">
+      <p className="num mt-1 flex flex-wrap items-center gap-x-2 text-[14.5px] text-muted">
         <span className={cn(g.baselineReachDate !== g.scenarioReachDate && "line-through decoration-subtle")}>{fmtDate(g.baselineReachDate)}</span>
         {g.baselineReachDate !== g.scenarioReachDate && (
           <>
@@ -74,7 +74,7 @@ function GoalRow({ g }: { g: GoalOutcome }) {
         <span className="text-subtle">· target {new Date(g.targetDate).toLocaleDateString("en-IN", { month: "short", year: "numeric" })}</span>
       </p>
       {g.monthsDelta !== null && g.monthsDelta !== 0 && (
-        <p className={cn("mt-1 text-[12.5px]", better ? "text-positive" : "text-danger")}>
+        <p className={cn("mt-1 text-[14px]", better ? "text-positive" : "text-danger")}>
           {Math.abs(g.monthsDelta)} month{Math.abs(g.monthsDelta) === 1 ? "" : "s"} {better ? "sooner" : "later"}
         </p>
       )}
@@ -185,7 +185,7 @@ export function PlannerView() {
                   setPrompt(s);
                   ask(s);
                 }}
-                className="rounded-full bg-surface-2 px-3 py-1.5 text-[12.5px] text-muted transition-colors hover:text-ink"
+                className="rounded-full bg-surface-2 px-3 py-1.5 text-[14px] text-muted transition-colors hover:text-ink"
               >
                 {s}
               </button>
@@ -199,9 +199,9 @@ export function PlannerView() {
 
       {changes.length > 0 && (
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className="text-[13px] text-muted">Kosh understood:</span>
+          <span className="text-[14.5px] text-muted">Kosh understood:</span>
           {changes.map((c, i) => (
-            <span key={i} className="rise inline-flex items-center gap-1.5 rounded-full bg-accent-soft py-1 pr-1.5 pl-3 text-[13px] text-accent">
+            <span key={i} className="rise inline-flex items-center gap-1.5 rounded-full bg-accent-soft py-1 pr-1.5 pl-3 text-[14.5px] text-accent">
               {describe(c, result?.projected[0]?.month)}
               <button aria-label="Remove change" onClick={() => update(changes.filter((_, j) => j !== i))} className="rounded-full p-0.5 hover:bg-accent/15">
                 <X size={12} />
@@ -211,7 +211,7 @@ export function PlannerView() {
         </div>
       )}
 
-      <div className="stagger mt-8 grid gap-5 lg:grid-cols-[1.6fr_1fr]">
+      <div className="mt-8 grid gap-5 lg:grid-cols-[1.6fr_1fr]">
         <Panel
           title={changes.length ? "Your savings, with this change" : "Your savings on today's plan"}
           description="Cumulative savings over the next 12 months"
@@ -223,7 +223,7 @@ export function PlannerView() {
               <div className="mb-4 flex flex-wrap items-baseline gap-x-4 gap-y-1">
                 <span className="font-display text-[56px] leading-none tracking-[-0.03em] text-ink"><CountUp value={end} format={formatINRCompact} /></span>
                 {changes.length > 0 && diff !== 0 && (
-                  <span className={cn("num text-[14px] font-medium", diff > 0 ? "text-positive" : "text-danger")}>
+                  <span className={cn("num text-[15.5px] font-medium", diff > 0 ? "text-positive" : "text-danger")}>
                     {diff > 0 ? "+" : "−"}
                     {formatINR(Math.abs(diff))} vs today&rsquo;s plan
                   </span>
@@ -232,7 +232,7 @@ export function PlannerView() {
               <div className={cn("transition-opacity", busy && "opacity-50")}>
                 <ProjectionChart baseline={result.baseline} projected={result.projected} />
               </div>
-              <div className="mt-3 flex items-center gap-5 text-[12px] text-muted">
+              <div className="mt-3 flex items-center gap-5 text-[13.5px] text-muted">
                 <span className="flex items-center gap-2">
                   <span className="h-0.5 w-4 rounded bg-fill" /> With change
                 </span>
@@ -241,10 +241,10 @@ export function PlannerView() {
                 </span>
               </div>
               {result.summary && (
-                <p className="mt-5 border-t border-line pt-4 text-[15px] leading-relaxed text-ink text-pretty">{result.summary}</p>
+                <p className="mt-5 border-t border-line pt-4 text-[16.5px] leading-relaxed text-ink text-pretty">{result.summary}</p>
               )}
               {result.assumptions.length > 0 && (
-                <p className="mt-3 text-[12px] text-subtle">Assumes: {result.assumptions.join(" · ")}</p>
+                <p className="mt-3 text-[13.5px] text-subtle">Assumes: {result.assumptions.join(" · ")}</p>
               )}
             </>
           )}
@@ -269,7 +269,7 @@ export function PlannerView() {
                 const v = sliderValue(cat);
                 return (
                   <li key={cat}>
-                    <div className="mb-1.5 flex justify-between text-[13.5px]">
+                    <div className="mb-1.5 flex justify-between text-[15px]">
                       <span className="text-ink">{getCategory(cat).label}</span>
                       <span className={cn("num", v < 0 ? "text-positive" : v > 0 ? "text-danger" : "text-muted")}>
                         {v > 0 ? "+" : ""}

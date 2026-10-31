@@ -13,12 +13,12 @@ import { Badge, Button, ErrorNote, Meter, PageHeader, Panel, Skeleton } from "..
 function MoneyInput({ value, onChange, className }: { value: number; onChange: (n: number) => void; className?: string }) {
   return (
     <label className={`flex h-9 items-center gap-1 rounded-lg border border-line bg-bg px-2.5 focus-within:border-subtle ${className ?? ""}`}>
-      <span className="text-[13px] text-subtle">₹</span>
+      <span className="text-[14.5px] text-subtle">₹</span>
       <input
         inputMode="numeric"
         value={value ? value.toLocaleString("en-IN") : ""}
         onChange={(e) => onChange(Number(e.target.value.replace(/[^\d]/g, "")) || 0)}
-        className="num w-full min-w-0 bg-transparent text-right text-[14px] outline-none"
+        className="num w-full min-w-0 bg-transparent text-right text-[15.5px] outline-none"
       />
     </label>
   );
@@ -47,7 +47,7 @@ function LifeEvent({ onApplied }: { onApplied: (p: FinancialProfile) => void }) 
       className="rounded-[var(--radius)] bg-ink p-7 text-bg [&_.text-muted]:text-bg/70"
     >
       <p className="font-display text-[34px] leading-tight text-bg">Life changed? Just say it.</p>
-      <p className="mt-1 text-[13.5px] text-muted">
+      <p className="mt-1 text-[15px] text-muted">
         &ldquo;My rent went up to 28k from November&rdquo;, &ldquo;Got a raise to 1.1 lakh&rdquo;, &ldquo;Started a ₹2,000 SIP&rdquo;. Kosh updates your plan and re-projects your goals.
       </p>
       <div className="mt-4 flex items-center gap-2 rounded-full bg-bg py-1.5 pr-1.5 pl-4 text-ink">
@@ -56,7 +56,7 @@ function LifeEvent({ onApplied }: { onApplied: (p: FinancialProfile) => void }) 
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="What changed?"
-          className="min-w-0 flex-1 bg-transparent text-[15px] outline-none placeholder:text-subtle"
+          className="min-w-0 flex-1 bg-transparent text-[16.5px] outline-none placeholder:text-subtle"
         />
         <Button type="submit" size="sm" variant="primary" loading={busy} disabled={!text.trim()}>
           Update plan
@@ -73,7 +73,7 @@ function NewGoal({ onAdd }: { onAdd: (g: Goal) => void }) {
   const [date, setDate] = useState("");
   if (!open) {
     return (
-      <button onClick={() => setOpen(true)} className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-line py-3 text-[13.5px] text-muted hover:border-subtle hover:text-ink">
+      <button onClick={() => setOpen(true)} className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-line py-3 text-[15px] text-muted hover:border-subtle hover:text-ink">
         <Plus size={15} /> Add a goal
       </button>
     );
@@ -96,7 +96,7 @@ function NewGoal({ onAdd }: { onAdd: (g: Goal) => void }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="e.g. Trip to Japan"
-        className="h-9 w-full rounded-lg border border-line bg-bg px-3 text-[14px] outline-none focus:border-subtle"
+        className="h-9 w-full rounded-lg border border-line bg-bg px-3 text-[15.5px] outline-none focus:border-subtle"
       />
       <div className="grid grid-cols-2 gap-3">
         <MoneyInput value={amount} onChange={setAmount} />
@@ -104,7 +104,7 @@ function NewGoal({ onAdd }: { onAdd: (g: Goal) => void }) {
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="h-9 rounded-lg border border-line bg-bg px-3 text-[14px] outline-none focus:border-subtle"
+          className="h-9 rounded-lg border border-line bg-bg px-3 text-[15.5px] outline-none focus:border-subtle"
         />
       </div>
       <div className="flex justify-end gap-2">
@@ -181,7 +181,7 @@ export function GoalsView() {
 
       <LifeEvent onApplied={(np) => { setP(np); reload(); }} />
 
-      <div className="stagger mt-5 grid gap-5 lg:grid-cols-2">
+      <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <div className="space-y-6">
           <Panel
             title="Monthly plan"
@@ -192,14 +192,14 @@ export function GoalsView() {
             }
           >
             <div className="flex items-center justify-between gap-4 border-b border-line pb-4">
-              <span className="text-[14px] font-medium text-ink">Take-home income</span>
+              <span className="text-[15.5px] font-medium text-ink">Take-home income</span>
               <MoneyInput className="w-36" value={p.monthlyIncome} onChange={(n) => setP({ ...p, monthlyIncome: n })} />
             </div>
-            <p className="mt-4 mb-2 text-[12.5px] font-medium text-muted">Fixed costs · {formatINR(fixed)}</p>
+            <p className="mt-4 mb-2 text-[14px] font-medium text-muted">Fixed costs · {formatINR(fixed)}</p>
             <ul className="space-y-2">
               {p.fixedCosts.map((f, i) => (
                 <li key={f.id} className="flex items-center justify-between gap-4">
-                  <span className="text-[14px] text-ink">{f.label}</span>
+                  <span className="text-[15.5px] text-ink">{f.label}</span>
                   <MoneyInput
                     className="w-36"
                     value={f.amount}
@@ -208,11 +208,11 @@ export function GoalsView() {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 mb-2 text-[12.5px] font-medium text-muted">Spending budgets · {formatINR(variable)}</p>
+            <p className="mt-5 mb-2 text-[14px] font-medium text-muted">Spending budgets · {formatINR(variable)}</p>
             <ul className="space-y-2">
               {Object.entries(p.categoryBudgets).map(([cat, amt]) => (
                 <li key={cat} className="flex items-center justify-between gap-4">
-                  <span className="flex items-center gap-2 text-[14px] text-ink">
+                  <span className="flex items-center gap-2 text-[15.5px] text-ink">
                     <span className="size-2 rounded-full" style={{ background: getCategory(cat as CategoryId).color }} />
                     {getCategory(cat as CategoryId).label}
                   </span>
@@ -231,13 +231,13 @@ export function GoalsView() {
           <Panel title="Emergency fund" description={`Target: ${p.emergencyFund.targetMonths} months of essential costs`}>
             <div className="flex items-baseline justify-between">
               <span className="num font-display text-[38px] leading-none text-ink">{efMonths.toFixed(1)} months</span>
-              <span className="num text-[13px] text-muted">
+              <span className="num text-[14.5px] text-muted">
                 {formatINRCompact(p.emergencyFund.current)} of {formatINRCompact(efTarget)}
               </span>
             </div>
             <Meter className="mt-4" value={p.emergencyFund.current / Math.max(efTarget, 1)} color={efMonths < 3 ? "var(--warn)" : "var(--accent)"} />
             <div className="mt-4 flex items-center justify-between gap-4">
-              <span className="text-[13.5px] text-muted">Saved so far</span>
+              <span className="text-[15px] text-muted">Saved so far</span>
               <MoneyInput
                 className="w-36"
                 value={p.emergencyFund.current}
@@ -254,8 +254,8 @@ export function GoalsView() {
                   <li key={g.id} className="group">
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="text-[14.5px] font-medium text-ink">{g.name}</p>
-                        <p className="num mt-0.5 text-[12.5px] text-muted">
+                        <p className="text-[16px] font-medium text-ink">{g.name}</p>
+                        <p className="num mt-0.5 text-[14px] text-muted">
                           {formatINRCompact(g.currentAmount)} of {formatINRCompact(g.targetAmount)} · by{" "}
                           {new Date(g.targetDate).toLocaleDateString("en-IN", { month: "short", year: "numeric" })}
                         </p>
@@ -288,8 +288,8 @@ export function GoalsView() {
                   <li key={e.id} className="flex gap-3">
                     <History size={15} className="mt-0.5 shrink-0 text-subtle" />
                     <div>
-                      <p className="text-[14px] text-ink">{e.description}</p>
-                      <p className="text-[12px] text-muted">{new Date(e.date).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</p>
+                      <p className="text-[15.5px] text-ink">{e.description}</p>
+                      <p className="text-[13.5px] text-muted">{new Date(e.date).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</p>
                     </div>
                   </li>
                 ))}

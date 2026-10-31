@@ -58,25 +58,25 @@ export function HowItWorksView() {
         </p>
       </header>
 
-      <ol className="stagger mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ol className="mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {PIPELINE.map((p, i) => (
-          <li key={p.title} className="group flex flex-col rounded-[var(--radius)] bg-surface p-7">
+          <li key={p.title} className="reveal group flex flex-col rounded-[var(--radius)] bg-surface p-7">
             <span className="font-display text-[44px] leading-none text-subtle transition-colors group-hover:text-accent">{i + 1}</span>
             <h2 className="mt-6 text-[18px] font-semibold tracking-[-0.01em]">{p.title}</h2>
-            <p className="mt-2 flex-1 text-[14.5px] leading-relaxed text-muted">{p.body}</p>
-            <Link href={p.href} className="mt-5 inline-flex items-center gap-1 text-[13.5px] font-medium text-ink underline-offset-4 hover:underline">
+            <p className="mt-2 flex-1 text-[16px] leading-relaxed text-muted">{p.body}</p>
+            <Link href={p.href} className="mt-5 inline-flex items-center gap-1 text-[15px] font-medium text-ink underline-offset-4 hover:underline">
               See it <ArrowRight size={13} />
             </Link>
           </li>
         ))}
       </ol>
 
-      <section className="mt-20 grid gap-10 md:grid-cols-2">
+      <section className="reveal mt-20 grid gap-10 md:grid-cols-2">
         <div>
           <h2 className="font-display text-[34px] leading-tight">What the AI does</h2>
           <ul className="mt-5 space-y-3">
             {AI_DOES.map((t) => (
-              <li key={t} className="flex gap-3 text-[16px] leading-relaxed">
+              <li key={t} className="flex gap-3 text-[17px] leading-relaxed">
                 <Check size={18} className="mt-1 shrink-0 text-positive" /> {t}
               </li>
             ))}
@@ -86,7 +86,7 @@ export function HowItWorksView() {
           <h2 className="font-display text-[34px] leading-tight">What it never does</h2>
           <ul className="mt-5 space-y-3">
             {AI_NEVER.map((t) => (
-              <li key={t} className="flex gap-3 text-[16px] leading-relaxed">
+              <li key={t} className="flex gap-3 text-[17px] leading-relaxed">
                 <X size={18} className="mt-1 shrink-0 text-danger" /> {t}
               </li>
             ))}
@@ -94,7 +94,7 @@ export function HowItWorksView() {
         </div>
       </section>
 
-      <section className="mt-20 rounded-[var(--radius)] bg-ink px-8 py-12 text-bg sm:px-12">
+      <section className="reveal mt-20 rounded-[var(--radius)] bg-ink px-8 py-12 text-bg sm:px-12">
         <h2 className="max-w-[20ch] font-display text-[40px] leading-[1.02] tracking-[-0.02em] sm:text-[52px]">Built entirely by voice.</h2>
         <p className="mt-5 max-w-[62ch] text-[17px] leading-relaxed opacity-80">
           Two people, three AI coding agents (Claude Code and two Codex instances), one day. Every prompt that built Kosh was spoken
@@ -102,10 +102,10 @@ export function HowItWorksView() {
           “what if I get a 15% raise in April?” or “my rent went up to 28k” and Kosh does the rest.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/planner?q=What%20if%20I%20cut%20dining%20out%20by%2030%25%20and%20my%20rent%20goes%20up%20by%203000%20from%20January%3F" className="inline-flex h-11 items-center gap-2 rounded-full bg-fill px-5 text-[14.5px] font-medium text-fill-ink">
+          <Link href="/planner?q=What%20if%20I%20cut%20dining%20out%20by%2030%25%20and%20my%20rent%20goes%20up%20by%203000%20from%20January%3F" className="inline-flex h-11 items-center gap-2 rounded-full bg-fill px-5 text-[16px] font-medium text-fill-ink">
             Try a what-if <ArrowRight size={15} />
           </Link>
-          <a href="https://github.com/dhruvsharma06-web/finance-coach" target="_blank" rel="noreferrer" className="inline-flex h-11 items-center rounded-full px-5 text-[14.5px] text-bg/80 underline-offset-4 hover:underline">
+          <a href="https://github.com/dhruvsharma06-web/finance-coach" target="_blank" rel="noreferrer" className="inline-flex h-11 items-center rounded-full px-5 text-[16px] text-bg/80 underline-offset-4 hover:underline">
             Read the code
           </a>
         </div>

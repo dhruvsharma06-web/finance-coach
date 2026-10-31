@@ -25,6 +25,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${serif.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        {/* arm scroll-reveal before first paint so nothing flashes; skipped for reduced motion */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("motion");var t=localStorage.getItem("kosh-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="min-h-full">
         <AppShell>{children}</AppShell>
         <Toaster position="bottom-right" closeButton toastOptions={{ className: "!rounded-xl !border-line !bg-surface !text-ink" }} />

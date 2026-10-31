@@ -199,6 +199,63 @@ input[type="range"] {
   animation: flash 2.4s ease-out;
 }
 
+/* ---------- Scroll reveal: anything with .reveal rises in when it enters the viewport ----------
+ * Only armed when JS has set html.motion, so content is never hidden without JS. */
+html.motion .reveal {
+  opacity: 0;
+  transform: translateY(32px) scale(0.985);
+  filter: blur(6px);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 1.1s var(--ease-out),
+    filter 0.9s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+html.motion .reveal.in {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Apple-style hero: headline lifts and fades as you scroll away (Chromium scroll timelines; no-op elsewhere) */
+@supports (animation-timeline: scroll()) {
+  .scroll-lift {
+    animation: lift linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 70vh;
+  }
+  .scroll-progress {
+    animation: grow linear both;
+    animation-timeline: scroll(root);
+  }
+}
+@keyframes lift {
+  to {
+    opacity: 0.15;
+    transform: translateY(-80px) scale(0.94);
+    filter: blur(4px);
+  }
+}
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Typewriter caret for the rotating what-if band */
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+.caret {
+  animation: caret 1s steps(1) infinite;
+}
+
 /* ---------- Cinematic intro (first visit per session) ---------- */
 @keyframes intro-word {
   0% { opacity: 0; transform: translateY(40%); filter: blur(10px); letter-spacing: 0.08em; }

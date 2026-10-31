@@ -8,6 +8,8 @@ import { Moon, RotateCcw, Sun } from "lucide-react";
 import { api } from "@/lib/client";
 import { Intro } from "../motion";
 import { CommandPalette } from "./command-palette";
+import { RevealObserver } from "../reveal-observer";
+import { NextStep } from "../journey";
 import { cn } from "../ui";
 
 /** Order matters: it is the "straight flow" of the product, and drives transition direction. */
@@ -88,7 +90,7 @@ function ResetDemo() {
           setBusy(false);
         }
       }}
-      className="flex items-center gap-2 rounded-full px-3 py-2 text-[13px] text-muted hover:bg-surface-2 hover:text-ink disabled:opacity-50"
+      className="flex items-center gap-2 rounded-full px-3 py-2 text-[14.5px] text-muted hover:bg-surface-2 hover:text-ink disabled:opacity-50"
     >
       <RotateCcw size={13} className={busy ? "animate-spin" : ""} />
       Reset demo
@@ -108,6 +110,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <>
       <Intro />
       <CommandPalette />
+      <RevealObserver />
+      <div aria-hidden className="scroll-progress fixed inset-x-0 top-0 z-[60] h-[2px] origin-left scale-x-0 bg-fill" />
       <div className="flex min-h-screen">
         <aside className="sticky top-0 hidden h-screen w-[232px] shrink-0 flex-col bg-surface-2/60 px-3 pt-8 pb-5 lg:flex">
           <Wordmark />
@@ -120,7 +124,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     transitionTypes={navType(path, href)}
                     aria-current={i === active ? "page" : undefined}
                     className={cn(
-                      "relative flex items-center rounded-full px-4 py-2.5 text-[14.5px] transition-colors duration-200",
+                      "relative flex items-center rounded-full px-4 py-2.5 text-[16px] transition-colors duration-200",
                       i === active ? "text-bg" : "text-muted hover:text-ink",
                     )}
                   >
@@ -139,12 +143,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <div className="mt-auto space-y-4 px-1">
             <button
               onClick={() => window.dispatchEvent(new Event("kosh:palette"))}
-              className="flex w-full items-center justify-between rounded-full bg-surface px-4 py-2.5 text-[13.5px] text-muted transition-colors hover:text-ink"
+              className="flex w-full items-center justify-between rounded-full bg-surface px-4 py-2.5 text-[15px] text-muted transition-colors hover:text-ink"
             >
               Search or ask
-              <kbd className="rounded bg-surface-2 px-1.5 text-[11px]">Ctrl K</kbd>
+              <kbd className="rounded bg-surface-2 px-1.5 text-[12px]">Ctrl K</kbd>
             </button>
-            <p className="px-3 text-[13px] leading-relaxed text-muted">
+            <p className="px-3 text-[14.5px] leading-relaxed text-muted">
               Every box takes voice. Hold your Wispr Flow key and say what you mean.
             </p>
             <div className="flex items-center justify-between">
@@ -168,7 +172,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   transitionTypes={navType(path, href)}
                   data-mobile-active={i === active ? "" : undefined}
                   className={cn(
-                    "shrink-0 rounded-full px-3.5 py-1.5 text-[13.5px]",
+                    "shrink-0 rounded-full px-3.5 py-1.5 text-[15px]",
                     i === active ? "bg-ink text-bg" : "text-muted hover:bg-surface-2",
                   )}
                 >
@@ -177,7 +181,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               ))}
             </nav>
           </header>
-          <main className="mx-auto w-full max-w-[1240px] flex-1 px-4 pt-6 pb-16 sm:px-8 lg:px-14 lg:pt-14">{children}</main>
+          <main className="mx-auto w-full max-w-[1240px] flex-1 px-4 pt-6 pb-16 sm:px-8 lg:px-14 lg:pt-14">
+            {children}
+            <NextStep />
+          </main>
         </div>
       </div>
     </>

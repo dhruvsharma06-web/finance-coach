@@ -41,13 +41,13 @@ function Result({ r }: { r: ImportResult }) {
         <dl className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {stats.map((s) => (
             <div key={s.label} className="rounded-xl bg-surface-2 px-4 py-3">
-              <dt className="text-[12.5px] text-muted">{s.label}</dt>
+              <dt className="text-[14px] text-muted">{s.label}</dt>
               <dd className="num mt-0.5 text-[22px] font-medium tracking-tight text-ink">{s.value}</dd>
             </div>
           ))}
         </dl>
         {r.warnings.length > 0 && (
-          <ul className="mt-4 space-y-1 text-[13px] text-warn">
+          <ul className="mt-4 space-y-1 text-[14.5px] text-warn">
             {r.warnings.map((w) => (
               <li key={w}>· {w}</li>
             ))}
@@ -62,13 +62,13 @@ function Result({ r }: { r: ImportResult }) {
               <li key={t.id} className="rise flex items-center gap-3 px-5 py-2.5" style={{ animationDelay: `${i * 40}ms` }}>
                 <CategoryIcon id={t.category} size={14} />
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-[14px] text-ink">{t.merchant}</p>
-                  <p className="text-[12px] text-muted">{getCategory(t.category).label}</p>
+                  <p className="truncate text-[15.5px] text-ink">{t.merchant}</p>
+                  <p className="text-[13.5px] text-muted">{getCategory(t.category).label}</p>
                 </div>
                 {t.categorySource === "user_rule" && <Badge tone="accent">Your rule</Badge>}
                 {t.categorySource === "ai" && <Badge tone="info">AI</Badge>}
                 {t.confidence < 0.6 && <Badge tone="warn">Review</Badge>}
-                <span className={cn("num text-[14px]", t.direction === "credit" ? "text-positive" : "text-ink")}>
+                <span className={cn("num text-[15.5px]", t.direction === "credit" ? "text-positive" : "text-ink")}>
                   {t.direction === "credit" ? "+" : "−"}
                   {formatINR(t.amount)}
                 </span>
@@ -76,7 +76,7 @@ function Result({ r }: { r: ImportResult }) {
             ))}
           </ul>
           {r.transactions.length > 12 && (
-            <p className="border-t border-line px-5 py-3 text-[13px] text-muted">and {r.transactions.length - 12} more</p>
+            <p className="border-t border-line px-5 py-3 text-[14.5px] text-muted">and {r.transactions.length - 12} more</p>
           )}
         </Panel>
       )}
@@ -132,7 +132,7 @@ export function ImportView() {
         description="Drop a statement from any Indian bank, or paste your transaction SMS. Kosh reads the mess, skips duplicates and OTP spam, and categorizes everything."
       />
 
-      <div className="stagger grid gap-5 lg:grid-cols-2">
+      <div className="grid gap-5 lg:grid-cols-2">
         <div
           onDragOver={(e) => {
             e.preventDefault();
@@ -165,10 +165,10 @@ export function ImportView() {
           <span className="grid size-14 place-items-center rounded-full bg-surface-2 text-ink">
             <UploadCloud size={24} className={busy && !busy.endsWith(".txt") && busy !== "sms" ? "animate-bounce" : ""} />
           </span>
-          <p className="mt-4 text-[16px] font-medium text-ink">
+          <p className="mt-4 text-[17px] font-medium text-ink">
             {busy && busy !== "sms" ? `Reading ${busy}…` : "Drop a PDF or CSV statement"}
           </p>
-          <p className="mt-1 text-[13.5px] text-muted">HDFC, ICICI, SBI, Axis, Kotak and more · or click to browse</p>
+          <p className="mt-1 text-[15px] text-muted">HDFC, ICICI, SBI, Axis, Kotak and more · or click to browse</p>
         </div>
 
         <Panel title="Paste bank SMS" description="Copy a batch from your messages app. Promos and OTPs are ignored.">
@@ -177,7 +177,7 @@ export function ImportView() {
             onChange={(e) => setSms(e.target.value)}
             rows={8}
             placeholder={"Rs.450.00 debited from A/c XX4821 on 10-11-26 to VPA swiggy@icici…"}
-            className="w-full resize-none rounded-xl border border-line bg-bg px-4 py-3 font-mono text-[12.5px] leading-relaxed outline-none placeholder:text-subtle focus:border-subtle"
+            className="w-full resize-none rounded-xl border border-line bg-bg px-4 py-3 font-mono text-[14px] leading-relaxed outline-none placeholder:text-subtle focus:border-subtle"
           />
           <div className="mt-3 flex justify-end">
             <Button variant="primary" loading={busy === "sms"} disabled={!sms.trim()} onClick={() => run("sms", () => api.importSms(sms))}>
@@ -188,7 +188,7 @@ export function ImportView() {
       </div>
 
       <div className="mt-6 flex flex-wrap items-center gap-2">
-        <span className="mr-1 text-[13px] text-muted">No statement handy? Try a sample:</span>
+        <span className="mr-1 text-[14.5px] text-muted">No statement handy? Try a sample:</span>
         {SAMPLES.map((s) => (
           <Button key={s.file} size="sm" loading={busy === s.file} onClick={() => trySample(s.file)}>
             <s.icon size={14} /> {s.label}

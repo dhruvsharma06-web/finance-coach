@@ -18,9 +18,9 @@ export function Button({ variant = "secondary", size = "md", loading, className,
       disabled={disabled || loading}
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-[background,color,box-shadow,transform] duration-150 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
-        size === "sm" && "h-8 px-3 text-[13px]",
+        size === "sm" && "h-8 px-3 text-[14.5px]",
         size === "md" && "h-10 px-4 text-sm",
-        size === "lg" && "h-12 px-6 text-[15px]",
+        size === "lg" && "h-12 px-6 text-[16.5px]",
         variant === "primary" && "bg-fill text-fill-ink hover:brightness-95",
         variant === "secondary" && "bg-surface-2 text-ink hover:bg-line",
         variant === "ghost" && "text-muted hover:bg-surface-2 hover:text-ink",
@@ -52,12 +52,12 @@ export function Panel({
   bleed?: boolean;
 }) {
   return (
-    <section className={cn("rounded-[var(--radius)] bg-surface", className)}>
+    <section className={cn("reveal rounded-[var(--radius)] bg-surface", className)}>
       {(title || action) && (
         <header className="flex items-start justify-between gap-4 px-6 pt-6 pb-4">
           <div className="min-w-0">
-            {title && <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-ink">{title}</h2>}
-            {description && <p className="mt-0.5 text-[13.5px] text-muted">{description}</p>}
+            {title && <h2 className="text-[17px] font-semibold tracking-[-0.01em] text-ink">{title}</h2>}
+            {description && <p className="mt-0.5 text-[15px] text-muted">{description}</p>}
           </div>
           {action && <div className="shrink-0">{action}</div>}
         </header>
@@ -79,7 +79,7 @@ export type Tone = keyof typeof TONES;
 
 export function Badge({ tone = "neutral", className, children }: { tone?: Tone; className?: string; children: React.ReactNode }) {
   return (
-    <span className={cn("inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11.5px] font-medium whitespace-nowrap", TONES[tone], className)}>
+    <span className={cn("inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[12.5px] font-medium whitespace-nowrap", TONES[tone], className)}>
       {children}
     </span>
   );
@@ -102,7 +102,7 @@ export function PageHeader({
     <div className="stagger mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
         <h1 className="font-display text-[44px] leading-[0.98] tracking-[-0.025em] text-ink text-balance sm:text-[60px]">{title}</h1>
-        {description && <p className="mt-3 max-w-[60ch] text-[16px] leading-relaxed text-muted text-pretty">{description}</p>}
+        {description && <p className="mt-3 max-w-[60ch] text-[17px] leading-relaxed text-muted text-pretty">{description}</p>}
       </div>
       {actions && <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>}
     </div>
