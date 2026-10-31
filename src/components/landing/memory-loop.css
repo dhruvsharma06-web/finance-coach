@@ -1,0 +1,110 @@
+/* "A money model. With a memory." — five-step scroll sequence. Global CSS (Turbopack loader), so everything is namespaced kosh3d-mem / m-*. */
+.kosh3d-mem{position:relative;height:520svh;background:radial-gradient(ellipse at 70% 55%,#1f3a2f,#0b1411 70%);border-block:1px solid #a7d8b51a;color:#f0e7d4}
+.kosh3d-mem-stage{position:sticky;top:0;height:100svh;min-height:640px;display:grid;grid-template-columns:36% 64%;align-items:center;padding:40px var(--page-pad);gap:20px}
+.kosh3d-mem-copy h2{font-family:var(--font-serif);font-weight:400;font-size:clamp(44px,4.6vw,70px);letter-spacing:-.025em;line-height:1.02;margin:0 0 30px}
+.kosh3d-mem-steps{display:flex;flex-direction:column;gap:6px}
+.kosh3d-mem-steps button{display:flex;gap:16px;align-items:flex-start;text-align:left;background:none;border:0;color:#9db1a4;padding:10px 0;cursor:pointer;font:inherit}
+.kosh3d-mem-steps button>span:first-child{font-variant-numeric:tabular-nums;font-size:14px;padding-top:3px;color:#6f877a;min-width:24px}
+.kosh3d-mem-steps strong{display:block;font-size:19px;font-weight:600}
+.kosh3d-mem-steps em{display:block;font-style:normal;font-size:16px;line-height:1.55;color:#c3d0c6;margin-top:6px;max-width:34ch;animation:memIn .5s var(--ease-out) both}
+.kosh3d-mem-steps .is-active{color:#f0e7d4}
+.kosh3d-mem-steps .is-active>span:first-child{color:#efbc6a}
+.kosh3d-mem-steps button:focus-visible{outline:2px solid #efbc6a;outline-offset:4px;border-radius:6px}
+.kosh3d-mem-note{font-size:13px;color:#7f968a;margin-top:26px}
+.kosh3d-mem-viewport{position:relative;height:min(78svh,620px);perspective:1300px;display:grid;place-items:center}
+.kosh3d-mem-world{position:relative;width:640px;height:460px;transform-style:preserve-3d;transition:transform 1.3s cubic-bezier(.16,1,.3,1);transform:rotateX(14deg) rotateY(calc(-16deg + var(--p,0) * 6deg))}
+.kosh3d-mem[data-step="1"] .kosh3d-mem-world{transform:rotateX(22deg) rotateY(calc(6deg + var(--p,0) * 5deg)) translateY(-10px)}
+.kosh3d-mem[data-step="2"] .kosh3d-mem-world{transform:rotateX(8deg) rotateY(calc(-8deg + var(--p,0) * 6deg)) scale(1.04)}
+.kosh3d-mem[data-step="3"] .kosh3d-mem-world{transform:rotateX(18deg) rotateY(calc(12deg - var(--p,0) * 6deg))}
+.kosh3d-mem[data-step="4"] .kosh3d-mem-world{transform:rotateX(10deg) rotateY(calc(-10deg + var(--p,0) * 8deg)) scale(1.02)}
+.kosh3d-mem .m-obj{position:absolute;opacity:0;transform:translateZ(-160px) translateY(30px);transition:opacity .7s ease,transform 1.1s cubic-bezier(.16,1,.3,1);border-radius:12px;box-shadow:8px 12px 0 #07100c,0 24px 50px #0007;pointer-events:none}
+.kosh3d-mem .m-obj.is-on{opacity:1;transform:translateZ(var(--z,40px))}
+
+/* 1 · inputs */
+.kosh3d-mem .m-statement{left:30px;top:50px;width:240px;padding:18px 20px;background:#f3eee1;color:#1d241f;--z:70px;font-size:12.5px;line-height:1.9}
+.kosh3d-mem .m-statement b{display:block;font-size:14px;margin-bottom:6px}
+.kosh3d-mem .m-statement i{display:block;font-style:normal;font-size:11.5px;border-top:1px solid #0001;letter-spacing:.01em}
+.kosh3d-mem .m-sms{left:310px;top:40px;padding:12px 16px;background:#1d3a2e;border:1px solid #6ab08d55;font-size:13.5px;color:#d9eadf;border-radius:16px 16px 16px 4px;--z:50px}
+.kosh3d-mem .m-sms2{left:340px;top:110px;--z:30px}
+.kosh3d-mem .m-recur{left:320px;top:190px;padding:14px 18px;background:#2a2417;border:1px solid #efbc6a66;color:#f5dca8;font-size:14px;--z:60px}
+.kosh3d-mem .m-recur span{display:inline-block;margin-right:6px;color:#efbc6a}
+
+/* 2 · understanding */
+.kosh3d-mem .m-bin{top:330px;width:170px;padding:16px 18px;background:linear-gradient(150deg,#243c32,#12251d);border:1px solid #64997a55;color:#e3ede4;--z:30px}
+.kosh3d-mem .m-bin strong{display:block;font-size:15px}
+.kosh3d-mem .m-bin span{font-size:20px;font-variant-numeric:tabular-nums;color:#efbc6a}
+.kosh3d-mem .m-bin-dining{left:20px}.kosh3d-mem .m-bin-rent{left:235px}.kosh3d-mem .m-bin-subs{left:450px}
+
+/* 3 · memory: correction → rule → next payment follows it */
+.kosh3d-mem .m-correction{left:40px;top:70px;padding:16px 20px;background:#f3eee1;color:#1d241f;font-size:16px;display:flex;gap:10px;align-items:center;--z:90px}
+.kosh3d-mem .m-strike{text-decoration:line-through;opacity:.55}
+.kosh3d-mem .m-arrow{color:#b8681a}
+.kosh3d-mem .m-correction strong{color:#2c7046}
+.kosh3d-mem .m-rule{left:330px;top:60px;padding:18px 22px;background:linear-gradient(135deg,#f7d797,#c49445);color:#281d0e;--z:110px;box-shadow:8px 14px 0 #6b4b20,0 0 55px #e8ad4340}
+.kosh3d-mem .m-rule small{display:block;font-size:12px;opacity:.75}
+.kosh3d-mem .m-rule strong{display:block;font-size:18px;margin:2px 0}
+.kosh3d-mem .m-rule span{font-size:13px}
+.kosh3d-mem .m-loop{position:absolute;left:230px;top:130px;width:190px;height:190px;opacity:0;transition:opacity .6s;transform:translateZ(60px)}
+.kosh3d-mem .m-loop path{fill:none;stroke:#efbc6a;stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 6px #efbc6a)}
+.kosh3d-mem .m-loop.is-on{opacity:1}
+.kosh3d-mem .m-loop.is-on path{transition:stroke-dashoffset 1.6s ease .3s;stroke-dashoffset:0}
+.kosh3d-mem .m-next{left:370px;top:290px;padding:14px 18px;background:#1d3a2e;border:1px solid #8bd8b777;color:#d9eadf;--z:70px}
+.kosh3d-mem .m-next.is-on{transition-delay:.9s}
+.kosh3d-mem .m-next span{display:block;font-size:13px;opacity:.8}
+.kosh3d-mem .m-next strong{color:#8bd8b7;font-size:16px}
+
+/* 4 · living model */
+.kosh3d-mem .m-node{padding:16px 20px;background:linear-gradient(150deg,#243c32,#12251d);border:1px solid #64997a66;--z:50px}
+.kosh3d-mem .m-node small{display:block;font-size:12.5px;color:#9db1a4}
+.kosh3d-mem .m-node strong{font-size:24px;font-variant-numeric:tabular-nums}
+.kosh3d-mem .m-income{left:30px;top:70px}.kosh3d-mem .m-spend{left:450px;top:60px}.kosh3d-mem .m-save{left:440px;top:300px;border-color:#8bd8b7aa}
+.kosh3d-mem .m-save strong{color:#8bd8b7}
+.kosh3d-mem .m-links{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .6s;transform:translateZ(20px);overflow:visible}
+.kosh3d-mem .m-links path{fill:none;stroke:#7fd1b0;stroke-width:2.5;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 5px #6fe0bd)}
+.kosh3d-mem .m-links.is-on{opacity:1}
+.kosh3d-mem .m-links.is-on path{transition:stroke-dashoffset 1.4s ease .4s;stroke-dashoffset:0}
+
+/* 5 · outcomes */
+.kosh3d-mem .m-change{left:30px;top:300px;padding:18px 22px;background:linear-gradient(135deg,#f7d797,#c49445);color:#281d0e;--z:100px}
+.kosh3d-mem .m-change small{display:block;font-size:12px;opacity:.75}
+.kosh3d-mem .m-change strong{display:block;font-size:22px}
+.kosh3d-mem .m-change span{font-size:14px}
+.kosh3d-mem .m-out{left:430px;width:190px;padding:14px 18px;background:#1d3a2e;border:1px solid #8bd8b766;color:#e3ede4;--z:60px}
+.kosh3d-mem .m-out strong{display:block;font-size:15px}
+.kosh3d-mem .m-out span{font-size:14px;color:#8bd8b7}
+.kosh3d-mem .m-out-goal{top:20px}.kosh3d-mem .m-out-fest{top:160px}.kosh3d-mem .m-out-coach{top:300px}
+.kosh3d-mem .m-out-goal.is-on{transition-delay:.5s}.kosh3d-mem .m-out-fest.is-on{transition-delay:.7s}.kosh3d-mem .m-out-coach.is-on{transition-delay:.9s}
+
+/* what each step keeps on screen */
+.kosh3d-mem[data-step="1"] :is(.m-statement,.m-sms,.m-recur).is-on{opacity:.28;transform:translateZ(-60px) translateY(-20px) scale(.9)}
+.kosh3d-mem:is([data-step="2"],[data-step="3"],[data-step="4"]) :is(.m-statement,.m-sms,.m-recur).is-on{opacity:0;transform:translateZ(-200px)}
+.kosh3d-mem[data-step="2"] :is(.m-bin-rent,.m-bin-subs).is-on{opacity:.25}
+.kosh3d-mem:is([data-step="3"],[data-step="4"]) .m-bin.is-on{opacity:0;transform:translateZ(-200px)}
+.kosh3d-mem:is([data-step="3"],[data-step="4"]) :is(.m-correction,.m-next).is-on,.kosh3d-mem:is([data-step="3"],[data-step="4"]) .m-loop.is-on{opacity:0}
+.kosh3d-mem[data-step="3"] .m-rule.is-on{opacity:.35;transform:translateZ(-80px) translate(-170px,250px) scale(.8)}
+.kosh3d-mem[data-step="4"] .m-rule.is-on{opacity:0}
+.kosh3d-mem[data-step="4"] .m-spend.is-on,.kosh3d-mem[data-step="4"] .m-links.is-on{opacity:0}
+.kosh3d-mem[data-step="4"] .m-save.is-on{transform:translateZ(80px) translate(-200px,-120px);box-shadow:0 0 0 2px #8bd8b7,0 0 50px #6fe0bd55}
+.kosh3d-mem[data-step="4"] .m-save strong::after{content:" → ₹25,256";color:#efbc6a}
+.kosh3d-mem[data-step="4"] .m-out.is-on{animation:memPulse 2.4s ease-in-out 1.2s infinite}
+@keyframes memPulse{50%{box-shadow:8px 12px 0 #07100c,0 0 40px #6fe0bd55}}
+@keyframes memIn{from{opacity:0;transform:translateY(6px)}}
+
+.kosh3d-mem-progress{position:absolute;bottom:0;left:0;right:0;height:3px;background:#e6cfaa13}
+.kosh3d-mem-progress>div{height:100%;background:linear-gradient(90deg,#71c4ac,#f4ce88);transform-origin:left;transition:transform .2s linear}
+
+@media(max-width:900px){
+  .kosh3d-mem-stage{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;align-items:start;padding-top:28px;gap:0}
+  .kosh3d-mem-copy{min-width:0}
+  .kosh3d-mem-copy h2{font-size:40px;margin-bottom:12px}
+  .kosh3d-mem-steps button{padding:4px 0}
+  .kosh3d-mem-steps button:not(.is-active){display:none}
+  .kosh3d-mem-steps strong{font-size:17px}
+  .kosh3d-mem-steps em{font-size:15px}
+  .kosh3d-mem-note{display:none}
+  .kosh3d-mem-viewport{height:auto;min-height:340px;min-width:0;overflow:hidden}
+  .kosh3d-mem-world{position:absolute;left:50%;top:50%;translate:-50% -50%;scale:.62;margin:0}
+  .kosh3d-mem-viewport{min-height:330px}
+}
+@media(max-width:480px){.kosh3d-mem-world{scale:.54}.kosh3d-mem-viewport{min-height:300px}}
+@media(prefers-reduced-motion:reduce){.kosh3d-mem *{transition:none!important;animation:none!important}}

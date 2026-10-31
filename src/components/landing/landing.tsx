@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowDown, ArrowRight, MessageSquare, MoveUpRight, ShieldCheck } from "lucide-react";
 import "./landing.css";
 import { MoneyUniverse } from "./money-universe";
+import { MemoryLoop } from "./memory-loop";
 
 // The project's Tailwind Turbopack loader emits global CSS; namespace this surface.
 const styles = {
@@ -113,10 +114,7 @@ export function Landing() {
         </div>
       </section>
 
-      <section className={styles.connection}>
-        <h2>A money model.<br />With a memory.</h2>
-        <div><p>A spending tracker tells you where your money went. Kosh connects that history to the life you’re planning.</p><div className={`${styles.diagram} kosh3d-flow`} role="img" aria-label="Statements feed your money model, which connects goals, what-if decisions and coaching"><span>Statements & SMS</span><ArrowDown /><strong>Your living money model</strong><div><span>Goals</span><span>What-ifs</span><span>Coaching</span></div></div><p className={styles.small}>Correct a category once. Review recurring costs. Ask a question in everyday language. Keep the model in step with you.</p></div>
-      </section>
+      <MemoryLoop />
 
       <section id="decisions" className={styles.decisions}>
         <div><h2>Before you decide,<br />see the difference.</h2><p>What if you put a little more aside each month? Move the slider and see a simple example.</p><Link className={styles.textLink} href="/login?next=/planner">Explore your own what-ifs <ArrowRight size={18} /></Link></div>
