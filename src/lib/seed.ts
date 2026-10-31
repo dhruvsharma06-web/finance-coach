@@ -220,7 +220,7 @@ export function buildSeed(): Database {
     goals: [
       { id: "goal-ef", name: "Emergency fund (6 months)", targetAmount: 300000, currentAmount: 120000, targetDate: "2027-06-30", priority: "high", icon: "ShieldCheck" },
       { id: "goal-goa", name: "Goa trip with friends", targetAmount: 45000, currentAmount: 12000, targetDate: "2026-12-20", priority: "medium", icon: "Palmtree" },
-      { id: "goal-laptop", name: "New MacBook", targetAmount: 160000, currentAmount: 30000, targetDate: "2027-09-01", priority: "low", icon: "Laptop" },
+      { id: "goal-laptop", name: "New MacBook", targetAmount: 160000, currentAmount: 30000, targetDate: "2027-11-30", priority: "low", icon: "Laptop" },
     ],
     lifeEvents: [{ id: "le-1", date: "2026-08-01", description: "Moved to Koramangala, rent ₹25,000" }],
     updatedAt: "2026-10-31T09:00:00.000Z",
@@ -264,3 +264,4 @@ export function buildSeed(): Database {
 
   return { version: 1, transactions: txns, rules: [], recurring, profile, nudges, reports: [] };
 }
+
