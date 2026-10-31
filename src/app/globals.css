@@ -255,6 +255,47 @@ html.motion .reveal:not(.in) .grow-bar {
   transform: scaleY(0);
 }
 
+/* Opening animation: headline words rise one after another */
+@keyframes word-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em) rotate(1.5deg);
+    filter: blur(8px);
+  }
+}
+.word {
+  display: inline-block;
+  animation: word-rise 0.9s var(--ease-out) both;
+  animation-delay: calc(var(--w, 0) * 90ms + 60ms);
+}
+
+/* Meters fill from zero when their .reveal parent enters view */
+html.motion .reveal:not(.in) .meter-fill {
+  width: 0 !important;
+}
+.meter-fill {
+  transition: width 1.2s var(--ease-out) 0.25s;
+}
+
+/* Cards that settle in as they scroll through the viewport (Chromium view timelines; no-op elsewhere) */
+@supports (animation-timeline: view()) {
+  .scroll-zoom {
+    animation: settle linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+  }
+}
+@keyframes settle {
+  from {
+    transform: scale(0.93) translateY(40px);
+    opacity: 0.4;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
 /* Line that draws left-to-right when its .reveal parent enters view */
 .grow-line {
   transform-origin: left;

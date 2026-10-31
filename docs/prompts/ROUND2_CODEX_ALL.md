@@ -46,6 +46,16 @@ Files: `src/proxy.ts` (or `src/middleware.ts`, per the docs), `src/lib/auth.ts`,
 - `GET /api/data/export`: the full JSON, with `Content-Disposition: attachment; filename="kosh-export.json"`.
 - No `console.log` of request bodies, transactions or passcodes anywhere.
 
+## Part 3b: Bank-grade data protection (people upload real statements)
+- **Encryption at rest:** encrypt the whole DB file with AES-256-GCM (`crypto.createCipheriv`). Use a random 12-byte IV per write, and store `{ v, iv, tag, data }` as JSON. Key = env `KOSH_DATA_KEY` (32 bytes, base64). If the key is unset, generate one into `data/.key` locally with file mode 0600 and log a one-line warning, and require the env var in production. Do this inside `src/lib/db.ts` `load()`/`persist()` only, keeping `readDb()`/`updateDb()` signatures unchanged. A tampered file must fail the GCM auth tag and reseed instead of crashing.
+- **Uploaded files are never stored.** Parse in memory, keep only the normalized transactions, and drop the buffer. Reject files over 5 MB (413) and anything that isn't CSV/PDF/TXT by magic bytes, not just by extension (415).
+- **Passcode at rest:** if `KOSH_PASSCODE_HASH` is set (scrypt `salt:hash`), compare against it instead of the plaintext env var. Ship `scripts/hash-passcode.ts` to generate it.
+- **Sessions:** 30-minute idle timeout (sliding: refresh `exp` on activity) plus a 7-day absolute cap. Rotate the token on login. Logout clears it server-side by bumping a `sessionVersion` stored in the DB.
+- **CSRF:** for every non-GET `/api/*` request, require `Origin` (or `Referer`) to match the host, else 403. `SameSite=Lax` stays as a second layer.
+- **No sensitive data in logs or errors:** errors returned to the client are generic, and details go to `console.error` without bodies.
+- **Data minimisation:** store only date, narration (masked), merchant, amount, direction and category. Never store the full account number, card number, balance history beyond `balanceAfter`, or the uploaded filename's path.
+- Add every point above to `docs/SECURITY.md`, and add tests to `scripts/test-security.ts` (encrypted file isn't plaintext, a tampered file is rejected, cross-origin POST gets 403, the idle timeout expires).
+
 ## Part 4: Rate limiting
 `src/lib/rate-limit.ts`: an in-memory sliding window keyed by IP (first hop of `x-forwarded-for`, else "local"). Limits: `/api/coach` 20/min, `/api/simulate` 40/min, `/api/plan/fix` 20/min, `/api/import` and `/api/import/preview` 10/min, `/api/profile/life-event` 20/min, login per Part 2. Return 429 `{ error: "Too many requests, try again in a moment." }` with `Retry-After`. Leave successful response shapes unchanged.
 

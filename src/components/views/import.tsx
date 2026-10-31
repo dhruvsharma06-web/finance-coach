@@ -14,7 +14,8 @@ import { ParseDemo } from "../parse-demo";
 import { Badge, Button, PageHeader, Panel, cn } from "../ui";
 
 const SAMPLES = [
-  { file: "hdfc-november.csv", label: "HDFC statement", kind: "CSV", icon: FileSpreadsheet },
+  { file: "kosh-demo-statement.csv", label: "6-month statement", kind: "CSV", icon: FileSpreadsheet },
+  { file: "hdfc-november.csv", label: "HDFC November", kind: "CSV", icon: FileSpreadsheet },
   { file: "statement.pdf", label: "Bank statement", kind: "PDF", icon: FileText },
   { file: "sms-dump.txt", label: "Bank SMS dump", kind: "SMS", icon: MessageSquareText },
 ];

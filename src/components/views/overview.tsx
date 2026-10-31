@@ -9,12 +9,15 @@ import { getCategory } from "@/lib/categories";
 import { formatINR, formatINRCompact, monthLabel } from "@/lib/format";
 import type { CategoryId, DashboardSummary } from "@/lib/types";
 import { AskBar } from "../ask-bar";
+import { AutopayStrip } from "../autopay-strip";
 import { CategoryIcon } from "../category";
+import { DailySpendChart } from "../charts";
+import { InView, Words } from "../in-view";
+import { JourneyStrip } from "../journey";
 import { MoneyFlow, type FlowSegment } from "../money-flow";
 import { CountUp } from "../motion";
 import { NudgeList } from "../nudges";
 import { WhatIfBand } from "../what-if-band";
-import { JourneyStrip } from "../journey";
 import { Badge, ErrorNote, Meter, Panel, Skeleton } from "../ui";
 
 function greeting() {
@@ -47,9 +50,12 @@ function storyLine(d: DashboardSummary): string {
   return parts.join(" ");
 }
 
+const word = (i: number) => ({ "--w": i }) as React.CSSProperties;
+
 export function OverviewView() {
   const [month, setMonth] = useState<string | undefined>();
   const { data: months } = useApi(() => api.reportMonths());
+  const { data: recurring } = useApi(() => api.recurring());
   const { data: d, error, reload, setData } = useApi(() => api.dashboard(month), [month]);
   const segments = useMemo(() => (d ? flowSegments(d) : []), [d]);
 
@@ -58,69 +64,80 @@ export function OverviewView() {
     return (
       <div className="space-y-8">
         <Skeleton className="h-6 w-64" />
-        <Skeleton className="h-28 w-3/4" />
-        <Skeleton className="h-[320px] w-full" />
+        <Skeleton className="h-36 w-3/4" />
+        <Skeleton className="h-[340px] w-full" />
       </div>
     );
   }
 
   const pct = Math.round(d.savingsRate * 100);
-  const pace = [...d.budgetPace].sort((a, b) => b.paceRatio - a.paceRatio).slice(0, 4);
+  const pace = [...d.budgetPace].sort((a, b) => b.paceRatio - a.paceRatio).slice(0, 5);
+  const dailyTotal = d.dailySpend.reduce((s, x) => s + x.amount, 0);
+  const peak = d.dailySpend.reduce((m, x) => (x.amount > m.amount ? x : m), d.dailySpend[0]);
 
   return (
-    <div className="space-y-14">
-      {/* ── Hero + the living model, together in the first view ── */}
+    <div className="space-y-20 sm:space-y-28">
+      {/* ── Opening: words rise in one by one, numbers count up ── */}
       <section className="scroll-lift">
-        <div className="stagger">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-[16.5px] text-muted">
-              {greeting()}, Aarav. Here&rsquo;s {monthLabel(d.month)}.
-            </p>
-            {months && months.length > 1 && (
-              <div className="flex gap-1 rounded-full bg-surface p-1">
-                {months.slice(0, 4).map((m) => (
-                  <button
-                    key={m}
-                    onClick={() => setMonth(m)}
-                    className={`rounded-full px-3 py-1 text-[14.5px] transition-colors ${m === d.month ? "bg-ink text-bg" : "text-muted hover:text-ink"}`}
-                  >
-                    {monthLabel(m).slice(0, 3)}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-          <h1 className="mt-5 max-w-[18ch] font-display text-[46px] leading-[0.98] tracking-[-0.03em] text-ink text-balance sm:text-[68px] xl:text-[76px]">
-            You spent <CountUp value={d.spending} format={formatINR} duration={1600} /> and kept{" "}
-            <CountUp value={pct} format={(n) => `${Math.round(n)}%`} duration={1600} />.
-          </h1>
-          <p className="mt-4 max-w-[60ch] text-[18px] leading-relaxed text-muted text-pretty">{storyLine(d)}</p>
+        <div className="rise flex flex-wrap items-center justify-between gap-3">
+          <p className="text-[16.5px] text-muted">
+            {greeting()}, Aarav. Here&rsquo;s {monthLabel(d.month)}.
+          </p>
+          {months && months.length > 1 && (
+            <div className="flex gap-1 rounded-full bg-surface p-1">
+              {months.slice(0, 4).map((m) => (
+                <button
+                  key={m}
+                  onClick={() => setMonth(m)}
+                  className={`rounded-full px-3 py-1 text-[14.5px] transition-colors ${m === d.month ? "bg-ink text-bg" : "text-muted hover:text-ink"}`}
+                >
+                  {monthLabel(m).slice(0, 3)}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
+        <h1 className="mt-6 max-w-[16ch] font-display text-[50px] leading-[0.96] tracking-[-0.035em] text-ink text-balance sm:text-[80px] xl:text-[92px]">
+          <Words text="You spent" />{" "}
+          <span className="word" style={word(2)}>
+            <CountUp value={d.spending} format={formatINR} duration={1800} />
+          </span>{" "}
+          <Words text="and kept" offset={3} />{" "}
+          <span className="word" style={word(5)}>
+            <CountUp value={pct} format={(n) => `${Math.round(n)}%`} duration={1800} />.
+          </span>
+        </h1>
+        <p className="rise mt-6 max-w-[56ch] text-[19px] leading-relaxed text-muted text-pretty [animation-delay:700ms] sm:text-[20px]">{storyLine(d)}</p>
+        <AskBar className="rise mt-8 [animation-delay:850ms]" />
+      </section>
 
-        <div className="reveal mt-8 rounded-[var(--radius)] bg-surface px-4 pt-6 pb-8 sm:px-8">
-          <div className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
-            <h2 className="text-[19px] font-semibold tracking-[-0.01em]">Where every rupee went</h2>
-            <Link href="/transactions" className="inline-flex items-center gap-1 text-[15px] text-muted hover:text-ink">
-              {d.byCategory.reduce((s, c) => s + c.txnCount, 0)} transactions <ArrowRight size={14} />
-            </Link>
+      {/* ── The living model ── */}
+      <section className="scroll-zoom">
+        <div className="reveal mb-8 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 className="font-display text-[38px] leading-none tracking-[-0.02em] sm:text-[52px]">Where every rupee went.</h2>
+            <p className="mt-3 max-w-[52ch] text-[17px] text-muted">
+              This month&rsquo;s income, followed to where it ended up. Built from {d.byCategory.reduce((s, c) => s + c.txnCount, 0)} real transactions.
+            </p>
           </div>
-          <MoneyFlow income={Math.max(d.income, d.spending)} segments={segments} height={300} />
+          <Link href="/transactions" className="inline-flex items-center gap-1 text-[16px] font-medium text-ink underline-offset-4 hover:underline">
+            See them all <ArrowRight size={15} />
+          </Link>
         </div>
-        <AskBar className="reveal mt-4" />
+        <div className="reveal rounded-[var(--radius)] bg-surface px-4 py-8 sm:px-8 sm:py-10">
+          <MoneyFlow income={Math.max(d.income, d.spending)} segments={segments} height={340} />
+        </div>
       </section>
 
       <JourneyStrip />
 
-      {/* ── One tight grid: what needs you, goals, pace ── */}
-      <section className="grid gap-5 lg:grid-cols-[1.35fr_1fr]">
-        <Panel
-          title="Kosh noticed"
-          action={<Badge tone={d.nudges.length ? "warn" : "positive"}>{d.nudges.length} open</Badge>}
-        >
-          <NudgeList limit={3} nudges={d.nudges} onDismiss={(id) => setData({ ...d, nudges: d.nudges.filter((n) => n.id !== id) })} />
-        </Panel>
-
-        <div className="space-y-5">
+      {/* ── What needs you ── */}
+      <section>
+        <h2 className="reveal font-display text-[38px] leading-none tracking-[-0.02em] sm:text-[52px]">What needs you.</h2>
+        <div className="mt-8 grid gap-5 lg:grid-cols-[1.35fr_1fr]">
+          <Panel title="Kosh noticed" action={<Badge tone={d.nudges.length ? "warn" : "positive"}>{d.nudges.length} open</Badge>}>
+            <NudgeList limit={4} nudges={d.nudges} onDismiss={(id) => setData({ ...d, nudges: d.nudges.filter((n) => n.id !== id) })} />
+          </Panel>
           <Panel
             title="Goals"
             action={
@@ -129,17 +146,17 @@ export function OverviewView() {
               </Link>
             }
           >
-            <ul className="space-y-5">
+            <ul className="space-y-6">
               {d.goals.map((g) => {
                 const r = g.currentAmount / g.targetAmount;
                 return (
                   <li key={g.id}>
                     <div className="mb-2 flex items-baseline justify-between gap-3">
-                      <span className="text-[16px] text-ink">{g.name}</span>
-                      <span className="num font-display text-[26px] leading-none text-ink">{Math.round(r * 100)}%</span>
+                      <span className="text-[16.5px] text-ink">{g.name}</span>
+                      <span className="num font-display text-[30px] leading-none text-ink">{Math.round(r * 100)}%</span>
                     </div>
                     <Meter value={r} />
-                    <p className="num mt-1.5 text-[14px] text-muted">
+                    <p className="num mt-2 text-[14px] text-muted">
                       {formatINRCompact(g.currentAmount)} of {formatINRCompact(g.targetAmount)} · by{" "}
                       {new Date(g.targetDate).toLocaleDateString("en-IN", { month: "short", year: "numeric" })}
                     </p>
@@ -148,7 +165,21 @@ export function OverviewView() {
               })}
             </ul>
           </Panel>
+        </div>
+      </section>
 
+      {/* ── The rhythm of the month ── */}
+      <section>
+        <h2 className="reveal font-display text-[38px] leading-none tracking-[-0.02em] sm:text-[52px]">The rhythm of your month.</h2>
+        <div className="mt-8 grid gap-5 lg:grid-cols-[1.35fr_1fr]">
+          <Panel
+            title="Day-to-day spending"
+            description={`${formatINRCompact(dailyTotal / d.dailySpend.length)} a day on average, excluding rent and bills. Biggest day: ${new Date(peak.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}.`}
+          >
+            <InView height={200}>
+              <DailySpendChart data={d.dailySpend} height={200} />
+            </InView>
+          </Panel>
           <Panel
             title="Budget pace"
             action={
@@ -163,7 +194,7 @@ export function OverviewView() {
                 const ratio = p.budget ? p.spent / p.budget : 0;
                 return (
                   <li key={p.category}>
-                    <div className="mb-1.5 flex items-center justify-between gap-3 text-[15px]">
+                    <div className="mb-1.5 flex items-center justify-between gap-3 text-[15.5px]">
                       <span className="flex items-center gap-2 text-ink">
                         <CategoryIcon id={p.category} size={12} />
                         {getCategory(p.category).label.split(" ")[0]}
@@ -184,9 +215,16 @@ export function OverviewView() {
             </ul>
           </Panel>
         </div>
+        {recurring && (
+          <div className="mt-5">
+            <AutopayStrip items={recurring} />
+          </div>
+        )}
       </section>
 
-      <WhatIfBand compact />
+      <div className="scroll-zoom">
+        <WhatIfBand />
+      </div>
     </div>
   );
 }

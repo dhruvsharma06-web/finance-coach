@@ -29,7 +29,7 @@ export function RevealObserver() {
           io.unobserve(el);
         });
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      { rootMargin: "0px 0px -6% 0px", threshold: 0 },
     );
 
     const scan = () => document.querySelectorAll<HTMLElement>(".reveal:not(.in)").forEach((el) => io.observe(el));

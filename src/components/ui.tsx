@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Loader2 } from "lucide-react";
+import { Words } from "./in-view";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -99,10 +100,10 @@ export function PageHeader({
   actions?: React.ReactNode;
 }) {
   return (
-    <div className="stagger mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
-        <h1 className="font-display text-[44px] leading-[0.98] tracking-[-0.025em] text-ink text-balance sm:text-[60px]">{title}</h1>
-        {description && <p className="mt-3 max-w-[60ch] text-[17px] leading-relaxed text-muted text-pretty">{description}</p>}
+        <h1 className="font-display text-[44px] leading-[0.98] tracking-[-0.025em] text-ink text-balance sm:text-[60px]">{typeof title === "string" ? <Words text={title} /> : title}</h1>
+        {description && <p className="rise mt-3 max-w-[60ch] [animation-delay:350ms] text-[17px] leading-relaxed text-muted text-pretty">{description}</p>}
       </div>
       {actions && <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>}
     </div>
@@ -138,7 +139,7 @@ export function Meter({ value, color = "var(--accent)", marker, className }: { v
   const pct = Math.max(0, Math.min(1, value)) * 100;
   return (
     <div className={cn("relative h-1.5 w-full rounded-full bg-surface-2", className)}>
-      <div className="h-full rounded-full transition-[width] duration-700 ease-out" style={{ width: `${pct}%`, background: color }} />
+      <div className="meter-fill h-full rounded-full" style={{ width: `${pct}%`, background: color }} />
       {marker !== undefined && (
         <div className="absolute -top-1 h-3.5 w-px bg-ink/40" style={{ left: `${Math.max(0, Math.min(1, marker)) * 100}%` }} />
       )}
