@@ -7,36 +7,32 @@ import { NAV, navType } from "./shell/app-shell";
 
 /** The product's four-step flow, shown on the Overview. Order carries meaning, so it's a real <ol>. */
 const STEPS = [
-  { href: "/import", title: "Bring in your money", body: "Drop a PDF or CSV statement, or paste bank SMS." },
-  { href: "/transactions", title: "Teach Kosh once", body: "Fix a category and it learns the rule for good." },
-  { href: "/planner", title: "Try a what-if", body: "Ask in plain words and watch your goal dates move." },
-  { href: "/report", title: "Review the month", body: "A one-page story of what went well and what to watch." },
+  { href: "/import", title: "Bring in your money", body: "PDF, CSV or bank SMS" },
+  { href: "/transactions", title: "Teach Kosh once", body: "Fix a category, it learns" },
+  { href: "/planner", title: "Try a what-if", body: "Watch goal dates move" },
+  { href: "/report", title: "Review the month", body: "Your one-page story" },
 ];
 
-export function Journey() {
+/** Compact four-step flow for the Overview: one row, with a line that draws across as it appears. */
+export function JourneyStrip() {
   const path = usePathname();
   return (
-    <section>
-      <h2 className="reveal font-display text-[40px] leading-none tracking-[-0.02em] sm:text-[56px]">Four steps. That&rsquo;s the whole app.</h2>
-      <ol className="mt-10 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+    <nav aria-label="How to use Kosh" className="reveal relative">
+      <div aria-hidden className="grow-line absolute top-[22px] right-[12%] left-[12%] hidden h-[2px] bg-fill sm:block" />
+      <ol className="relative grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
         {STEPS.map((s, i) => (
-          <li key={s.href} className="reveal">
-            <Link
-              href={s.href}
-              transitionTypes={navType(path, s.href)}
-              className="group flex h-full flex-col rounded-[var(--radius)] bg-surface p-7 transition-colors hover:bg-ink hover:text-bg"
-            >
-              <span className="font-display text-[56px] leading-none text-fill">{i + 1}</span>
-              <span className="mt-8 text-[22px] font-semibold leading-tight tracking-[-0.01em]">{s.title}</span>
-              <span className="mt-2 flex-1 text-[16.5px] leading-relaxed text-muted group-hover:text-bg/75">{s.body}</span>
-              <span className="mt-6 inline-flex items-center gap-1.5 text-[15.5px] font-medium">
-                Go <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+          <li key={s.href}>
+            <Link href={s.href} transitionTypes={navType(path, s.href)} className="group flex flex-col items-start gap-3 sm:items-center sm:text-center">
+              <span className="grid size-11 place-items-center rounded-full bg-ink font-display text-[22px] text-bg transition-transform group-hover:scale-110">{i + 1}</span>
+              <span>
+                <span className="block text-[18px] font-semibold leading-tight tracking-[-0.01em] text-ink">{s.title}</span>
+                <span className="mt-1 block text-[15px] leading-snug text-muted">{s.body}</span>
               </span>
             </Link>
           </li>
         ))}
       </ol>
-    </section>
+    </nav>
   );
 }
 
@@ -56,7 +52,7 @@ const NEXT_COPY: Record<string, string> = {
 export function NextStep() {
   const path = usePathname();
   const i = NAV.findIndex((n) => (n.href === "/" ? path === "/" : path.startsWith(n.href)));
-  if (i < 0) return null;
+  if (i < 0 || path === "/") return null; // the Overview already has the journey strip
   const next = NAV[(i + 1) % NAV.length];
   return (
     <Link

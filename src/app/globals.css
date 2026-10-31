@@ -255,6 +255,15 @@ html.motion .reveal:not(.in) .grow-bar {
   transform: scaleY(0);
 }
 
+/* Line that draws left-to-right when its .reveal parent enters view */
+.grow-line {
+  transform-origin: left;
+  transition: transform 1.4s var(--ease-out) 0.2s;
+}
+html.motion .reveal:not(.in) .grow-line {
+  transform: scaleX(0);
+}
+
 /* Typewriter caret for the rotating what-if band */
 @keyframes caret {
   50% {

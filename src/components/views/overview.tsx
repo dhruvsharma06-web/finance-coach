@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { ArrowRight, ArrowDown, Upload } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { api } from "@/lib/client";
 import { useApi } from "@/lib/use-api";
 import { getCategory } from "@/lib/categories";
@@ -10,13 +10,12 @@ import { formatINR, formatINRCompact, monthLabel } from "@/lib/format";
 import type { CategoryId, DashboardSummary } from "@/lib/types";
 import { AskBar } from "../ask-bar";
 import { CategoryIcon } from "../category";
-import { DailySpendChart } from "../charts";
 import { MoneyFlow, type FlowSegment } from "../money-flow";
 import { CountUp } from "../motion";
 import { NudgeList } from "../nudges";
 import { WhatIfBand } from "../what-if-band";
-import { Journey } from "../journey";
-import { Badge, Button, ErrorNote, Meter, Panel, Skeleton } from "../ui";
+import { JourneyStrip } from "../journey";
+import { Badge, ErrorNote, Meter, Panel, Skeleton } from "../ui";
 
 function greeting() {
   const h = new Date().getHours();
@@ -43,7 +42,7 @@ function storyLine(d: DashboardSummary): string {
   const fixed = d.byCategory.filter((c) => ["rent", "emi", "utilities", "insurance"].includes(c.category)).reduce((s, c) => s + c.amount, 0);
   const over = [...d.budgetPace].filter((p) => p.paceRatio > 1.15).sort((a, b) => b.spent - b.budget - (a.spent - a.budget));
   const parts = [`Rent and bills took ${formatINR(fixed)}.`];
-  if (over[0]) parts.push(`${getCategory(over[0].category).label.split(" ")[0]} ran ${formatINR(Math.max(0, over[0].spent - over[0].budget))} over plan${over.length > 1 ? `, and ${getCategory(over[1].category).label.toLowerCase()} is close behind` : ""}.`);
+  if (over[0]) parts.push(`${getCategory(over[0].category).label.split(" ")[0]} ran ${formatINR(Math.max(0, over[0].spent - over[0].budget))} over plan.`);
   else parts.push("Every budget is on pace.");
   return parts.join(" ");
 }
@@ -59,20 +58,19 @@ export function OverviewView() {
     return (
       <div className="space-y-8">
         <Skeleton className="h-6 w-64" />
-        <Skeleton className="h-40 w-3/4" />
-        <Skeleton className="h-[340px] w-full" />
+        <Skeleton className="h-28 w-3/4" />
+        <Skeleton className="h-[320px] w-full" />
       </div>
     );
   }
 
   const pct = Math.round(d.savingsRate * 100);
-  const pace = [...d.budgetPace].sort((a, b) => b.paceRatio - a.paceRatio);
-  const committed = d.upcomingRecurring.reduce((s, r) => s + r.lastAmount, 0);
+  const pace = [...d.budgetPace].sort((a, b) => b.paceRatio - a.paceRatio).slice(0, 4);
 
   return (
-    <div className="space-y-24 sm:space-y-32">
-      {/* ── Hero ── */}
-      <section className="scroll-lift flex min-h-[calc(100svh-9rem)] flex-col">
+    <div className="space-y-14">
+      {/* ── Hero + the living model, together in the first view ── */}
+      <section className="scroll-lift">
         <div className="stagger">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-[16.5px] text-muted">
@@ -92,69 +90,56 @@ export function OverviewView() {
               </div>
             )}
           </div>
-          <h1 className="mt-6 max-w-[14ch] font-display text-[52px] leading-[0.95] tracking-[-0.035em] text-ink text-balance sm:text-[88px] xl:text-[104px]">
+          <h1 className="mt-5 max-w-[18ch] font-display text-[46px] leading-[0.98] tracking-[-0.03em] text-ink text-balance sm:text-[68px] xl:text-[76px]">
             You spent <CountUp value={d.spending} format={formatINR} duration={1600} /> and kept{" "}
             <CountUp value={pct} format={(n) => `${Math.round(n)}%`} duration={1600} />.
           </h1>
-          <p className="mt-6 max-w-[52ch] text-[18px] leading-relaxed text-muted text-pretty sm:text-[20px]">{storyLine(d)}</p>
+          <p className="mt-4 max-w-[60ch] text-[18px] leading-relaxed text-muted text-pretty">{storyLine(d)}</p>
         </div>
-        <div className="mt-auto flex items-center gap-2 pt-10 text-[14.5px] text-subtle">
-          <ArrowDown size={14} className="animate-bounce" /> Scroll to see where it went
-        </div>
-      </section>
 
-      {/* ── The living model ── */}
-      <section className="reveal">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <h2 className="font-display text-[40px] leading-none tracking-[-0.02em] sm:text-[56px]">Where it went.</h2>
-            <p className="mt-3 max-w-[50ch] text-[17px] text-muted">
-              Every rupee that came in this month, followed to where it ended up. Built from {d.byCategory.reduce((s, c) => s + c.txnCount, 0)} real transactions.
-            </p>
+        <div className="reveal mt-8 rounded-[var(--radius)] bg-surface px-4 pt-6 pb-8 sm:px-8">
+          <div className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
+            <h2 className="text-[19px] font-semibold tracking-[-0.01em]">Where every rupee went</h2>
+            <Link href="/transactions" className="inline-flex items-center gap-1 text-[15px] text-muted hover:text-ink">
+              {d.byCategory.reduce((s, c) => s + c.txnCount, 0)} transactions <ArrowRight size={14} />
+            </Link>
           </div>
-          <Link href="/transactions" className="inline-flex items-center gap-1 text-[15.5px] font-medium text-ink underline-offset-4 hover:underline">
-            See every transaction <ArrowRight size={14} />
-          </Link>
+          <MoneyFlow income={Math.max(d.income, d.spending)} segments={segments} height={300} />
         </div>
-        <div className="rounded-[var(--radius)] bg-surface px-4 py-8 sm:px-8 sm:py-12">
-          <MoneyFlow income={Math.max(d.income, d.spending)} segments={segments} height={360} />
-        </div>
-        <AskBar className="reveal mt-6" />
+        <AskBar className="reveal mt-4" />
       </section>
 
-      <Journey />
+      <JourneyStrip />
 
-      {/* ── Attention + goals ── */}
-      <section>
-        <h2 className="reveal font-display text-[40px] leading-none tracking-[-0.02em] sm:text-[56px]">What needs you.</h2>
-        <div className="mt-10 grid gap-5 lg:grid-cols-[1.45fr_1fr]">
-          <Panel
-            title="Kosh noticed"
-            description="Watching your plan so you don't have to"
-            action={<Badge tone={d.nudges.length ? "warn" : "positive"}>{d.nudges.length} open</Badge>}
-          >
-            <NudgeList limit={4} nudges={d.nudges} onDismiss={(id) => setData({ ...d, nudges: d.nudges.filter((n) => n.id !== id) })} />
-          </Panel>
+      {/* ── One tight grid: what needs you, goals, pace ── */}
+      <section className="grid gap-5 lg:grid-cols-[1.35fr_1fr]">
+        <Panel
+          title="Kosh noticed"
+          action={<Badge tone={d.nudges.length ? "warn" : "positive"}>{d.nudges.length} open</Badge>}
+        >
+          <NudgeList limit={3} nudges={d.nudges} onDismiss={(id) => setData({ ...d, nudges: d.nudges.filter((n) => n.id !== id) })} />
+        </Panel>
+
+        <div className="space-y-5">
           <Panel
             title="Goals"
-            description="Progress so far"
             action={
               <Link href="/planner" className="inline-flex items-center gap-1 text-[14.5px] text-muted hover:text-ink">
                 Plan <ArrowRight size={13} />
               </Link>
             }
           >
-            <ul className="space-y-6">
+            <ul className="space-y-5">
               {d.goals.map((g) => {
                 const r = g.currentAmount / g.targetAmount;
                 return (
                   <li key={g.id}>
                     <div className="mb-2 flex items-baseline justify-between gap-3">
-                      <span className="text-[16.5px] text-ink">{g.name}</span>
+                      <span className="text-[16px] text-ink">{g.name}</span>
                       <span className="num font-display text-[26px] leading-none text-ink">{Math.round(r * 100)}%</span>
                     </div>
                     <Meter value={r} />
-                    <p className="num mt-2 text-[14px] text-muted">
+                    <p className="num mt-1.5 text-[14px] text-muted">
                       {formatINRCompact(g.currentAmount)} of {formatINRCompact(g.targetAmount)} · by{" "}
                       {new Date(g.targetDate).toLocaleDateString("en-IN", { month: "short", year: "numeric" })}
                     </p>
@@ -163,19 +148,12 @@ export function OverviewView() {
               })}
             </ul>
           </Panel>
-        </div>
-      </section>
 
-      {/* ── Pace + rhythm ── */}
-      <section>
-        <h2 className="reveal font-display text-[40px] leading-none tracking-[-0.02em] sm:text-[56px]">How the month is pacing.</h2>
-        <div className="mt-10 grid gap-5 lg:grid-cols-[1.45fr_1fr]">
           <Panel
             title="Budget pace"
-            description="The tick shows where you should be by now"
             action={
               <Link href="/goals" className="text-[14.5px] text-muted hover:text-ink">
-                Edit budgets
+                All budgets
               </Link>
             }
           >
@@ -186,12 +164,13 @@ export function OverviewView() {
                 return (
                   <li key={p.category}>
                     <div className="mb-1.5 flex items-center justify-between gap-3 text-[15px]">
-                      <Link href={`/transactions?category=${p.category}`} className="flex items-center gap-2 text-ink underline-offset-4 hover:underline">
-                        {getCategory(p.category).label}
-                        {over && <Badge tone={p.paceRatio > 1.4 ? "danger" : "warn"}>{Math.round((p.paceRatio - 1) * 100)}% over pace</Badge>}
-                      </Link>
+                      <span className="flex items-center gap-2 text-ink">
+                        <CategoryIcon id={p.category} size={12} />
+                        {getCategory(p.category).label.split(" ")[0]}
+                        {over && <Badge tone={p.paceRatio > 1.4 ? "danger" : "warn"}>{Math.round((p.paceRatio - 1) * 100)}% over</Badge>}
+                      </span>
                       <span className="num text-muted">
-                        <span className="text-ink">{formatINR(p.spent)}</span> / {formatINRCompact(p.budget)}
+                        <span className="text-ink">{formatINRCompact(p.spent)}</span> / {formatINRCompact(p.budget)}
                       </span>
                     </div>
                     <Meter
@@ -204,61 +183,10 @@ export function OverviewView() {
               })}
             </ul>
           </Panel>
-
-          <div className="space-y-5">
-            <Panel
-              title="Day-to-day spending"
-              description={`${formatINRCompact(d.dailySpend.reduce((s, x) => s + x.amount, 0) / d.dailySpend.length)} a day, excluding rent and bills`}
-            >
-              <DailySpendChart data={d.dailySpend} />
-            </Panel>
-
-            <Panel
-              title="Coming up"
-              description={`${formatINR(committed)} in recurring payments`}
-              action={
-                <Link href="/subscriptions" className="inline-flex items-center gap-1 text-[14.5px] text-muted hover:text-ink">
-                  All <ArrowRight size={13} />
-                </Link>
-              }
-              bleed
-            >
-              <ul className="divide-y divide-line pb-2">
-                {d.upcomingRecurring.map((r) => (
-                  <li key={r.id} className="flex items-center gap-3 px-6 py-2.5">
-                    <CategoryIcon id={r.category} size={14} />
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-[15.5px] text-ink">{r.merchant}</p>
-                      <p className="text-[13.5px] text-muted">
-                        {new Date(r.nextExpectedDate).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}
-                      </p>
-                    </div>
-                    {r.status === "price_changed" && <Badge tone="warn">Price up</Badge>}
-                    {r.status === "possibly_unused" && <Badge tone="info">Still using?</Badge>}
-                    <span className="num text-[15.5px] text-ink">{formatINR(r.lastAmount)}</span>
-                  </li>
-                ))}
-              </ul>
-            </Panel>
-          </div>
         </div>
       </section>
 
-      {/* ── Close ── */}
-      <div className="space-y-5">
-        <WhatIfBand />
-        <div className="reveal flex flex-wrap items-center justify-between gap-4 rounded-[var(--radius)] bg-surface px-6 py-6 sm:px-8">
-          <div>
-            <p className="text-[17px] font-medium text-ink">Got a new statement?</p>
-            <p className="text-[15px] text-muted">Drop a PDF, a CSV from any bank, or a pile of SMS. Kosh sorts it in seconds.</p>
-          </div>
-          <Link href="/import">
-            <Button variant="primary">
-              <Upload size={15} /> Import
-            </Button>
-          </Link>
-        </div>
-      </div>
+      <WhatIfBand compact />
     </div>
   );
 }
