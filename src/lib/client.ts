@@ -65,6 +65,7 @@ export const api = {
   nudges: () => req<Nudge[]>("/api/nudges"),
   dismissNudge: (id: string) => req<{ ok: true }>(`/api/nudges/${id}`, { method: "PATCH", body: JSON.stringify({ dismissed: true }) }),
   report: (month?: string) => req<MonthlyReport>(`/api/report${qs({ month })}`),
+  reportMonths: () => req<string[]>("/api/report/months"),
   coach: (messages: CoachMessage[]) => req<CoachMessage>("/api/coach", { method: "POST", body: JSON.stringify({ messages }) }),
   reset: () => req<{ ok: true }>("/api/reset", { method: "POST" }),
 };

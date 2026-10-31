@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { ArrowRight, CalendarCheck, CalendarX, Mic, Sparkles, X } from "lucide-react";
 import { api } from "@/lib/client";
 import { getCategory } from "@/lib/categories";
-import { formatINR, formatINRCompact } from "@/lib/format";
+import { addMonths, formatINR, formatINRCompact, monthLabel } from "@/lib/format";
 import type { CategoryId, GoalOutcome, ScenarioChange, SimulationResult } from "@/lib/types";
 import { ProjectionChart } from "../charts";
 import { CountUp } from "../motion";
@@ -21,9 +21,10 @@ const SUGGESTIONS = [
 
 const TUNABLE: CategoryId[] = ["dining", "shopping", "groceries", "transport", "entertainment"];
 
-function describe(c: ScenarioChange): string {
+function describe(c: ScenarioChange, start?: string): string {
   const cat = c.category ? getCategory(c.category).label : c.label ?? "";
-  const when = c.startMonth ? ` from month ${c.startMonth + 1}` : "";
+  const at = c.startMonth && start ? monthLabel(addMonths(start, c.startMonth)).replace(/ d{4}$/, "") : null;
+  const when = c.startMonth ? (c.kind === "one_time" ? ` in ${at ?? `month ${c.startMonth + 1}`}` : ` from ${at ?? `month ${c.startMonth + 1}`}`) : "";
   switch (c.kind) {
     case "category_pct":
       return `${cat} ${c.value > 0 ? "+" : ""}${c.value}%${when}`;
@@ -201,7 +202,7 @@ export function PlannerView() {
           <span className="text-[13px] text-muted">Kosh understood:</span>
           {changes.map((c, i) => (
             <span key={i} className="rise inline-flex items-center gap-1.5 rounded-full bg-accent-soft py-1 pr-1.5 pl-3 text-[13px] text-accent">
-              {describe(c)}
+              {describe(c, result?.projected[0]?.month)}
               <button aria-label="Remove change" onClick={() => update(changes.filter((_, j) => j !== i))} className="rounded-full p-0.5 hover:bg-accent/15">
                 <X size={12} />
               </button>
@@ -239,7 +240,7 @@ export function PlannerView() {
                   <span className="h-0 w-4 border-t border-dashed border-subtle" /> Today&rsquo;s plan
                 </span>
               </div>
-              {result.summary && changes.length > 0 && (
+              {result.summary && (
                 <p className="mt-5 border-t border-line pt-4 text-[15px] leading-relaxed text-ink text-pretty">{result.summary}</p>
               )}
               {result.assumptions.length > 0 && (

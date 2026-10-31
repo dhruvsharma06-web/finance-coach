@@ -1,3 +1,5 @@
+> **Status: done.** Claude built Lane C on 31 Oct (see docs/STATUS.md). Do not start this lane. Kept for reference.
+
 # Lane C — Brain: What-if engine, Nudges, Monthly Review, Coach + Guardrails (Codex #2, friend's)
 
 > Paste everything below the line into Codex. Model: strongest Codex model, **high** reasoning.

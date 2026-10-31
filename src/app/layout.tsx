@@ -9,7 +9,12 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 const serif = Instrument_Serif({ variable: "--font-serif", subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
-  title: "Kosh — your living money model",
+  title: { default: "Kosh — your living money model", template: "%s · Kosh" },
+  openGraph: {
+    title: "Kosh — your living money model",
+    description: "An AI money coach for India that reads messy statements, learns your categories, and shows what a decision does to your goals.",
+    type: "website",
+  },
   description: "An AI personal finance coach that learns your money, models your what-ifs, and nudges you back on plan.",
 };
 

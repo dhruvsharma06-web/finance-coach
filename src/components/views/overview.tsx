@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { ArrowRight, Upload } from "lucide-react";
 import { api } from "@/lib/client";
 import { useApi } from "@/lib/use-api";
@@ -62,10 +63,12 @@ function Allocation({ d }: { d: DashboardSummary }) {
 }
 
 export function OverviewView() {
-  const { data: d, error, loading, reload, setData } = useApi(() => api.dashboard());
+  const [month, setMonth] = useState<string | undefined>();
+  const { data: months } = useApi(() => api.reportMonths());
+  const { data: d, error, reload, setData } = useApi(() => api.dashboard(month), [month]);
 
   if (error) return <ErrorNote error={error} retry={reload} />;
-  if (loading || !d) {
+  if (!d) {
     return (
       <div className="space-y-6">
         <Skeleton className="h-28 w-2/3" />
@@ -85,9 +88,24 @@ export function OverviewView() {
   return (
     <div className="space-y-8">
       <section className="stagger">
-        <p className="text-[15px] text-muted">
-          {greeting()}, Aarav. Here&rsquo;s {monthLabel(d.month)}.
-        </p>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-[15px] text-muted">
+            {greeting()}, Aarav. Here&rsquo;s {monthLabel(d.month)}.
+          </p>
+          {months && months.length > 1 && (
+            <div className="flex gap-1 rounded-full bg-surface p-1">
+              {months.slice(0, 4).map((m) => (
+                <button
+                  key={m}
+                  onClick={() => setMonth(m)}
+                  className={`rounded-full px-3 py-1 text-[13px] transition-colors ${m === d.month ? "bg-ink text-bg" : "text-muted hover:text-ink"}`}
+                >
+                  {monthLabel(m).slice(0, 3)}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
         <h1 className="mt-4 max-w-[19ch] font-display text-[46px] leading-[0.98] tracking-[-0.03em] text-ink text-balance sm:text-[72px]">
           You spent <CountUp value={d.spending} format={formatINR} /> and kept <CountUp value={pct} format={(n) => `${Math.round(n)}%`} />.
         </h1>
@@ -105,7 +123,7 @@ export function OverviewView() {
             description="Kosh watches your plan so you don't have to"
             action={<Badge tone={d.nudges.length ? "warn" : "positive"}>{d.nudges.length} open</Badge>}
           >
-            <NudgeList nudges={d.nudges} onDismiss={(id) => setData({ ...d, nudges: d.nudges.filter((n) => n.id !== id) })} />
+            <NudgeList limit={4} nudges={d.nudges} onDismiss={(id) => setData({ ...d, nudges: d.nudges.filter((n) => n.id !== id) })} />
           </Panel>
 
           <Panel

@@ -123,7 +123,9 @@ export function GoalsView() {
   const { data, error, loading, reload } = useApi(() => api.profile());
   const [p, setP] = useState<FinancialProfile | null>(null);
   const [saving, setSaving] = useState(false);
-  useEffect(() => setP(data), [data]);
+  useEffect(() => {
+    setP(data);
+  }, [data]);
 
   if (error) return <ErrorNote error={error} retry={reload} />;
   if (loading || !p) {

@@ -30,5 +30,6 @@ Each lane appends 2–3 lines after every push: what works, any API shape change
 - Added POST /api/import/preview (read-only { parsed, wouldAdd, duplicates, needsReview, transactions, warnings, source, fileName? }) and GET /api/transactions?needsReview=true. Existing successful shapes unchanged; malformed inputs now return 400/404/413/415.
 - Parser/learning/engine/hardening/AI-fixture and HTTP tests pass, including 18 invalid requests without writes. scripts/README.md documents validation and Lane A/C handoffs; preview UI and live Lane C brain remain owned by those lanes.
 
-## Lane C (Codex #2): Brain
-- (not started)
+## Lane C (Claude, taken over): Brain
+- 31 Oct, evening: built by Claude since Lane C had not started. Deterministic engine (`simulate/baseline.ts`, `simulate/index.ts`) with deadline-then-priority goal funding over 36 months; regex-first NL parser with AI fallback (`simulate/parse.ts`, `simulate/nl.ts`); AI summary wrapper (`simulate/summary.ts`); nudges for drift, price change, unused/new subscriptions, goals at risk, low buffer and positives with month dedupe; monthly review with cached AI narrative and template fallback; coach with guardrail pre/post checks, what-if tool use and grounded template answers; `POST /api/profile/life-event`; `GET /api/report/months`. Tests: `npx tsx tests/brain.test.ts` (25 guardrail cases + 7 engine invariants, all pass).
+- Lane A additions: Ctrl+K command palette, Overview month switcher, ranked nudges with show-more, How it works page, app icon + Open Graph metadata. Fixed a crash where an effect returned scrollIntoView's Promise.

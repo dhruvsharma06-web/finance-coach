@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { AlertTriangle, ArrowRight, BellRing, Sparkles, TrendingUp, X } from "lucide-react";
 import type { Nudge } from "@/lib/types";
 import { api } from "@/lib/client";
@@ -12,13 +13,19 @@ const STYLE: Record<Nudge["severity"], { icon: typeof BellRing; color: string; b
   positive: { icon: Sparkles, color: "var(--positive)", bg: "var(--positive-soft)" },
 };
 
-export function NudgeList({ nudges, onDismiss }: { nudges: Nudge[]; onDismiss: (id: string) => void }) {
+const RANK = { critical: 0, warning: 1, info: 2, positive: 3 } as const;
+
+export function NudgeList({ nudges, onDismiss, limit }: { nudges: Nudge[]; onDismiss: (id: string) => void; limit?: number }) {
+  const [all, setAll] = useState(false);
   if (!nudges.length) {
     return <p className="py-6 text-center text-sm text-muted">You&rsquo;re on plan. Nothing needs your attention.</p>;
   }
+  const sorted = [...nudges].sort((a, b) => RANK[a.severity] - RANK[b.severity]);
+  const shown = limit && !all ? sorted.slice(0, limit) : sorted;
   return (
+    <>
     <ul className="divide-y divide-line">
-      {nudges.map((n, i) => {
+      {shown.map((n, i) => {
         const s = STYLE[n.severity];
         const Icon = s.icon;
         return (
@@ -55,5 +62,11 @@ export function NudgeList({ nudges, onDismiss }: { nudges: Nudge[]; onDismiss: (
         );
       })}
     </ul>
+    {limit && sorted.length > limit && (
+      <button onClick={() => setAll((v) => !v)} className="mt-4 text-[13px] font-medium text-muted underline-offset-4 hover:text-ink hover:underline">
+        {all ? "Show fewer" : `Show ${sorted.length - limit} more`}
+      </button>
+    )}
+    </>
   );
 }

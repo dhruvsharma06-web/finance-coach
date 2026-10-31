@@ -5,14 +5,12 @@ import { Printer, ThumbsUp, Eye } from "lucide-react";
 import { api } from "@/lib/client";
 import { useApi } from "@/lib/use-api";
 import { getCategory } from "@/lib/categories";
-import { addMonths, formatINR, formatPct, monthLabel } from "@/lib/format";
+import { formatINR, formatPct, monthLabel } from "@/lib/format";
 import type { MonthlyReport } from "@/lib/types";
 import { CategoryDot } from "../category";
 import { CountUp } from "../motion";
 import { Button, ErrorNote, Meter, Skeleton, cn } from "../ui";
 
-const LATEST = "2026-10";
-const MONTHS = [LATEST, addMonths(LATEST, -1), addMonths(LATEST, -2)];
 
 function Body({ r }: { r: MonthlyReport }) {
   const maxCat = Math.max(...r.byCategory.map((c) => Math.max(c.amount, c.budget ?? 0)), 1);
@@ -139,8 +137,11 @@ function Body({ r }: { r: MonthlyReport }) {
 }
 
 export function ReportView() {
-  const [month, setMonth] = useState(LATEST);
-  const { data, error, loading, reload } = useApi(() => api.report(month), [month]);
+  const { data: months } = useApi(() => api.reportMonths());
+  const [picked, setMonth] = useState<string | null>(null);
+  const month = picked ?? months?.[0] ?? null;
+  const { data, error, loading, reload } = useApi(() => (month ? api.report(month) : Promise.resolve(null)), [month]);
+  const MONTHS = (months ?? []).slice(0, 4);
 
   return (
     <div className="mx-auto max-w-[920px]">

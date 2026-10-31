@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Moon, RotateCcw, Sun } from "lucide-react";
 import { api } from "@/lib/client";
 import { Intro } from "../motion";
+import { CommandPalette } from "./command-palette";
 import { cn } from "../ui";
 
 /** Order matters: it is the "straight flow" of the product, and drives transition direction. */
@@ -19,6 +20,7 @@ export const NAV = [
   { href: "/planner", label: "What if" },
   { href: "/coach", label: "Coach" },
   { href: "/report", label: "Monthly review" },
+  { href: "/how-it-works", label: "How it works" },
 ] as const;
 
 const indexOf = (path: string) => {
@@ -105,6 +107,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Intro />
+      <CommandPalette />
       <div className="flex min-h-screen">
         <aside className="sticky top-0 hidden h-screen w-[232px] shrink-0 flex-col bg-surface-2/60 px-3 pt-8 pb-5 lg:flex">
           <Wordmark />
@@ -134,6 +137,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </nav>
 
           <div className="mt-auto space-y-4 px-1">
+            <button
+              onClick={() => window.dispatchEvent(new Event("kosh:palette"))}
+              className="flex w-full items-center justify-between rounded-full bg-surface px-4 py-2.5 text-[13.5px] text-muted transition-colors hover:text-ink"
+            >
+              Search or ask
+              <kbd className="rounded bg-surface-2 px-1.5 text-[11px]">Ctrl K</kbd>
+            </button>
             <p className="px-3 text-[13px] leading-relaxed text-muted">
               Every box takes voice. Hold your Wispr Flow key and say what you mean.
             </p>
