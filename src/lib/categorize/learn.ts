@@ -1,14 +1,46 @@
-import type { CategoryId, CorrectionResult } from "../types";
-import { newId, nowIso, updateDb } from "../db";
+import type {
+  CategoryId,
+  CategoryRule,
+  CorrectionResult,
+  Transaction,
+} from "../types";
+import { newId, nowIso, readDb, updateDb } from "../db";
 import { normalizeMerchant } from "../format";
+import { knownMerchant } from "../ingest/merchant";
 import { matchRule } from "./index";
-
-/**
- * LANE B (Codex). The correction loop:
- * user fixes a category → we learn a rule → re-apply to similar past transactions.
- * Stub: merchant_exact rule. Improve generalization (strip UPI handles / ref numbers,
- * use "contains" for chains like "swiggy instamart"), dedupe/override conflicting rules.
- */
+function proposedRule(txn: Transaction, category: CategoryId): CategoryRule {
+  const merchant = normalizeMerchant(txn.merchant),
+    known = knownMerchant(txn.merchant);
+  const token = known?.aliases.find(
+    (a) => a.length >= 4 && merchant.includes(a),
+  );
+  return {
+    id: newId(),
+    pattern: token ?? merchant,
+    matchType: token ? "contains" : "merchant_exact",
+    category,
+    direction: txn.direction,
+    createdFrom: "correction",
+    exampleTransactionId: txn.id,
+    createdAt: nowIso(),
+    hits: 0,
+  };
+}
+export async function similarPreview(
+  transactionId: string,
+): Promise<{ similarIds: string[]; count: number }> {
+  const db = await readDb(),
+    txn = db.transactions.find((t) => t.id === transactionId);
+  if (!txn) throw new Error("Transaction not found");
+  const rule = proposedRule(txn, txn.category);
+  const similarIds = db.transactions
+    .filter(
+      (t) =>
+        t.id !== txn.id && t.categorySource !== "user" && matchRule(t, [rule]),
+    )
+    .map((t) => t.id);
+  return { similarIds, count: similarIds.length };
+}
 export async function applyCorrection(
   transactionId: string,
   category: CategoryId,
@@ -21,40 +53,47 @@ export async function applyCorrection(
     txn.category = category;
     txn.categorySource = "user";
     txn.confidence = 1;
-
-    if (!createRule) return { transaction: txn, rule: null, similarIds: [], appliedCount: 0 };
-
-    const pattern = normalizeMerchant(txn.merchant);
-    let rule = db.rules.find((r) => r.matchType === "merchant_exact" && r.pattern === pattern);
-    if (rule) rule.category = category;
-    else {
-      rule = {
-        id: newId(),
-        pattern,
-        matchType: "merchant_exact",
+    delete txn.ruleId;
+    if (!createRule)
+      return { transaction: txn, rule: null, similarIds: [], appliedCount: 0 };
+    const candidate = proposedRule(txn, category);
+    let rule = db.rules.find(
+      (r) =>
+        r.pattern === candidate.pattern &&
+        r.matchType === candidate.matchType &&
+        r.direction === candidate.direction,
+    );
+    if (rule)
+      Object.assign(rule, {
         category,
-        createdFrom: "correction",
+        createdAt: candidate.createdAt,
         exampleTransactionId: txn.id,
-        createdAt: nowIso(),
-        hits: 0,
-      };
+      });
+    else {
+      rule = candidate;
       db.rules.push(rule);
     }
     txn.ruleId = rule.id;
-    const r = rule;
-
-    const similar = db.transactions.filter((t) => t.id !== txn.id && t.categorySource !== "user" && matchRule(t, [r]));
+    const similar = db.transactions.filter(
+      (t) =>
+        t.id !== txn.id && t.categorySource !== "user" && matchRule(t, [rule!]),
+    );
     let appliedCount = 0;
-    if (applyToSimilar) {
+    if (applyToSimilar)
       for (const t of similar) {
         if (t.category !== category) appliedCount++;
-        t.category = category;
-        t.categorySource = "user_rule";
-        t.confidence = 1;
-        t.ruleId = r.id;
+        Object.assign(t, {
+          category,
+          categorySource: "user_rule",
+          confidence: 1,
+          ruleId: rule.id,
+        });
       }
-      r.hits += similar.length;
-    }
-    return { transaction: txn, rule: r, similarIds: similar.map((t) => t.id), appliedCount };
+    return {
+      transaction: txn,
+      rule,
+      similarIds: similar.map((t) => t.id),
+      appliedCount,
+    };
   });
 }

@@ -11,7 +11,11 @@ Each lane appends 2–3 lines after every push: what works, any API shape change
 - CSV increment pushed. API shapes unchanged. The default npm run build is now green after the UI rebase; the earlier Windows worker failure cleared.
 - Categorization increment: user rules precede 60+ built-in aliases, batched AI (60 per call), then low-confidence Other. Ingest validates rows, persists rule hits, and deduplicates inside each batch and concurrent imports.
 
+- Categorization increment pushed. Correction increment: branded contains rules, exact person rules, direction scoping, conflict updates, and manual-category protection. EatClub test: preview 5 / appliedCount 5 / next import dining via user_rule.
+- Added GET /api/transactions/:id/similar?category=x returning { similarIds, count }; PATCH /api/rules/:id accepts { category } and returns the updated rule. Existing correction response unchanged.
+
 ## Lane C (Codex #2): Brain
 - (not started)
+
 
 
