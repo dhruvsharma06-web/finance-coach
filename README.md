@@ -1,5 +1,7 @@
 # Kosh: your living money model
 
+**Live demo:** [Open Kosh](https://finance-coach-six.vercel.app)
+
 An AI personal-finance coach for India that **reads your messy statements, learns how you categorize, notices what changed, and models your what-ifs**, without ever recommending specific securities.
 
 Built for the Product Space × Wispr Flow hackathon (problem 04), **entirely by voice** with Wispr Flow driving Claude Code and Codex.
@@ -51,3 +53,4 @@ See [security model and prototype limitations](docs/SECURITY.md). Storage suppor
 
 ## Verify
 `npm run build`, `npx tsc --noEmit`, `npx eslint src`, `npx tsx tests/brain.test.ts`, `npx tsx tests/round2.test.ts`, `npx tsx tests/assistant.test.ts`, `npx tsx scripts/test-security.ts`.
+
