@@ -1,7 +1,7 @@
 import type { CategoryId, Database, Nudge } from "../types";
 import { updateDb } from "../db";
 import { getCategory, isSpendCategory } from "../categories";
-import { addMonths, formatINR } from "../format";
+import { addMonths, formatINR, normalizeMerchant } from "../format";
 import { simulate } from "../simulate";
 import { buildBaseline, latestDataMonth } from "../simulate/baseline";
 
@@ -17,40 +17,124 @@ function monthProgress(db: Database, month: string): number {
   const [y, m] = month.split("-").map(Number);
   const days = new Date(y, m, 0).getDate();
   const today = new Date();
-  if (today.toISOString().slice(0, 7) === month) return Math.max(0.1, today.getDate() / days);
-  const lastDay = Math.max(...db.transactions.filter((t) => t.date.startsWith(month)).map((t) => Number(t.date.slice(8))), 1);
+  if (today.toISOString().slice(0, 7) === month)
+    return Math.max(0.1, today.getDate() / days);
+  const lastDay = Math.max(
+    ...db.transactions
+      .filter((t) => t.date.startsWith(month))
+      .map((t) => Number(t.date.slice(8))),
+    1,
+  );
   return Math.max(0.1, Math.min(1, lastDay / days));
 }
 
-export function computeNudges(db: Database): Omit<Nudge, "id" | "createdAt" | "dismissed">[] {
+export function computeNudges(
+  db: Database,
+): Omit<Nudge, "id" | "createdAt" | "dismissed">[] {
   const month = latestDataMonth(db.transactions);
   const prev = addMonths(month, -1);
   const progress = monthProgress(db, month);
   const out: Omit<Nudge, "id" | "createdAt" | "dismissed">[] = [];
 
   const spend = (m: string) => {
-    const map = new Map<CategoryId, { total: number; merchants: Map<string, number> }>();
+    const map = new Map<
+      CategoryId,
+      { total: number; merchants: Map<string, number> }
+    >();
     for (const t of db.transactions) {
-      if (!t.date.startsWith(m) || t.direction !== "debit" || !isSpendCategory(t.category)) continue;
+      if (
+        !t.date.startsWith(m) ||
+        t.direction !== "debit" ||
+        !isSpendCategory(t.category)
+      )
+        continue;
       const e = map.get(t.category) ?? { total: 0, merchants: new Map() };
       e.total += t.amount;
-      e.merchants.set(t.merchant, (e.merchants.get(t.merchant) ?? 0) + t.amount);
+      e.merchants.set(
+        t.merchant,
+        (e.merchants.get(t.merchant) ?? 0) + t.amount,
+      );
       map.set(t.category, e);
     }
     return map;
   };
   const cur = spend(month);
   const before = spend(prev);
+  const median = (values: number[]) => {
+    const a = [...values].sort((x, y) => x - y);
+    const i = Math.floor(a.length / 2);
+    return a.length % 2 ? a[i] : (a[i - 1] + a[i]) / 2;
+  };
+  const history = db.transactions.filter(
+    (t) => t.direction === "debit" && t.date.slice(0, 7) < month,
+  );
+  const earlierUnusual = db.nudges.filter(
+    (n) =>
+      n.type === "unusual" && (n.month ?? n.createdAt.slice(0, 7)) === month,
+  );
+  const already = new Set(earlierUnusual.map((n) => n.relatedTransactionId));
+  const anomalies = db.transactions
+    .filter(
+      (t) =>
+        t.direction === "debit" &&
+        t.date.startsWith(month) &&
+        isSpendCategory(t.category) &&
+        !already.has(t.id),
+    )
+    .map((t) => {
+      const merchants = history
+        .filter(
+          (p) =>
+            normalizeMerchant(p.merchant) === normalizeMerchant(t.merchant),
+        )
+        .map((p) => p.amount);
+      const categories = history
+        .filter((p) => p.category === t.category)
+        .map((p) => p.amount);
+      const merchantMedian = merchants.length >= 2 ? median(merchants) : 0,
+        categoryMedian = categories.length ? median(categories) : 0;
+      const merchantRatio = merchantMedian > 0 ? t.amount / merchantMedian : 0,
+        categoryRatio = categoryMedian > 0 ? t.amount / categoryMedian : 0;
+      return {
+        t,
+        ratio:
+          merchantRatio >= 2.5
+            ? merchantRatio
+            : t.amount > 2000 && categoryRatio >= 3
+              ? categoryRatio
+              : 0,
+        merchant: merchantRatio >= 2.5,
+      };
+    })
+    .filter((x) => x.ratio > 0)
+    .sort((a, b) => b.ratio - a.ratio || a.t.id.localeCompare(b.t.id))
+    .slice(0, Math.max(0, 2 - earlierUnusual.length));
+  for (const { t, ratio, merchant } of anomalies)
+    out.push({
+      type: "unusual",
+      severity: "warning",
+      relatedTransactionId: t.id,
+      month,
+      title: `Unusual: ${formatINR(t.amount)} at ${t.merchant}`,
+      body: `That's about ${Math.round(ratio)}× what you usually spend ${merchant ? "there" : "on a single " + getCategory(t.category).label.toLowerCase() + " transaction"}.`,
+      action: { label: "Review", href: "/transactions" },
+    });
 
   // Drift off plan
-  for (const [cat, budget] of Object.entries(db.profile.categoryBudgets) as [CategoryId, number][]) {
+  for (const [cat, budget] of Object.entries(db.profile.categoryBudgets) as [
+    CategoryId,
+    number,
+  ][]) {
     if (!budget) continue;
     const e = cur.get(cat);
     const spent = e?.total ?? 0;
     const pace = spent / (budget * progress);
     const label = getCategory(cat).label;
     if (pace > 1.15 && e) {
-      const top = [...e.merchants.entries()].sort((a, b) => b[1] - a[1]).slice(0, 2).map(([n]) => n);
+      const top = [...e.merchants.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 2)
+        .map(([n]) => n);
       const over = Math.round(spent - budget * progress);
       out.push({
         type: "overspend_pace",
@@ -58,7 +142,10 @@ export function computeNudges(db: Database): Omit<Nudge, "id" | "createdAt" | "d
         title: `${label.split(" ")[0]} is running hot`,
         body: `You're ${formatINR(over)} ahead of your ${formatINR(budget)} ${label.toLowerCase()} plan${progress < 1 ? " for this point in the month" : ""}. Most of it went to ${top.join(" and ")}.`,
         relatedCategory: cat,
-        action: { label: "Try a what-if", href: `/planner?q=${encodeURIComponent(`What if I cut ${label.split(" ")[0].toLowerCase()} by 30%?`)}` },
+        action: {
+          label: "Try a what-if",
+          href: `/planner?q=${encodeURIComponent(`What if I cut ${label.split(" ")[0].toLowerCase()} by 30%?`)}`,
+        },
       });
     } else if (progress >= 0.7 && spent <= budget * 0.8 && spent > 0) {
       out.push({
@@ -109,9 +196,15 @@ export function computeNudges(db: Database): Omit<Nudge, "id" | "createdAt" | "d
   }
 
   // Goals + buffer
-  const sim = simulate(db.profile, db.transactions, { name: "Today's plan", changes: [] });
+  const sim = simulate(db.profile, db.transactions, {
+    name: "Today's plan",
+    changes: [],
+  });
   for (const g of sim.goals.filter((x) => !x.onTrackBaseline).slice(0, 2)) {
-    const by = new Date(g.targetDate).toLocaleDateString("en-IN", { month: "short", year: "numeric" });
+    const by = new Date(g.targetDate).toLocaleDateString("en-IN", {
+      month: "short",
+      year: "numeric",
+    });
     out.push({
       type: "goal_at_risk",
       severity: "warning",
@@ -120,7 +213,10 @@ export function computeNudges(db: Database): Omit<Nudge, "id" | "createdAt" | "d
         ? `At today's pace you'd get there by ${new Date(g.baselineReachDate).toLocaleDateString("en-IN", { month: "short", year: "numeric" })}, after your ${by} target.`
         : `At today's pace you won't reach it within three years. Your target is ${by}.`,
       relatedGoalId: g.goalId,
-      action: { label: "Find the money", href: `/planner?q=${encodeURIComponent("What if I cut dining out by 30% and shopping by 20%?")}` },
+      action: {
+        label: "Find the money",
+        href: `/planner?q=${encodeURIComponent("What if I cut dining out by 30% and shopping by 20%?")}`,
+      },
     });
   }
   const b = buildBaseline(db.profile, db.transactions);
@@ -135,8 +231,12 @@ export function computeNudges(db: Database): Omit<Nudge, "id" | "createdAt" | "d
   }
 
   // Savings rate trend
-  const inc = (m: string) => db.transactions.filter((t) => t.date.startsWith(m) && t.direction === "credit").reduce((s, t) => s + t.amount, 0);
-  const tot = (m: Map<CategoryId, { total: number }>) => [...m.values()].reduce((s, e) => s + e.total, 0);
+  const inc = (m: string) =>
+    db.transactions
+      .filter((t) => t.date.startsWith(m) && t.direction === "credit")
+      .reduce((s, t) => s + t.amount, 0);
+  const tot = (m: Map<CategoryId, { total: number }>) =>
+    [...m.values()].reduce((s, e) => s + e.total, 0);
   const rateNow = inc(month) ? (inc(month) - tot(cur)) / inc(month) : 0;
   const ratePrev = inc(prev) ? (inc(prev) - tot(before)) / inc(prev) : 0;
   if (inc(prev) && rateNow > ratePrev + 0.03) {
@@ -150,21 +250,45 @@ export function computeNudges(db: Database): Omit<Nudge, "id" | "createdAt" | "d
   return out;
 }
 
-const keyOf = (n: Pick<Nudge, "type" | "relatedCategory" | "relatedRecurringId" | "relatedGoalId">, month: string) =>
-  [n.type, n.relatedCategory ?? n.relatedRecurringId ?? n.relatedGoalId ?? "", month].join(":");
+const keyOf = (
+  n: Pick<
+    Nudge,
+    | "type"
+    | "relatedCategory"
+    | "relatedRecurringId"
+    | "relatedGoalId"
+    | "relatedTransactionId"
+  >,
+  month: string,
+) =>
+  [
+    n.type,
+    n.relatedTransactionId ??
+      n.relatedCategory ??
+      n.relatedRecurringId ??
+      n.relatedGoalId ??
+      "",
+    month,
+  ].join(":");
 
 export async function generateNudges(): Promise<Nudge[]> {
   return updateDb((db) => {
     const month = latestDataMonth(db.transactions);
-    const existing = new Set(db.nudges.map((n) => keyOf(n, n.createdAt.slice(0, 7) <= month ? month : n.createdAt.slice(0, 7))));
-    // seed / earlier nudges for this month count as existing regardless of createdAt day
-    for (const n of db.nudges) existing.add(keyOf(n, month));
+    const existing = new Set(
+      db.nudges.map((n) => keyOf(n, n.month ?? n.createdAt.slice(0, 7))),
+    );
     const fresh: Nudge[] = [];
     for (const n of computeNudges(db)) {
       const k = keyOf(n, month);
       if (existing.has(k)) continue;
       existing.add(k);
-      fresh.push({ ...n, id: k, createdAt: new Date().toISOString(), dismissed: false });
+      fresh.push({
+        ...n,
+        month,
+        id: k,
+        createdAt: new Date().toISOString(),
+        dismissed: false,
+      });
     }
     db.nudges.push(...fresh);
     return fresh;
