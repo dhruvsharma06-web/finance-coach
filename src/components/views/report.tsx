@@ -158,6 +158,11 @@ export function ReportView() {
             </button>
           ))}
         </div>
+        {month && (
+          <a href={`/wrapped?month=${month}`} className="inline-flex h-8 items-center gap-1.5 rounded-full bg-fill px-3 text-[14.5px] font-medium text-fill-ink">
+            Play as Wrapped
+          </a>
+        )}
         <Button size="sm" onClick={() => window.print()}>
           <Printer size={14} /> Print / save PDF
         </Button>

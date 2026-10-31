@@ -109,6 +109,12 @@ export function OverviewView() {
         </h1>
         <p className="rise mt-6 max-w-[56ch] text-[19px] leading-relaxed text-muted text-pretty [animation-delay:700ms] sm:text-[20px]">{storyLine(d)}</p>
         <AskBar className="rise mt-8 [animation-delay:850ms]" />
+        <Link
+          href={`/wrapped?month=${d.month}`}
+          className="rise mt-4 inline-flex items-center gap-2 rounded-full bg-fill px-5 py-2.5 text-[16px] font-medium text-fill-ink transition-transform [animation-delay:950ms] hover:scale-[1.02]"
+        >
+          Your {monthLabel(d.month).split(" ")[0]}, wrapped <ArrowRight size={15} />
+        </Link>
       </section>
 
       {/* ── The living model ── */}

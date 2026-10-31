@@ -338,5 +338,142 @@ export interface Database {
   profile: FinancialProfile;
   nudges: Nudge[];
   reports: MonthlyReport[];
+  /** Round 4 — optional so older db.json files keep loading; libs fall back to seed defaults */
+  family?: Family;
+  splits?: SplitsState;
+  festivalPots?: Record<string, number>;
+}
+
+/* ---------------- Family ---------------- */
+
+export type FamilyRole = "earner" | "dependent" | "student" | "retired";
+
+export interface SupportFlow {
+  fromMemberId: string;
+  toMemberId: string;
+  amount: number; // monthly
+  day: number; // day of month it's sent
+  label?: string; // "College fees + rent"
+}
+
+export interface FamilyMember {
+  id: string;
+  name: string;
+  relation: string; // "You", "Papa", "Didi"…
+  role: FamilyRole;
+  monthlyIncome: number;
+  city?: string;
+  /** false = only totals are shown to the rest of the family */
+  shareDetails: boolean;
+}
+
+export interface FamilyGoal {
+  id: string;
+  name: string;
+  targetAmount: number;
+  targetDate: string;
+  /** memberId → amount already put in */
+  saved: Record<string, number>;
+  /** memberId → monthly contribution going forward */
+  monthly: Record<string, number>;
+}
+
+export interface Family {
+  name: string;
+  members: FamilyMember[];
+  support: SupportFlow[];
+  goals: FamilyGoal[];
+}
+
+export interface FamilySummary {
+  totalIncome: number;
+  earners: number;
+  dependents: number;
+  dependencyRatio: number;
+  shareByEarner: { memberId: string; name: string; income: number; pct: number }[];
+  monthlySupportTotal: number;
+  supportFlows: (SupportFlow & { fromName: string; toName: string; daysUntil: number })[];
+  goals: (FamilyGoal & { savedTotal: number; monthlyTotal: number; reachDate: string | null; onTrack: boolean })[];
+}
+
+/* ---------------- Splits (Splitwise-style) ---------------- */
+
+export interface SplitGroup {
+  id: string;
+  name: string;
+  members: { id: string; name: string }[];
+}
+
+export type SplitMode = "equal" | "exact" | "percent";
+
+export interface SplitExpense {
+  id: string;
+  groupId: string;
+  description: string;
+  amount: number;
+  paidBy: string; // member id
+  date: string;
+  mode: SplitMode;
+  /** memberId → share in ₹ (always stored resolved to rupees) */
+  shares: Record<string, number>;
+}
+
+export interface Settlement {
+  id: string;
+  groupId: string;
+  from: string;
+  to: string;
+  amount: number;
+  date: string;
+}
+
+export interface SplitsState {
+  /** which member id is "you" in every group */
+  me: string;
+  groups: SplitGroup[];
+  expenses: SplitExpense[];
+  settlements: Settlement[];
+}
+
+export interface SplitBalances {
+  group: SplitGroup;
+  /** + = is owed money, − = owes */
+  balances: { memberId: string; name: string; net: number }[];
+  settleUp: { from: string; fromName: string; to: string; toName: string; amount: number }[];
+  myNet: number;
+  total: number;
+}
+
+/* ---------------- Festivals ---------------- */
+
+export interface FestivalOutlook {
+  id: string;
+  name: string;
+  date: string;
+  daysLeft: number;
+  estimatedSpend: number;
+  basis: string; // "Based on last Diwali" / "Typical for a household like yours"
+  potSaved: number;
+  monthlyToSave: number;
+  goalImpact: string;
+}
+
+/* ---------------- Wrapped ---------------- */
+
+export interface WrappedCard {
+  id: string;
+  kicker: string;
+  headline: string;
+  value?: string;
+  caption: string;
+  /** CSS colour var for the card field */
+  tone: string;
+  bars?: { label: string; value: number }[];
+}
+
+export interface Wrapped {
+  month: string;
+  persona: string;
+  cards: WrappedCard[];
 }
 

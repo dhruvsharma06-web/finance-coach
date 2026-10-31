@@ -60,3 +60,6 @@ Each lane appends 2–3 lines after every push: what works, any API shape change
 - Deployment target is explicitly pinned to Node 22.x in both project settings and package engines, so a broad >=22 range cannot select a newer major on Vercel.
 - Live production: https://finance-coach-six.vercel.app (public, no Kosh passcode). Vercel project elites22/finance-coach uses Node 22.x, Google AI and private signing/data-encryption keys. Public health is 200 with AI available; live assistant navigation, sample deep-link import and Google-backed coach verified.
 - Final verification: clean separate checkout npm ci + npm run build passed on Node v22.23.4; tsc and eslint clean; brain, round2, assistant, final-security and the expanded 12-row HTTP security suite pass. Prototype limitation remains ephemeral shared per-instance storage/rate limits, documented in SECURITY/DEPLOY.
+
+## Round 4 (Claude)
+- Family (/family, GET/PUT /api/family), Splits (/splits, /api/splits, /api/splits/expenses, /api/splits/settle), Festivals (/festivals, GET/POST /api/festivals), Monthly Wrapped (/wrapped?month=, GET /api/wrapped). All maths deterministic; tests: npx tsx tests/round4.test.ts (17 pass).

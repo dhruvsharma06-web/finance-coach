@@ -1,3 +1,4 @@
+import { seedFamily, seedSplits } from "./seed-round4";
 import type {
   CategoryId,
   Database,
@@ -262,6 +263,6 @@ export function buildSeed(): Database {
     },
   ];
 
-  return { version: 1, transactions: txns, rules: [], recurring, profile, nudges, reports: [] };
+  return { version: 1, transactions: txns, rules: [], recurring, profile, nudges, reports: [], family: seedFamily(), splits: seedSplits(), festivalPots: { diwali: 6000 } };
 }
 

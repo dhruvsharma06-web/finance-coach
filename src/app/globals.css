@@ -305,6 +305,24 @@ html.motion .reveal:not(.in) .grow-line {
   transform: scaleX(0);
 }
 
+/* Round 4 motion: diya flame, settle-up flow, wrapped story */
+@keyframes flicker {
+  0%, 100% { transform: scale(1, 1) rotate(-1deg); }
+  30% { transform: scale(0.94, 1.06) rotate(2deg); }
+  60% { transform: scale(1.04, 0.95) rotate(-2deg); }
+}
+.diya-flame { animation: flicker 1.6s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity: 0.32; transform: scale(1.08); } }
+.diya-glow { transform-origin: 100px 92px; animation: breathe 3s ease-in-out infinite; }
+@keyframes dash { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+.flow-dash { animation: dash 1.2s linear infinite; }
+.grow-x { transition: width 1.2s var(--ease-out) 0.2s; }
+html.motion .reveal:not(.in) .grow-x { width: 0 !important; }
+@keyframes bar-up { from { transform: scaleY(0); } }
+.wrapped-bar { transform-origin: bottom; animation: bar-up 0.9s var(--ease-out) both; }
+@keyframes progress { from { width: 0; } to { width: 100%; } }
+.wrapped-progress { animation: progress linear forwards; }
+
 /* Typewriter caret for the rotating what-if band */
 @keyframes caret {
   50% {
